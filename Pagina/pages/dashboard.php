@@ -187,18 +187,18 @@ $data = $tabla_paciente->GetPaciente($idPaciente);
                     <input type="date" class="form-control" id="fn">
                   </div>
                   <div class="form-group col-3">
-                    <label for="edad">Edad</label>
-                    <input type="text" class="form-control" id="edad">
+                    <label for="fn">Teléfono</label>
+                    <input type="tel" class="form-control" id="fn">
                   </div>
                   <div class="form-group col">
-                    <label for="mail">Correo electronico</label>
+                    <label for="mail">Correo electrónico</label>
                     <input type="email" class="form-control" id="mail">
                   </div>
                 </div>
 
                 <div class="row">
                   <div class="form-group col">
-                    <label for="calle">Calle</label>
+                    <label for="calle">Calle y número</label>
                     <input type="text" class="form-control" id="calle">
                   </div>
                   <div class="form-group col">
