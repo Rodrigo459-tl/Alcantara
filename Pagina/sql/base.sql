@@ -15,8 +15,16 @@ GRANT UPDATE,
     SELECT ON ExpedienteMedico.* TO 'usuario' @'localhost';
 -- ROLES
 CREATE TABLE Roles (
-    id_rol INT(5) NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    idRol INT(5) NOT NULL PRIMARY KEY AUTO_INCREMENT,
     rol VARCHAR(10) NOT NULL
+);
+-- USUARIOS
+CREATE TABLE Usuarios (
+    idUsuario INT(5) NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    Contrasenia VARCHAR(10) NOT NULL,
+    Correo_Electronico VARCHAR(100) NOT NULL,
+    idRol INT NOT NULL,
+    FOREIGN KEY (idRol) REFERENCES roles (idRol) ON DELETE CASCADE ON UPDATE CASCADE
 );
 -- Paciente
 CREATE TABLE Paciente (
@@ -24,7 +32,6 @@ CREATE TABLE Paciente (
     Nombre VARCHAR(50) NOT NULL,
     AP VARCHAR(50) NOT NULL,
     AM VARCHAR(50) NOT NULL,
-    Correo_Electronico VARCHAR(100) NOT NULL,
     Telefono BIGINT NOT NULL,
     Contrasenia VARCHAR(255) NOT NULL,
     FechaN DATE NOT NULL,
@@ -32,8 +39,11 @@ CREATE TABLE Paciente (
     Colonia VARCHAR(50) NOT NULL,
     Calle VARCHAR(50) NOT NULL,
     Estado VARCHAR(50) NOT NULL,
-    idRol INT NOT NULL,
-    FOREIGN KEY (idRol) REFERENCES roles (idRol) ON DELETE CASCADE ON UPDATE CASCADE
+    idUsuario INT(5) NOT NULL,
+    --100 administrador
+    --10 operador
+    --1 paciente
+    FOREIGN KEY (idUsuario) REFERENCES Usuarios (idUsuario) ON DELETE CASCADE ON UPDATE CASCADE
 );
 -- Historial
 CREATE TABLE Historial (
