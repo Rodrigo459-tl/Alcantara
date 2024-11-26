@@ -25,6 +25,7 @@ CREATE TABLE Paciente (
     AP VARCHAR(50) NOT NULL,
     AM VARCHAR(50) NOT NULL,
     Correo_Electronico VARCHAR(100) NOT NULL,
+    Telefono BIGINT NOT NULL,
     Contrasenia VARCHAR(255) NOT NULL,
     FechaN DATE NOT NULL,
     Municipio VARCHAR(50) NOT NULL,
