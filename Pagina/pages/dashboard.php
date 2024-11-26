@@ -236,7 +236,7 @@ $data = $tabla_paciente->GetPaciente($idPaciente);
                         <input type="radio" name="options" id="Tiene" autocomplete="off" checked> Tiene
                       </label>
                       <label class="btn btn-secondary">
-                        <input type="radio" name="options" id="noTiene" autocomplete="off"> No tiene
+                        <input type="radio" name="options" id="noTiene" autocomplete="off"> Notiene
                       </label>
                     </div>
                   </div>
