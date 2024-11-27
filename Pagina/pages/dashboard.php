@@ -221,76 +221,77 @@ $data = $tabla_paciente->GetPaciente($idPaciente);
           <br> <!-- antecedentes Patologicos -->
 
           <div class="row m-1">
-            <div class="col-6 bg-white">
+            <div class="col-12 bg-white">
               <form id="pacienteForm">
                 <legend style="text-align: center;">Antecedentes Patologicos</legend>
                 <div class="row">
                   <div class="form-group col-4">
-                    <label for="diabetesNombre">Padecimiento</label>
-                    <input type="text" class="form-control" id="diabetesNombre">
+                    <label for="diabetes">Padecimiento</label>
+                    <input type="text" class="form-control" id="diabetes" value="Diabetes" readonly>
                   </div>
-                  <div class="form-group col-1">
+                  <div class="form-group col">
                     <label for="diabetes">Estado</label>
-                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
-                      <label class="btn btn-secondary active">
-                        <input type="radio" name="options" id="Tiene" autocomplete="off" checked> Tiene
-                      </label>
-                      <label class="btn btn-secondary">
-                        <input type="radio" name="options" id="noTiene" autocomplete="off"> Notiene
-                      </label>
+                    <div class="input-group mb-3">
+                      <div class="input-group-prepend">
+                        <div class="input-group-text">
+                          <input type="checkbox" aria-label="Checkbox for following text input">
+                        </div>
+                      </div>
+                      <input type="text" class="form-control m-10;" aria-label="Text input with checkbox">
                     </div>
                   </div>
-
                 </div>
-                <!-- Otros campos que necesites -->
-              </form>
+
             </div>
-
-            <div class="col-6">
-              <form id="pacienteForm">
-                <legend>Antecedentes no patologicos</legend>
-                <label for="estado">Estado</label>
-                <input type="checkbox" id="estado">
-
-                <label for="correo">Correo Electrónico:</label>
-                <input type="email" id="correo" name="correo" readonly>
-
-                <label for="fechaN">Fecha de Nacimiento:</label>
-                <input type="date" id="fechaN" name="fechaN" readonly>
-
-                <div class="row m-1">
-                  <div class="col-12">
-                    Citas previas
-                  </div>
-                </div>
-                <!-- Otros campos que necesites -->
-              </form>
-            </div>
+            <!-- Otros campos que necesites -->
+            </form>
           </div>
 
+          <div class="col-6">
+            <form id="pacienteForm">
+              <legend>Antecedentes no patologicos</legend>
+              <label for="estado">Estado</label>
+              <input type="checkbox" id="estado">
 
+              <label for="correo">Correo Electrónico:</label>
+              <input type="email" id="correo" name="correo" readonly>
+
+              <label for="fechaN">Fecha de Nacimiento:</label>
+              <input type="date" id="fechaN" name="fechaN" readonly>
+
+              <div class="row m-1">
+                <div class="col-12">
+                  Citas previas
+                </div>
+              </div>
+              <!-- Otros campos que necesites -->
+            </form>
+          </div>
         </div>
 
-        <div id="antecedentes" class="section">
-          <h2>Gestión de Antecedentes</h2>
-          <p>Contenido relacionado con los historiales aquí.</p>
-        </div>
+
       </div>
 
-      <!-- Scripts -->
-      <script src="../js/jquery.min.js"></script>
-      <script src="../js/bootstrap.bundle.min.js"></script>
-      <script>
-        function showSection(sectionId) {
-          // Ocultar todas las secciones
-          const sections = document.querySelectorAll('.section');
-          sections.forEach(section => section.classList.remove('active'));
+      <div id="antecedentes" class="section">
+        <h2>Gestión de Antecedentes</h2>
+        <p>Contenido relacionado con los historiales aquí.</p>
+      </div>
+    </div>
 
-          // Mostrar la sección seleccionada
-          const sectionToShow = document.getElementById(sectionId);
-          sectionToShow.classList.add('active');
-        }
-      </script>
+    <!-- Scripts -->
+    <script src="../js/jquery.min.js"></script>
+    <script src="../js/bootstrap.bundle.min.js"></script>
+    <script>
+      function showSection(sectionId) {
+        // Ocultar todas las secciones
+        const sections = document.querySelectorAll('.section');
+        sections.forEach(section => section.classList.remove('active'));
+
+        // Mostrar la sección seleccionada
+        const sectionToShow = document.getElementById(sectionId);
+        sectionToShow.classList.add('active');
+      }
+    </script>
 </body>
 
 </html>
