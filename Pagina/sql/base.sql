@@ -2,6 +2,9 @@ DROP DATABASE IF EXISTS ExpedienteMedico;
 CREATE DATABASE IF NOT EXISTS ExpedienteMedico DEFAULT CHARACTER
 SET utf8 COLLATE utf8_general_ci;
 USE ExpedienteMedico;
+CREATE USER 'admin' @'localhost' IDENTIFIED BY 'admin';
+GRANT ALL PRIVILEGES ON ExpedienteMedico.* TO 'admin' @'localhost';
+-- ROLES
 CREATE TABLE Roles (
     idRol INT(5) NOT NULL PRIMARY KEY AUTO_INCREMENT,
     rol VARCHAR(10) NOT NULL
