@@ -29,7 +29,7 @@
                     <a href="../../index.php"><img src="../../images/logo.png" alt="logo" /></a>
                     </div>
                     <h1>Bienvenido</h1>
-                    <h2>q</h2>
+                    
                 </div>
             </div>
             <div class= "col">

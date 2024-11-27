@@ -2,17 +2,10 @@ DROP DATABASE IF EXISTS ExpedienteMedico;
 CREATE DATABASE IF NOT EXISTS ExpedienteMedico DEFAULT CHARACTER
 SET utf8 COLLATE utf8_general_ci;
 USE ExpedienteMedico;
--- USUARIOS
-CREATE USER 'doctora' @'localhost' IDENTIFIED BY 'doctora';
-CREATE USER 'recepcion' @'localhost' IDENTIFIED BY 'recepcion';
-CREATE USER 'usuario' @'localhost' IDENTIFIED BY 'usuario';
--- PRIVILEGIOS
-GRANT ALL PRIVILEGES ON ExpedienteMedico.* TO 'doctora' @'localhost';
-GRANT UPDATE,
-    INSERT,
-    SELECT ON ExpedienteMedico.* TO 'recepcion' @'localhost';
-GRANT UPDATE,
-    SELECT ON ExpedienteMedico.* TO 'usuario' @'localhost';
+
+CREATE USER 'admin'@'localhost' IDENTIFIED BY 'admin';
+GRANT ALL PRIVILEGES ON ExpedienteMedico.* TO 'admin'@'localhost';
+
 -- ROLES
 CREATE TABLE Roles (
     idRol INT(5) NOT NULL PRIMARY KEY AUTO_INCREMENT,
@@ -33,16 +26,12 @@ CREATE TABLE Paciente (
     AP VARCHAR(50) NOT NULL,
     AM VARCHAR(50) NOT NULL,
     Telefono BIGINT NOT NULL,
-    Contrasenia VARCHAR(255) NOT NULL,
     FechaN DATE NOT NULL,
     Municipio VARCHAR(50) NOT NULL,
     Colonia VARCHAR(50) NOT NULL,
     Calle VARCHAR(50) NOT NULL,
     Estado VARCHAR(50) NOT NULL,
     idUsuario INT(5) NOT NULL,
-    --100 administrador
-    --10 operador
-    --1 paciente
     FOREIGN KEY (idUsuario) REFERENCES Usuarios (idUsuario) ON DELETE CASCADE ON UPDATE CASCADE
 );
 -- Historial
