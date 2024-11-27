@@ -36,70 +36,72 @@
 -- Fecha
 -- Hora
 -- Metodo_Agenda
-INSERT INTO roles (id_rol, rol)
+INSERT INTO Roles (idRol, rol)
 VALUES (100, 'Administrador'),
     (10, 'Operador'),
     (1, 'paciente');
+-- INSERT PARA Usuarios
+INSERT INTO Usuarios (
+        idUsuario,
+        Contrasenia,
+        Correo_Electronico,
+        idRol
+    )
+VALUES (1, 'admin', 'admin', 100),
+    (2, 'operador', 'operador', 10),
+    (3, 'paciente', 'paciente', 1);
 INSERT INTO Paciente (
+        idPaciente,
         Nombre,
         AP,
         AM,
-        Correo_Electronico,
         Telefono,
-        Contrasenia,
         FechaN,
         Municipio,
         Colonia,
         Calle,
         Estado,
-        idRol
+        idUsuario
     )
 VALUES (
+        1,
         'Carlos',
         'Pérez',
         'López',
-        'admin@admin',
-        2464658598,
-        'admin',
+        1231231231,
         '1985-03-15',
         'Puebla',
         'El Carmen',
         'Av. Hidalgo',
         'Puebla',
-        100
+        1
     ),
     (
+        2,
         'Lucía',
         'Ramírez',
         'Gómez',
-        'operador@operador',
-        2465869852,
-        'operador',
+        1231231231,
         '1990-07-22',
         'Tlaxcala',
         'Centro',
         'Calle Juárez',
         'Tlaxcala',
-        10
+        2
     ),
     (
+        3,
         'Pedro',
         'Sánchez',
         'Méndez',
-        'usuario@usuario',
-        2465898956,
-        'usuario',
+        1231231231,
         '2000-05-30',
         'Apizaco',
         'San Pablo',
         'Av. Reforma',
         'Tlaxcala',
-        1
+        3
     );
-INSERT INTO Historial (idPaciente)
-VALUES (1),
-    (2),
-    (3);
 INSERT INTO Tratamiento (
         idPaciente,
         Tipo,
@@ -132,6 +134,10 @@ VALUES (
         '2024-11-10',
         '2024-12-01'
     );
+INSERT INTO Historial (idPaciente)
+VALUES (1),
+    (2),
+    (3);
 ---------PATOLOGICOS--------------------------------------------------------------------------------------------------------------------
 -- Paciente 1
 INSERT INTO Antecedentes_Patologicos (idHistorial, Nombre, Estado, Descripcion)
