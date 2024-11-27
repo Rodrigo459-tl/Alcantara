@@ -94,6 +94,22 @@ $data = $tabla_paciente->GetPaciente($idPaciente);
     .section.active {
       display: block;
     }
+
+    .legend-button {
+      width: 100%;
+      max-width: 100%;
+      font-size: 1.5rem;
+      line-height: inherit;
+      color: inherit;
+      white-space: normal;
+      background: none;
+      border: none;
+      text-align: center;
+      color: inherit;
+      cursor: pointer;
+      outline: none;
+      box-shadow: none;
+    }
   </style>
 </head>
 
@@ -219,32 +235,47 @@ $data = $tabla_paciente->GetPaciente($idPaciente);
           </div>
 
           <br> <!-- antecedentes Patologicos -->
-
           <div class="row m-1">
-            <div class="col-12 bg-white">
-              <form id="pacienteForm">
-                <legend style="text-align: center;">Antecedentes Patologicos</legend>
-                <div class="row">
-                  <div class="form-group col-4">
-                    <label for="diabetes">Padecimiento</label>
-                    <input type="text" class="form-control" id="diabetes" value="Diabetes" readonly>
-                  </div>
-                  <div class="form-group col">
-                    <label for="diabetes">Estado</label>
-                    <div class="input-group mb-3">
-                      <div class="input-group-prepend">
-                        <div class="input-group-text">
-                          <input type="checkbox" aria-label="Checkbox for following text input">
+            <div class="col-12 bg-white p-3">
+              <!-- Botón que activa el panel -->
+              <button class="btn legend-button btn-block" type="button" data-toggle="collapse" data-target="#antecedentesPanel" aria-expanded="false" aria-controls="antecedentesPanel">
+                <i class="fas fa-angle-down" style="font-size: 1.5rem;"></i> Antecedentes Patológicos
+              </button>
+
+
+
+
+              <!-- Panel colapsable -->
+              <div class="collapse mt-3" id="antecedentesPanel">
+                <form id="pacienteForm">
+                  <div class="row">
+
+                    <div class="form-group col-5">
+                      <label for="diabetes">Padecimiento</label>
+                      <input type="text" class="form-control" id="diabetes" value="Diabetes" readonly>
+                    </div>
+
+                    <!-- Nueva sección para el checkbox -->
+                    <div class="form-group col-1">
+                      <label for="estadoCheckbox">Estado</label>
+                      <div class="d-flex align-items-center" style="height: 15%; padding-left: 8px;">
+                        <div class="form-check m-0">
+                          <input type="checkbox" class="form-check-input" id="estadoCheckbox" style="transform: scale(1.5);" checked disabled>
                         </div>
                       </div>
-                      <input type="text" class="form-control m-10;" aria-label="Text input with checkbox">
                     </div>
-                  </div>
-                </div>
 
+
+                    <!-- Nueva sección para el input de texto -->
+                    <div class="form-group col-6">
+                      <label for="descripcion">Descripción</label>
+                      <input type="text" class="form-control" id="descripcion" placeholder="Descripción" readonly>
+                    </div>
+
+                  </div>
+                </form>
+              </div>
             </div>
-            <!-- Otros campos que necesites -->
-            </form>
           </div>
 
           <div class="col-6">
