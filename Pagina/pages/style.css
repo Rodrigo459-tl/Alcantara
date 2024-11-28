@@ -51,6 +51,7 @@
 .submenu-item {
   padding: 16px;
   display: inline-block;
+  cursor: pointer;
   width: 100%;
   border-radius: 12px;
   color: #fff;

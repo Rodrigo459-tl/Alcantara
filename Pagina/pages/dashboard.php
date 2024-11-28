@@ -77,10 +77,6 @@
 
         <!--
         <li class="item">
-          <a href="#">Your first link</a>
-        </li>
-
-        <li class="item">
           <div class="submenu-item">
             <span>First submenu</span>
             <i class="fa-solid fa-chevron-right"></i>
@@ -201,27 +197,32 @@
           </button>
 
           <!-- Panel colapsable -->
-          <div class="collapse mt-3" id="antecedentesPanel">
+          <div class="collapse" id="antecedentesPanel">
             <form id="pacienteForm">
-              <div class="row">
-                <div class="col-md-5 mb-3">
+              <!---->
+              <div class="row mb-4">
+                <div class="col-4">
                   <label for="diabetes" class="form-label">Padecimiento</label>
-                  <input type="text" class="form-control" id="diabetes" value="Diabetes" readonly>
+                  <input type="text" class="form-control" id="diabetes"
+                    style="cursor:default ; outline: none; box-shadow: none;" value="Diabetes" readonly>
                 </div>
 
-                <div class="col-md-1 mb-3">
+                <div class="col-2">
                   <label for="estadoCheckbox" class="form-label">Estado</label>
                   <div class="form-check pt-2">
-                    <input type="checkbox" class="form-check-input" id="estadoCheckbox" style="transform: scale(1.5);"
-                      checked disabled>
+                    <input type="checkbox" class="form-check-input" id="estadoCheckbox"
+                      style="margin-left: 1px; ;transform: scale(1.5);" checked disabled>
                   </div>
                 </div>
 
-                <div class="col-md-6 mb-3">
+                <div class="col-6">
                   <label for="descripcion" class="form-label">Descripción</label>
-                  <input type="text" class="form-control" id="descripcion" placeholder="Descripción" readonly>
+                  <input type="text" class="form-control" id="descripcion"
+                    style="cursor:default ; outline: none; box-shadow: none;" value="Diabetes" readonly>
                 </div>
               </div>
+
+
             </form>
           </div>
         </div>

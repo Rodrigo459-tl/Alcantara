@@ -9,6 +9,7 @@
 -- Estado
 -- Calle
 -- Correo electronico
+--
 -- Antecedentes Patologicos:
 -- 1 Diabetes
 -- 2 hipertencion
@@ -24,12 +25,14 @@
 -- 12 convulsiones
 -- 13 toma anticonceptivos
 -- 14 Embarazo actual
+--
 -- Antecedentes NO Patologicos:
 -- 1 higiene bucal (buena, mala regular)
 -- 2 frecuencia de cepillado
 -- 3 fuma (cuantos cigarros al dia)
 -- 4 consume alcohol
 -- 5 aprieta o rechina los dientes
+--
 -- cita:
 -- Motivo
 -- Estado
