@@ -20,26 +20,13 @@ $data = $tabla_paciente->GetPaciente($idPaciente);
   <!-- basic -->
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <!-- mobile metas -->
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="viewport" content="initial-scale=1, maximum-scale=1" />
 
-  <!-- bootstrap css -->
-  <link rel="stylesheet" href="../css/bootstrap.min.css" />
-  <!-- style css -->
-  <!-- Responsive-->
-  <link rel="stylesheet" href="css/responsive.css" />
-  <!-- fevicon -->
-  <link rel="icon" href="images/fevicon.png" type="image/gif" />
-  <!-- Scrollbar Custom CSS -->
-  <link rel="stylesheet" href="css/jquery.mCustomScrollbar.min.css" />
-  <link
-    rel="stylesheet"
-    href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" />
-  <link
-    rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css"
-    media="screen" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
+  <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css" media="screen" />
+
 
 
   <!-- Estilos Personalizados -->
@@ -213,7 +200,7 @@ $data = $tabla_paciente->GetPaciente($idPaciente);
                 </div>
 
                 <div class="row">
-                  <div class="form-group col">
+                  <div class="form-group col mb-3">
                     <label for="calle">Calle y número</label>
                     <input type="text" class="form-control" id="calle">
                   </div>
@@ -232,7 +219,7 @@ $data = $tabla_paciente->GetPaciente($idPaciente);
                 </div>
               </form>
             </div>
-          </div>
+          </div> <!--Fin datos del paciente-->
 
           <br> <!-- antecedentes Patologicos -->
           <div class="row m-1">
@@ -242,11 +229,8 @@ $data = $tabla_paciente->GetPaciente($idPaciente);
                 <i class="fas fa-angle-down" style="font-size: 1.5rem;"></i> Antecedentes Patológicos
               </button>
 
-
-
-
               <!-- Panel colapsable -->
-              <div class="collapse mt-3" id="antecedentesPanel">
+              <div class=" mt-3" id="antecedentesPanel">
                 <form id="pacienteForm">
                   <div class="row">
 
@@ -277,30 +261,7 @@ $data = $tabla_paciente->GetPaciente($idPaciente);
               </div>
             </div>
           </div>
-
-          <div class="col-6">
-            <form id="pacienteForm">
-              <legend>Antecedentes no patologicos</legend>
-              <label for="estado">Estado</label>
-              <input type="checkbox" id="estado">
-
-              <label for="correo">Correo Electrónico:</label>
-              <input type="email" id="correo" name="correo" readonly>
-
-              <label for="fechaN">Fecha de Nacimiento:</label>
-              <input type="date" id="fechaN" name="fechaN" readonly>
-
-              <div class="row m-1">
-                <div class="col-12">
-                  Citas previas
-                </div>
-              </div>
-              <!-- Otros campos que necesites -->
-            </form>
-          </div>
         </div>
-
-
       </div>
 
       <div id="antecedentes" class="section">
@@ -310,8 +271,8 @@ $data = $tabla_paciente->GetPaciente($idPaciente);
     </div>
 
     <!-- Scripts -->
-    <script src="../js/jquery.min.js"></script>
-    <script src="../js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
     <script>
       function showSection(sectionId) {
         // Ocultar todas las secciones

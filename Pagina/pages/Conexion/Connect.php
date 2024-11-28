@@ -18,7 +18,6 @@ class Connect
                 PDO::ATTR_ERRMODE,
                 PDO::ERRMODE_EXCEPTION
             );
-            echo "Exito al establecer la conexion";
         } catch (Exception $e) {
             echo "Error" . $e->getMessage();
         }
