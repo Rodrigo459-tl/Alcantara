@@ -13,6 +13,36 @@
   <link rel="stylesheet" href="style.css" />
   <!-- Fontawesome CDN Link -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" />
+  <style>
+    .scrollable-div {
+      height: 100vh;
+      /* Ajusta la altura según tus necesidades */
+      overflow-y: scroll;
+      /* Habilita siempre la barra de desplazamiento vertical */
+      border: 1px solid #ccc;
+      /* Opcional: Añade un borde para visualizar el contenedor */
+      /* Más alto que la barra de navegación */
+      position: relative;
+      /* Necesario para aplicar z-index */
+    }
+
+    /* Estilo opcional para hacer la barra de desplazamiento más delgada */
+    .scrollable-div::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    .scrollable-div::-webkit-scrollbar-thumb {
+      background-color: #888;
+      /* Color de la barra */
+      border-radius: 4px;
+      /* Bordes redondeados */
+    }
+
+    .scrollable-div::-webkit-scrollbar-thumb:hover {
+      background-color: #555;
+      /* Color al pasar el cursor */
+    }
+  </style>
 </head>
 
 <body>
@@ -20,7 +50,7 @@
   <nav class="sidebar">
     <a href="#" class="logo">Dashboard</a>
 
-    <div class="menu-content">
+    <div class="menu-content ">
       <ul class="menu-items">
 
         <li class="item">
@@ -65,7 +95,7 @@
     <i class="fa-solid fa-bars" id="sidebar-close"></i>
   </nav>
 
-  <div class="main content">
+  <div class="main content scrollable-div">
     <div class="row w-100">
       <div class="col-lg-12">
         <div id="pacientes" class="section">
@@ -165,17 +195,137 @@
                   </button>
 
                   <!-- Panel colapsable -->
-                  <div class="">
-                    <div class="collapse" id="antecedentesPanel">
-                      <form id="pacienteForm">
-                        <!---->
-                        <div class="row card-content">
-                          <div class="col-xl-12">
-
-
-                          </div>
+                  <div class="row">
+                    <div class="collapse p-0 m-0" id="antecedentesPanel">
+                      <div class="row card-content p-0">
+                        <!-- Antecedentes Patológicos -->
+                        <div class="col-xl-6">
+                          <h4 class="text-center">Antecedentes Patológicos</h4>
+                          <table class="table table-bordered table-sm">
+                            <thead class="thead-light">
+                              <tr>
+                                <th>Nombre</th>
+                                <th>Estado</th>
+                                <th>Descripción</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr>
+                                <td>Diabetes</td>
+                                <td><input type="checkbox" readonly></td>
+                                <td><input type="text" class="form-control" readonly></td>
+                              </tr>
+                              <tr>
+                                <td>Hipertensión</td>
+                                <td><input type="checkbox" readonly></td>
+                                <td><input type="text" class="form-control" readonly></td>
+                              </tr>
+                              <tr>
+                                <td>Enfermedades crónicas</td>
+                                <td><input type="checkbox" readonly></td>
+                                <td><input type="text" class="form-control" readonly></td>
+                              </tr>
+                              <tr>
+                                <td>Problemas del corazón</td>
+                                <td><input type="checkbox" readonly></td>
+                                <td><input type="text" class="form-control" readonly></td>
+                              </tr>
+                              <tr>
+                                <td>Problemas respiratorios</td>
+                                <td><input type="checkbox" readonly></td>
+                                <td><input type="text" class="form-control" readonly></td>
+                              </tr>
+                              <tr>
+                                <td>Problemas del hígado</td>
+                                <td><input type="checkbox" readonly></td>
+                                <td><input type="text" class="form-control" readonly></td>
+                              </tr>
+                              <tr>
+                                <td>Problemas renales</td>
+                                <td><input type="checkbox" readonly></td>
+                                <td><input type="text" class="form-control" readonly></td>
+                              </tr>
+                              <tr>
+                                <td>Problemas digestivos</td>
+                                <td><input type="checkbox" readonly></td>
+                                <td><input type="text" class="form-control" readonly></td>
+                              </tr>
+                              <tr>
+                                <td>Problemas de coagulación</td>
+                                <td><input type="checkbox" readonly></td>
+                                <td><input type="text" class="form-control" readonly></td>
+                              </tr>
+                              <tr>
+                                <td>Intervenciones quirúrgicas</td>
+                                <td><input type="checkbox" readonly></td>
+                                <td><input type="text" class="form-control" readonly></td>
+                              </tr>
+                              <tr>
+                                <td>Alergias</td>
+                                <td><input type="checkbox" readonly></td>
+                                <td><input type="text" class="form-control" readonly></td>
+                              </tr>
+                              <tr>
+                                <td>Convulsiones</td>
+                                <td><input type="checkbox" readonly></td>
+                                <td><input type="text" class="form-control" readonly></td>
+                              </tr>
+                              <tr>
+                                <td>Toma anticonceptivos</td>
+                                <td><input type="checkbox" readonly></td>
+                                <td><input type="text" class="form-control" readonly></td>
+                              </tr>
+                              <tr>
+                                <td>Embarazo actual</td>
+                                <td><input type="checkbox" readonly></td>
+                                <td><input type="text" class="form-control" readonly></td>
+                              </tr>
+                            </tbody>
+                          </table>
                         </div>
-                      </form>
+
+                        <!-- Antecedentes No Patológicos -->
+                        <div class="col-xl-6">
+                          <h4 class="text-center">Antecedentes No Patológicos</h4>
+                          <table class="table table-bordered table-sm b-0 p-0">
+                            <thead class="thead-light">
+                              <tr>
+                                <th>Nombre</th>
+                                <th>Estado</th>
+                                <th>Descripción</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr>
+                                <td>Higiene bucal</td>
+                                <td><input type="checkbox" readonly></td>
+                                <td><input type="text" class="form-control" readonly></td>
+                              </tr>
+                              <tr>
+                                <td>Frecuencia de cepillado</td>
+                                <td><input type="checkbox" readonly></td>
+                                <td><input type="text" class="form-control" readonly></td>
+                              </tr>
+                              <tr>
+                                <td>Fuma (cuántos cigarros al día)</td>
+                                <td><input type="checkbox" readonly></td>
+                                <td><input type="text" class="form-control" readonly></td>
+                              </tr>
+                              <tr>
+                                <td>Consume alcohol</td>
+                                <td><input type="checkbox" readonly></td>
+                                <td><input type="text" class="form-control" readonly></td>
+                              </tr>
+                              <tr>
+                                <td>Aprieta o rechina los dientes</td>
+                                <td><input type="checkbox" readonly></td>
+                                <td><input type="text" class="form-control" readonly></td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </div>
+
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -183,7 +333,6 @@
             </div>
           </div> <!--Fin Antecedentes Patologicos-->
         </div>
-
         <div id="antecedentes" class="section">
           <h2>Gestión de Antecedentes</h2>
           <p>Contenido relacionado con los historiales aquí.</p>

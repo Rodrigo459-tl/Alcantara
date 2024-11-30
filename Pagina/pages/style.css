@@ -6,6 +6,7 @@
   box-sizing: border-box;
   font-family: "Poppins", sans-serif;
 }
+
 .sidebar {
   color: #fff;
   position: fixed;
@@ -97,7 +98,7 @@
   left: 260px;
   width: calc(100% - 260px);
   transition: all 0.5s ease;
-  z-index: 1000;
+  z-index: 200;
 }
 .sidebar.close ~ .navbar,
 .sidebar.close ~ .main {
@@ -137,8 +138,8 @@
 
 .main,
 .row {
-  padding-left: 15px;
-  padding-right: 15px;
+  padding-left: 10px;
+  padding-right: 10px;
 }
 
 .card-title {
@@ -175,7 +176,7 @@
 }
 
 .collapse {
-  transition: height 0.5s ease;
+  transition: height 0.5s ease-in-out;
   /* Aumenta el tiempo y suaviza la animación */
 }
 
@@ -191,5 +192,5 @@
 }
 
 .card-content {
-  margin: 20px 12px 20px 15px;
+  margin: 25px 30px 25px 30px;
 }
