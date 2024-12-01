@@ -39,6 +39,8 @@
 -- Fecha
 -- Hora
 -- Metodo_Agenda
+--
+-- INSERT PARA Roles
 INSERT INTO Roles (idRol, rol)
 VALUES (100, 'Administrador'),
     (10, 'Operador'),
@@ -50,9 +52,10 @@ INSERT INTO Usuarios (
         Correo_Electronico,
         idRol
     )
-VALUES (1, 'admin', 'admin', 100),
-    (2, 'operador', 'operador', 10),
-    (3, 'paciente', 'paciente', 1);
+VALUES (1, 'admin', 'admin@gmail.com', 100),
+    (2, 'operador', 'operador@gmail.com', 10),
+    (3, 'paciente', 'paciente@gmail.com', 1);
+-- INSERT PARA Paciente
 INSERT INTO Paciente (
         idPaciente,
         Nombre,

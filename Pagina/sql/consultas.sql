@@ -11,3 +11,9 @@ FROM cita c
     JOIN paciente p ON c.idTratamiento = t.idTratamiento
     AND t.idPaciente = p.idPaciente
 WHERE c.idCita = 1;
+----Datos de paciente recolectando correo de usuarios
+SELECT concat(p.Nombre, ' ', p.AP, ' ', p.AM) as NombreCompleto,
+    u.Correo_Electronico as Email
+FROM paciente p
+    JOIN usuarios u ON u.idUsuario = p.idUsuario
+where Nombre = 'carlos';

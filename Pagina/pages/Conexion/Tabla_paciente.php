@@ -4,7 +4,7 @@ require_once("Connect.php");
 class Tabla_paciente
 {
     private $connect;
-    //private $table = "paciente;";
+    private $table = "paciente;";
     private $primary_key = "idPaciente";
 
     public function __construct()
@@ -29,6 +29,35 @@ class Tabla_paciente
 
             //Bind parameters to sql
             $stmt->bindValue("idPaciente", $idPaciente);
+
+            //specific fetch mode before calling fetch
+            $stmt->setFetchMode(PDO::FETCH_OBJ);
+
+            //Ejecute the query
+            $stmt->execute();
+
+            //return 
+            $user = $stmt->fetch();
+
+            return $user ?: [];
+        } catch (Exception $e) {
+            echo "Error" . $e->getMessage() . "";
+            return array();
+        }
+    }
+
+    public function buscarPaciente($name)
+    {
+        $sql = "SELECT idPaciente, concat(p.Nombre,' ',p.AP,' ',p.AM) as NombreCompleto, Telefono, u.Correo_Electronico as Correo 
+        FROM paciente p JOIN usuarios u ON u.idUsuario = p.idUsuario 
+        where Nombre = :name;";
+
+        try {
+            //Preparate the query
+            $stmt = $this->connect->prepare($sql);
+
+            //Bind parameters to sql
+            $stmt->bindValue("name", $name);
 
             //specific fetch mode before calling fetch
             $stmt->setFetchMode(PDO::FETCH_OBJ);

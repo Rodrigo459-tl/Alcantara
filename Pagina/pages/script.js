@@ -48,3 +48,5 @@ collapseElement.addEventListener("hide.bs.collapse", () => {
 });
 
 console.log(menuItems, subMenuTitles);
+
+//--------------------------------------------------Scrips de prueba-----------------------------

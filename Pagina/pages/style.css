@@ -194,3 +194,22 @@
 .card-content {
   margin: 25px 30px 25px 30px;
 }
+
+/* Scripts temporales */
+
+/* Contenedor de la barra de búsqueda */
+.search-container {
+  display: flex;
+  align-items: center;
+}
+
+/* Botón de búsqueda */
+#searchButton {
+  padding: 10px 15px;
+  font-size: 16px;
+}
+
+/* Ícono de lupa */
+#searchButton i {
+  font-size: 18px;
+}

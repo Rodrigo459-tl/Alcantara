@@ -1,3 +1,13 @@
+<?php
+require_once("./Conexion/Tabla_paciente.php");
+
+//Instancia modelo
+$Tabla_paciente = new Tabla_paciente();
+$data = $Tabla_paciente->buscarPaciente("Carlos");
+
+//print_r($data);
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -100,9 +110,30 @@
   <div class="main content scrollable-div">
     <div class="row w-100">
       <div class="col-lg-12"> <!--Columna principal-->
+
         <div id="pacientes" class="section active">
           <h2>Gestión de Pacientes</h2>
-          <p>Contenido relacionado con los pacientes aquí.</p>
+          <div class="search-container mt-3 mb-3 d-flex">
+            <input type="text" id="searchInput" class="form-control" placeholder="Buscar por nombre...">
+            <button id="searchButton" class="btn btn-primary ms-2">
+              <i class="fa fa-search"></i> <!-- Ícono de lupa de Font Awesome -->
+            </button>
+          </div>
+          <div class="card-content">
+            <table id="pacientesTable" class="table table-bordered">
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Nombre Completo</th>
+                  <th>Teléfono</th>
+                  <th>Correo Electrónico</th>
+                </tr>
+              </thead>
+              <tbody>
+                <!-- Datos serán llenados dinámicamente desde la base de datos -->
+              </tbody>
+            </table>
+          </div>
         </div>
 
         <div id="historiales" class="section">
@@ -346,6 +377,58 @@
 
   <script src="script.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    document
+      .getElementById("searchButton")
+      .addEventListener("click", fetchPacientes);
+
+    function fetchPacientes() {
+      const searchValue = document.getElementById("searchInput").value.trim();
+
+      if (!searchValue) {
+        alert("Por favor, ingresa un nombre.");
+        return;
+      }
+
+      // Crear objeto FormData para enviar datos al servidor
+      const formData = new FormData();
+      formData.append("name", searchValue);
+
+      // Realizar la solicitud AJAX
+      fetch("./Conexion/buscar_paciente.php", {
+        method: "POST",
+        body: formData,
+      })
+        .then((response) => response.json()) // Convertir la respuesta en JSON
+        .then((data) => {
+          mostrarResultados(data); // Llamar a la función para mostrar los resultados
+        })
+        .catch((error) => {
+          console.error("Error al obtener los datos:", error);
+        });
+    }
+
+    function mostrarResultados(paciente) {
+      const tbody = document.querySelector("#pacientesTable tbody");
+      tbody.innerHTML = ""; // Limpiar la tabla
+
+      if (!paciente.idPaciente) {
+        tbody.innerHTML =
+          '<tr><td colspan="4" class="text-center">No se encontraron resultados.</td></tr>';
+        return;
+      }
+
+      // Crear una fila con los datos recibidos
+      const row = document.createElement("tr");
+      row.innerHTML = `
+      <td>${paciente.idPaciente}</td>
+      <td>${paciente.NombreCompleto}</td>
+      <td>${paciente.Telefono}</td>
+      <td>${paciente.Correo ? paciente.Correo : "N/A"}</td>
+      `;
+      tbody.appendChild(row);
+    }
+  </script>
 </body>
 
 </html>
