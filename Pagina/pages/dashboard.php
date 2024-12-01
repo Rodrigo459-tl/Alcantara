@@ -54,6 +54,24 @@ $data = $Tabla_paciente->buscarPaciente("Carlos");
       background-color: #555;
       /* Color al pasar el cursor */
     }
+
+    #pacientesTable th,
+    #pacientesTable td {
+      text-align: center;
+    }
+
+    #pacientesTable .fixed-column {
+      width: 50px;
+      /* Ajusta el tamaño de las columnas según tus necesidades */
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    #pacientesTable .fixed-column:last-child {
+      width: 150px;
+      /* Ajuste del tamaño para la columna de Acciones */
+    }
   </style>
 </head>
 
@@ -123,10 +141,11 @@ $data = $Tabla_paciente->buscarPaciente("Carlos");
             <table id="pacientesTable" class="table table-bordered">
               <thead>
                 <tr>
-                  <th>ID</th>
-                  <th>Nombre Completo</th>
-                  <th>Teléfono</th>
-                  <th>Correo Electrónico</th>
+                  <th class="col-1">ID</th>
+                  <th class="col-3">Nombre Completo</th>
+                  <th class="col-2">Teléfono</th>
+                  <th class="col-3">Correo Electrónico</th>
+                  <th class="col-3">Acciones</th>
                 </tr>
               </thead>
               <tbody>
@@ -414,20 +433,41 @@ $data = $Tabla_paciente->buscarPaciente("Carlos");
 
       if (!paciente.idPaciente) {
         tbody.innerHTML =
-          '<tr><td colspan="4" class="text-center">No se encontraron resultados.</td></tr>';
+          '<tr><td colspan="5" class="text-center">No se encontraron resultados.</td></tr>';
         return;
       }
 
       // Crear una fila con los datos recibidos
       const row = document.createElement("tr");
       row.innerHTML = `
-      <td>${paciente.idPaciente}</td>
-      <td>${paciente.NombreCompleto}</td>
-      <td>${paciente.Telefono}</td>
-      <td>${paciente.Correo ? paciente.Correo : "N/A"}</td>
+      <td class="col-1">${paciente.idPaciente}</td>
+      <td class="col-3">${paciente.NombreCompleto}</td>
+      <td class="col-2">${paciente.Telefono}</td>
+      <td class="col-3">${paciente.Correo ? paciente.Correo : "N/A"}</td>
+      <td class="col-3">
+        <button class="btn btn-warning" onclick="modificarDatos(${paciente.idPaciente})">Modificar Datos</button>
+        <button class="btn btn-info" onclick="verHistorial(${paciente.idPaciente})">Ver Historial</button>
+      </td>
       `;
+
       tbody.appendChild(row);
     }
+    // Función para manejar el botón "Modificar Datos"
+    function modificarDatos(idPaciente) {
+      console.log("Modificar datos del paciente con ID:", idPaciente);
+      // Aquí puedes redirigir o hacer alguna acción con la id del paciente
+      // Por ejemplo:
+      // window.location.href = `modificar_paciente.php?id=${idPaciente}`;
+    }
+
+    // Función para manejar el botón "Ver Historial"
+    function verHistorial(idPaciente) {
+      console.log("Ver historial del paciente con ID:", idPaciente);
+      // Aquí puedes redirigir o hacer alguna acción con la id del paciente
+      // Por ejemplo:
+      // window.location.href = `historial_paciente.php?id=${idPaciente}`;
+    }
+
   </script>
 </body>
 

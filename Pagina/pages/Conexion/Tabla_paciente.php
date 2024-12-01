@@ -37,9 +37,9 @@ class Tabla_paciente
             $stmt->execute();
 
             //return 
-            $user = $stmt->fetch();
+            $datos = $stmt->fetch();
 
-            return $user ?: [];
+            return $datos ?: [];
         } catch (Exception $e) {
             echo "Error" . $e->getMessage() . "";
             return array();
@@ -66,9 +66,9 @@ class Tabla_paciente
             $stmt->execute();
 
             //return 
-            $user = $stmt->fetch();
+            $datos = $stmt->fetch();
 
-            return $user ?: [];
+            return $datos ?: [];
         } catch (Exception $e) {
             echo "Error" . $e->getMessage() . "";
             return array();
