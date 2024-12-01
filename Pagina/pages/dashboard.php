@@ -58,6 +58,7 @@ $data = $Tabla_paciente->buscarPaciente("Carlos");
     #pacientesTable th,
     #pacientesTable td {
       text-align: center;
+      vertical-align: middle;
     }
 
     #pacientesTable .fixed-column {
