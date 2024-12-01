@@ -1,13 +1,3 @@
-<?php
-require_once("./Conexion/Tabla_paciente.php");
-
-//Instancia modelo
-$Tabla_paciente = new Tabla_paciente();
-$data = $Tabla_paciente->buscarPaciente("Carlos");
-
-//print_r($data);
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -23,6 +13,8 @@ $data = $Tabla_paciente->buscarPaciente("Carlos");
   <link rel="stylesheet" href="style.css" />
   <!-- Fontawesome CDN Link -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" />
+  <!-- Vincula Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <style>
     .scrollable-div {
       height: 100vh;
@@ -73,13 +65,39 @@ $data = $Tabla_paciente->buscarPaciente("Carlos");
       width: 150px;
       /* Ajuste del tamaño para la columna de Acciones */
     }
+
+    .card-info {
+      border-left: 10px solid #0dcaf0;
+      /* Ajusta el color de la franja */
+      padding-left: 15px;
+      /* Ajuste del espacio a la izquierda */
+    }
+
+    .card-warning {
+      border-left: 10px solid #ffc107;
+      /* Ajusta el color de la franja */
+      padding-left: 15px;
+      /* Ajuste del espacio a la izquierda */
+    }
+
+    .card-success {
+      border-left: 10px solid #198754;
+      /* Ajusta el color de la franja */
+      padding-left: 15px;
+      /* Ajuste del espacio a la izquierda */
+    }
+
+    th {
+      text-align: center;
+      vertical-align: middle;
+    }
   </style>
 </head>
 
 <body>
   <!--Sidebard-->
   <nav class="sidebar">
-    <a href="#" class="logo">Dashboard</a>
+    <a onclick="showSection('dashboard')" class="logo">Dashboard</a>
 
     <div class="menu-content ">
       <ul class="menu-items">
@@ -129,8 +147,87 @@ $data = $Tabla_paciente->buscarPaciente("Carlos");
   <div class="main content scrollable-div">
     <div class="row w-100">
       <div class="col-lg-12"> <!--Columna principal-->
+        <div id="dashboard" class="section active">
+          <h2>Dashboard</h2>
+          <!--Inicio row tarjetas-->
+          <div class="row mt-4">
+            <!-- Tarjeta 1: Total Pacientes -->
+            <div class="col-md-4">
+              <div class="card bg-white mb-3 card-info shadow-sm">
+                <div class="card-body">
+                  <h5>Total Pacientes</h5>
+                  <p class="card-text">120</p>
+                </div>
+              </div>
+            </div>
 
-        <div id="pacientes" class="section active">
+            <!-- Tarjeta 2: Citas Pendientes -->
+            <div class="col-md-4">
+              <div class="card bg-white mb-3 card-warning shadow-sm">
+                <div class="card-body">
+                  <h5>Citas Pendientes</h5>
+                  <p class="card-text">15</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Tarjeta 3: Nuevas Consultas -->
+            <div class="col-md-4">
+              <div class="card bg-white mb-3 card-success shadow-sm">
+                <div class="card-body">
+                  <h5>Nuevas Consultas</h5>
+                  <p class="card-text">30</p>
+                </div>
+              </div>
+            </div>
+          </div> <!--Fin row tarjetas-->
+
+
+
+          <!--Datos Extras-->
+          <div class="mt-4">
+            <div class="row">
+              <!--Grafica de clientes-->
+              <div class="col-8">
+                <div class="card shadow-sm">
+                  <div class="card-header bg-dark text-white" style="background-color: #11101d">
+                    <h5 class=" mb-0">Citas programadas esta semana</h5>
+                  </div>
+                  <div class="card-body">
+                    <canvas id="graficaPacientes"></canvas>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Informacion de la proxima cita-->
+              <div class="col-4">
+                <div class="card shadow-sm mb-4">
+                  <div class="card-header bg-dark text-white">
+                    <h5 class="mb-0">Proxima cita</h5>
+                  </div>
+                  <div class="card-body">
+                    <!-- Motivo de la Cita -->
+                    <h6 class="text-primary"><strong>Motivo:</strong> Chequeo de rutina</h6>
+                    <!-- Fecha y Hora -->
+                    <p class="card-text">
+                      <strong>Fecha:</strong> 2 de noviembre de 2024<br>
+                      <strong>Hora:</strong> 10:00 AM
+                    </p>
+                    <!-- Método de Agenda -->
+                    <p class="card-text">
+                      <strong>Método de Agenda:</strong> Online
+                    </p>
+                    <!-- Estado de la Cita -->
+                    <span class="badge bg-success">Confirmada</span>
+                  </div>
+                </div> <!-- Fin informacion de la proxima cita-->
+
+              </div>
+            </div> <!-- Fin datos de la semana -->
+          </div>
+        </div>
+
+        <div id="pacientes" class="section">
           <h2>Gestión de Pacientes</h2>
           <div class="search-container mt-3 mb-3 d-flex">
             <input type="text" id="searchInput" class="form-control" placeholder="Buscar por nombre...">
@@ -243,8 +340,8 @@ $data = $Tabla_paciente->buscarPaciente("Carlos");
                   <!-- Botón que activa el panel -->
                   <button class="legend-button align-items-center" type="button" data-bs-toggle="collapse"
                     data-bs-target="#antecedentesPanel" aria-expanded="false" aria-controls="antecedentesPanel">
-                    <span>Antecedentes Patológicos</span>
                     <i class="fas fa-angle-down icon-rotate" id="iconoColapso" style="font-size: 1.5rem;"></i>
+                    <span>Antecedentes Patológicos</span>
                   </button>
 
                   <!-- Panel colapsable -->
@@ -398,77 +495,51 @@ $data = $Tabla_paciente->buscarPaciente("Carlos");
   <script src="script.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
   <script>
-    document
-      .getElementById("searchButton")
-      .addEventListener("click", fetchPacientes);
+    // Datos de ejemplo (número de pacientes por día)
+    const datosPacientes = {
+      labels: [
+        "Lunes",
+        "Martes",
+        "Miércoles",
+        "Jueves",
+        "Viernes",
+        "Sábado",
+        "Domingo",
+      ],
+      datasets: [
+        {
+          label: "Número de Pacientes",
+          data: [1, 2, 14, 12, 16, 10, 8], // Reemplaza con tus datos reales
+          backgroundColor: "rgba(13, 110, 253, 0.6)", // Color primary de Bootstrap con transparencia
+          borderColor: "rgba(13, 110, 253, 1)", // Color primary sólido de Bootstrap
+          borderWidth: 2,
+          borderRadius: 10,
+        },
+      ],
+    };
 
-    function fetchPacientes() {
-      const searchValue = document.getElementById("searchInput").value.trim();
+    // Configuración de la gráfica
+    const config = {
+      type: "bar", // Tipo de gráfica (barras)
+      data: datosPacientes,
+      options: {
+        responsive: true,
+        plugins: {
+          legend: {
+            display: false, // Ocultar leyenda
+          },
+        },
+        scales: {
+          y: {
+            beginAtZero: true, // Inicia el eje Y desde cero
+          },
+        },
+      },
+    };
 
-      if (!searchValue) {
-        alert("Por favor, ingresa un nombre.");
-        return;
-      }
-
-      // Crear objeto FormData para enviar datos al servidor
-      const formData = new FormData();
-      formData.append("name", searchValue);
-
-      // Realizar la solicitud AJAX
-      fetch("./Conexion/buscar_paciente.php", {
-        method: "POST",
-        body: formData,
-      })
-        .then((response) => response.json()) // Convertir la respuesta en JSON
-        .then((data) => {
-          mostrarResultados(data); // Llamar a la función para mostrar los resultados
-        })
-        .catch((error) => {
-          console.error("Error al obtener los datos:", error);
-        });
-    }
-
-    function mostrarResultados(paciente) {
-      const tbody = document.querySelector("#pacientesTable tbody");
-      tbody.innerHTML = ""; // Limpiar la tabla
-
-      if (!paciente.idPaciente) {
-        tbody.innerHTML =
-          '<tr><td colspan="5" class="text-center">No se encontraron resultados.</td></tr>';
-        return;
-      }
-
-      // Crear una fila con los datos recibidos
-      const row = document.createElement("tr");
-      row.innerHTML = `
-      <td class="col-1">${paciente.idPaciente}</td>
-      <td class="col-3">${paciente.NombreCompleto}</td>
-      <td class="col-2">${paciente.Telefono}</td>
-      <td class="col-3">${paciente.Correo ? paciente.Correo : "N/A"}</td>
-      <td class="col-3">
-        <button class="btn btn-warning" onclick="modificarDatos(${paciente.idPaciente})">Modificar Datos</button>
-        <button class="btn btn-info" onclick="verHistorial(${paciente.idPaciente})">Ver Historial</button>
-      </td>
-      `;
-
-      tbody.appendChild(row);
-    }
-    // Función para manejar el botón "Modificar Datos"
-    function modificarDatos(idPaciente) {
-      console.log("Modificar datos del paciente con ID:", idPaciente);
-      // Aquí puedes redirigir o hacer alguna acción con la id del paciente
-      // Por ejemplo:
-      // window.location.href = `modificar_paciente.php?id=${idPaciente}`;
-    }
-
-    // Función para manejar el botón "Ver Historial"
-    function verHistorial(idPaciente) {
-      console.log("Ver historial del paciente con ID:", idPaciente);
-      // Aquí puedes redirigir o hacer alguna acción con la id del paciente
-      // Por ejemplo:
-      // window.location.href = `historial_paciente.php?id=${idPaciente}`;
-    }
-
+    // Inicializar la gráfica en el canvas
+    const ctx = document.getElementById("graficaPacientes").getContext("2d");
+    new Chart(ctx, config);
   </script>
 </body>
 

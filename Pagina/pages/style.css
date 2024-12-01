@@ -19,6 +19,7 @@
 .logo {
   font-size: 25px;
   padding: 0 42px;
+  cursor: pointer;
 }
 .sidebar a {
   color: #fff;
@@ -135,6 +136,10 @@
   padding-left: 20px;
   font-size: 30px;
 }
+h4 {
+  padding-left: 20px;
+  font-size: 25px;
+}
 
 .main,
 .row {
@@ -212,4 +217,49 @@
 /* Ícono de lupa */
 #searchButton i {
   font-size: 18px;
+}
+
+#pacientesTable th,
+#pacientesTable td {
+  text-align: center;
+  vertical-align: middle;
+}
+
+#pacientesTable .fixed-column {
+  width: 50px;
+  /* Ajusta el tamaño de las columnas según tus necesidades */
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+#pacientesTable .fixed-column:last-child {
+  width: 150px;
+  /* Ajuste del tamaño para la columna de Acciones */
+}
+
+.card-info {
+  border-left: 10px solid #0dcaf0;
+  /* Ajusta el color de la franja */
+  padding-left: 15px;
+  /* Ajuste del espacio a la izquierda */
+}
+
+.card-warning {
+  border-left: 10px solid #ffc107;
+  /* Ajusta el color de la franja */
+  padding-left: 15px;
+  /* Ajuste del espacio a la izquierda */
+}
+
+.card-success {
+  border-left: 10px solid #198754;
+  /* Ajusta el color de la franja */
+  padding-left: 15px;
+  /* Ajuste del espacio a la izquierda */
+}
+
+th {
+  text-align: center;
+  vertical-align: middle;
 }
