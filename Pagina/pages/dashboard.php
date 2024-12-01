@@ -22,8 +22,10 @@
       border: 1px solid #ccc;
       /* Opcional: Añade un borde para visualizar el contenedor */
       /* Más alto que la barra de navegación */
-      position: relative;
-      /* Necesario para aplicar z-index */
+      height: calc(100vh - 55px);
+      /* Resta la altura de la barra de navegación */
+      top: 55px;
+      /* Alinea la barra lateral debajo de la navbar */
     }
 
     /* Estilo opcional para hacer la barra de desplazamiento más delgada */
@@ -97,13 +99,13 @@
 
   <div class="main content scrollable-div">
     <div class="row w-100">
-      <div class="col-lg-12">
-        <div id="pacientes" class="section">
+      <div class="col-lg-12"> <!--Columna principal-->
+        <div id="pacientes" class="section active">
           <h2>Gestión de Pacientes</h2>
           <p>Contenido relacionado con los pacientes aquí.</p>
         </div>
 
-        <div id="historiales" class="section active">
+        <div id="historiales" class="section">
           <h2>Gestión de Historiales</h2>
 
           <br> <!--datos personales del paciente -->
@@ -333,6 +335,7 @@
             </div>
           </div> <!--Fin Antecedentes Patologicos-->
         </div>
+
         <div id="antecedentes" class="section">
           <h2>Gestión de Antecedentes</h2>
           <p>Contenido relacionado con los historiales aquí.</p>
