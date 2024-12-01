@@ -3,14 +3,14 @@ error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
 // Incluye la clase o el archivo donde está definida la función getId()
-include 'Tabla_paciente.php'; // Asegúrate de ajustar el nombre del archivo
+include 'funciones_tablas.php'; // Asegúrate de ajustar el nombre del archivo
 
 // Comprueba si se recibe el nombre por POST
 if (isset($_POST['name'])) {
     $name = $_POST['name'];
 
     // Crea una instancia de tu clase (ajusta el nombre de la clase según tu código)
-    $pacienteObj = new Tabla_paciente(); // Reemplaza 'TuClase' con el nombre real de tu clase
+    $pacienteObj = new funciones_tablas(); // Reemplaza 'TuClase' con el nombre real de tu clase
 
     // Llama a la función getId() y obtiene el resultado
     $resultado = $pacienteObj->buscarPaciente($name);

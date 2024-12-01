@@ -1,7 +1,7 @@
 <?php
 require_once("Connect.php");
 
-class Tabla_paciente
+class funciones_tablas
 {
     private $connect;
     private $table = "paciente;";

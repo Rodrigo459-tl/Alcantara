@@ -147,12 +147,6 @@ h4 {
   padding-right: 10px;
 }
 
-.card-title {
-  position: relative;
-  background: #dedee1;
-  padding: 30.4px 24px;
-  padding: 1.9rem 1.5rem;
-}
 .section {
   display: none;
 }
@@ -162,18 +156,9 @@ h4 {
 }
 
 .legend-button {
-  position: relative;
-  padding: 30.4px 24px;
-  padding: 1.9rem 1.5rem;
   width: 100%;
   max-width: 100%;
-  font-size: 1.5rem;
-  line-height: inherit;
-  color: inherit;
-  white-space: normal;
-  background: #dedee1;
   border: none;
-  text-align: center;
   color: inherit;
   cursor: pointer;
   outline: none;
@@ -217,49 +202,4 @@ h4 {
 /* Ícono de lupa */
 #searchButton i {
   font-size: 18px;
-}
-
-#pacientesTable th,
-#pacientesTable td {
-  text-align: center;
-  vertical-align: middle;
-}
-
-#pacientesTable .fixed-column {
-  width: 50px;
-  /* Ajusta el tamaño de las columnas según tus necesidades */
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
-#pacientesTable .fixed-column:last-child {
-  width: 150px;
-  /* Ajuste del tamaño para la columna de Acciones */
-}
-
-.card-info {
-  border-left: 10px solid #0dcaf0;
-  /* Ajusta el color de la franja */
-  padding-left: 15px;
-  /* Ajuste del espacio a la izquierda */
-}
-
-.card-warning {
-  border-left: 10px solid #ffc107;
-  /* Ajusta el color de la franja */
-  padding-left: 15px;
-  /* Ajuste del espacio a la izquierda */
-}
-
-.card-success {
-  border-left: 10px solid #198754;
-  /* Ajusta el color de la franja */
-  padding-left: 15px;
-  /* Ajuste del espacio a la izquierda */
-}
-
-th {
-  text-align: center;
-  vertical-align: middle;
 }

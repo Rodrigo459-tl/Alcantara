@@ -79,12 +79,12 @@ CREATE TABLE Factura (
 -- Cita
 CREATE TABLE Cita (
     idCita INT AUTO_INCREMENT PRIMARY KEY,
-    idTratamiento INT NOT NULL,
-    idHistorial INT NOT NULL,
-    idPaciente INT NOT NULL,
+    idTratamiento INT NULL,
+    idHistorial INT NULL,
+    idPaciente INT NULL,
     Motivo VARCHAR(200) NOT NULL,
-    Fecha DATE NOT NULL,
-    Hora TIME NOT NULL,
+    Fecha DATE NULL,
+    Hora TIME NULL,
     Metodo_Agenda VARCHAR(50) NOT NULL,
     Estado VARCHAR(50) NOT NULL,
     FOREIGN KEY (idHistorial) REFERENCES Historial (idHistorial) ON DELETE CASCADE ON UPDATE CASCADE,
