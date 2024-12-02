@@ -579,7 +579,7 @@
         <div id="actualizarPaciente" class="section">
           <div class="d-flex justify-content-between align-items-center">
             <h2 class="mb-0">Actualizar Paciente</h2>
-            <button id="botonActualizar" class="btn btn-primary" onclick="actualizarDatos();">Actualizar</button>
+            <button id="botonActualizar" class="btn btn-warning me-4" onclick="actualizarDatos();">Actualizar</button>
           </div>
 
           <br> <!-- Datos personales del paciente -->
