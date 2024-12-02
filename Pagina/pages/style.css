@@ -103,8 +103,8 @@
 }
 .sidebar.close ~ .navbar,
 .sidebar.close ~ .main {
-  left: 50px;
-  width: calc(100% - 50px);
+  left: 0;
+  width: calc(100%);
 }
 .navbar {
   position: fixed;

@@ -99,6 +99,18 @@
       height: 20px;
       cursor: pointer;
     }
+
+    .historial_check {
+      width: 20px;
+      height: 20px;
+      cursor: pointer;
+    }
+
+    .historial_check-no-patologicos {
+      width: 20px;
+      height: 20px;
+      cursor: pointer;
+    }
   </style>
 </head>
 
@@ -109,17 +121,6 @@
 
     <div class="menu-content ">
       <ul class="menu-items">
-
-        <li class="item">
-          <a onclick="showSection('verPacientes'); listarTodo();">Pacientes</a>
-        </li>
-        <li class="item">
-          <a onclick="showSection('historiales')">Historiales</a>
-        </li>
-        <li class="item">
-          <a onclick="showSection('antecedentes')">Antecedentes</a>
-        </li>
-
         <!--Menus y sub menus-->
         <!--Pacientes-->
         <li class="item">
@@ -155,7 +156,7 @@
               Volver
             </div>
             <li class="item">
-              <a href="#">Registrar usuario</a>
+              <a onclick="showSection('registrarUsuario')">Registrar usuario</a>
             </li>
             <li class="item">
               <a href="#">Ver usuarios</a>
@@ -284,11 +285,13 @@
           </div>
         </div>
 
+        <!--Secciones de Paciente------------------------------------------------------------------------------->
+
         <!--Seccion Registrar paciente-->
         <div id="registrarPaciente" class="section">
           <div class="d-flex justify-content-between align-items-center">
             <h2 class="mb-0">Registrar Nuevo Paciente</h2>
-            <button class="btn btn-success me-4" id="botonRegistrar" onclick="guardarDatos();">Registrar</button>
+            <button class="btn btn-primary me-4" id="botonRegistrar" onclick="guardarDatos();">Registrar</button>
           </div>
 
           <br> <!-- Datos personales del paciente -->
@@ -845,76 +848,72 @@
           </div> <!--Fin Antecedentes-->
         </div>
 
-        <!--Seccion dashboard-->
-        <div id="historiales" class="section">
-          <h2>Gestión de Historiales</h2>
+        <!-- Sección Ver historial del Paciente -->
+        <div id="historialPaciente" class="section">
+          <div class="d-flex justify-content-between align-items-center">
+            <h2 class="mb-0">Historial de Paciente</h2>
+            <button id="botonCerrarHistorial" class="btn btn-success me-4" onclick="showSection('verPacientes');">
+              Cerrar historial
+            </button>
+          </div>
 
-          <br> <!--datos personales del paciente -->
+          <br />
+          <!-- Datos personales del paciente -->
           <div class="row">
             <div class="col-12">
               <div class="card bg-white">
                 <div class="card-body m-0 p-0">
                   <form>
-                    <legend class="card-title" style="text-align: center;">Datos personales</legend>
+                    <h5 class="card-header card-title bg-dark text-white">
+                      Datos personales
+                    </h5>
                     <div class="card-content">
                       <div class="row mb-3">
                         <div class="form-group col">
                           <label for="nombre">Nombre</label>
-                          <input type="text" class="form-control" id="nombre"
-                            style="cursor:default ; outline: none; box-shadow: none;" value="Jose Miguel" readonly>
+                          <input type="text" class="form-control" id="historial_nombre" value="Ernesto" />
                         </div>
                         <div class="form-group col">
                           <label for="ap">Apellido paterno</label>
-                          <input type="text" class="form-control" id="ap"
-                            style="cursor:default ; outline: none; box-shadow: none;" value="Echavarria" readonly>
+                          <input type="text" class="form-control" id="historial_ap" value="Sanchez" />
                         </div>
                         <div class="form-group col">
                           <label for="am">Apellido materno</label>
-                          <input type="text" class="form-control" id="am"
-                            style="cursor:default ; outline: none; box-shadow: none;" value="Matamoros" readonly>
+                          <input type="text" class="form-control" id="historial_am" value="Piedras" />
                         </div>
                       </div>
 
                       <div class="row mb-3">
                         <div class="form-group col-3">
                           <label for="fn">Fecha de Nacimiento</label>
-                          <input type="date" class="form-control" id="fn" value="2024-05-01" readonly>
+                          <input type="date" class="form-control" id="historial_fn" value="1985-05-05" />
                         </div>
                         <div class="form-group col-3">
-                          <label for="fn">Teléfono</label>
-                          <input type="tel" class="form-control" id="fn"
-                            style="cursor:default ; outline: none; box-shadow: none;" value="2461987568" readonly>
+                          <label for="telefono">Teléfono</label>
+                          <input type="tel" class="form-control" id="historial_telefono" value="2947595684" />
                         </div>
                         <div class="form-group col">
                           <label for="mail">Correo electrónico</label>
-                          <input type="email" class="form-control" id="mail"
-                            style="cursor:default ; outline: none; box-shadow: none;"
-                            value="jose.migue.7897763@gmail.com" readonly>
+                          <input type="email" class="form-control" id="historial_mail" value="ErnestoSP@gmail.com" />
                         </div>
                       </div>
 
                       <div class="row mb-3">
                         <div class="form-group col">
                           <label for="calle">Calle y número</label>
-                          <input type="text" class="form-control" id="calle"
-                            style="cursor:default ; outline: none; box-shadow: none;"
-                            value="3a Privada de independencia #12" readonly>
+                          <input type="text" class="form-control" id="historial_calle" value="Avenida Juarez #123" />
                         </div>
                         <div class="form-group col">
                           <label for="col">Colonia</label>
-                          <input type="text" class="form-control" id="col"
-                            style="cursor:default ; outline: none; box-shadow: none;" value="Ocotlan" readonly>
+                          <input type="text" class="form-control" id="historial_col" value="Centro" />
                         </div>
                         <div class="form-group col">
                           <label for="municipio">Municipio</label>
-                          <input type="text" class="form-control" id="municipio"
-                            style="cursor:default ; outline: none; box-shadow: none;" value="Tlaxcala de Xicohténcatl"
-                            readonly>
+                          <input type="text" class="form-control" id="historial_municipio" value="Tlaxcala" />
                         </div>
                         <div class="form-group col">
                           <label for="estado">Estado</label>
-                          <input type="text" class="form-control" id="estado"
-                            style="cursor:default ; outline: none; box-shadow: none;" value="Tlaxcala" readonly>
+                          <input type="text" class="form-control" id="historial_estado" value="Tlaxcala" />
                         </div>
                       </div>
                     </div>
@@ -922,25 +921,28 @@
                 </div>
               </div>
             </div>
-          </div> <!--Fin datos del paciente-->
+          </div>
+          <!-- Fin datos del paciente -->
 
-
-          <br> <!-- antecedentes Patologicos -->
+          <br />
+          <!-- antecedentes Patologicos y no Patologicos -->
           <div class="row">
-            <div class="col-12">
+            <div class="col-12 mb-0">
               <div class="card p-0 m-0 bg-white">
                 <div class="card-body p-0 m-0">
                   <!-- Botón que activa el panel -->
-                  <button class="legend-button align-items-center" type="button" data-bs-toggle="collapse"
+                  <button class="card-header bg-dark text-white legend-button" type="button" data-bs-toggle="collapse"
                     data-bs-target="#antecedentesPanel" aria-expanded="false" aria-controls="antecedentesPanel">
-                    <i class="fas fa-angle-down icon-rotate" id="iconoColapso" style="font-size: 1.5rem;"></i>
-                    <span>Antecedentes Patológicos</span>
+                    <h5 class="mb-0 text-start">
+                      <i class="fas fa-angle-down icon-rotate" id="iconoColapso" style="font-size: 1.2rem"></i>
+                      Antecedentes
+                    </h5>
                   </button>
 
                   <!-- Panel colapsable -->
                   <div class="row">
                     <div class="collapse p-0 m-0" id="antecedentesPanel">
-                      <div class="row card-content p-0">
+                      <div class="row card-content p-0 mb-3">
                         <!-- Antecedentes Patológicos -->
                         <div class="col-xl-6">
                           <h4 class="text-center">Antecedentes Patológicos</h4>
@@ -955,73 +957,139 @@
                             <tbody>
                               <tr>
                                 <td>Diabetes</td>
-                                <td><input type="checkbox" readonly></td>
-                                <td><input type="text" class="form-control" readonly></td>
+                                <td class="centrado">
+                                  <input type="checkbox" class="historial_check" id="historial_check-diabetes" />
+                                </td>
+                                <td>
+                                  <input type="text" class="form-control" id="historial_text-diabetes" />
+                                </td>
                               </tr>
                               <tr>
                                 <td>Hipertensión</td>
-                                <td><input type="checkbox" readonly></td>
-                                <td><input type="text" class="form-control" readonly></td>
+                                <td class="centrado">
+                                  <input type="checkbox" class="historial_check" id="historial_check-hipertension" />
+                                </td>
+                                <td>
+                                  <input type="text" class="form-control" id="historial_text-hipertension" />
+                                </td>
                               </tr>
                               <tr>
                                 <td>Enfermedades crónicas</td>
-                                <td><input type="checkbox" readonly></td>
-                                <td><input type="text" class="form-control" readonly></td>
+                                <td class="centrado">
+                                  <input type="checkbox" class="historial_check"
+                                    id="historial_check-enfermedades-cronicas" />
+                                </td>
+                                <td>
+                                  <input type="text" class="form-control" id="historial_text-enfermedades-cronicas" />
+                                </td>
                               </tr>
                               <tr>
                                 <td>Problemas del corazón</td>
-                                <td><input type="checkbox" readonly></td>
-                                <td><input type="text" class="form-control" readonly></td>
+                                <td class="centrado">
+                                  <input type="checkbox" class="historial_check"
+                                    id="historial_check-problemas-corazon" />
+                                </td>
+                                <td>
+                                  <input type="text" class="form-control" id="historial_text-problemas-corazon" />
+                                </td>
                               </tr>
                               <tr>
                                 <td>Problemas respiratorios</td>
-                                <td><input type="checkbox" readonly></td>
-                                <td><input type="text" class="form-control" readonly></td>
+                                <td class="centrado">
+                                  <input type="checkbox" class="historial_check"
+                                    id="historial_check-problemas-respiratorios" />
+                                </td>
+                                <td>
+                                  <input type="text" class="form-control" id="historial_text-problemas-respiratorios" />
+                                </td>
                               </tr>
                               <tr>
                                 <td>Problemas del hígado</td>
-                                <td><input type="checkbox" readonly></td>
-                                <td><input type="text" class="form-control" readonly></td>
+                                <td class="centrado">
+                                  <input type="checkbox" class="historial_check"
+                                    id="historial_check-problemas-higado" />
+                                </td>
+                                <td>
+                                  <input type="text" class="form-control" id="historial_text-problemas-higado" />
+                                </td>
                               </tr>
                               <tr>
                                 <td>Problemas renales</td>
-                                <td><input type="checkbox" readonly></td>
-                                <td><input type="text" class="form-control" readonly></td>
+                                <td class="centrado">
+                                  <input type="checkbox" class="historial_check"
+                                    id="historial_check-problemas-renales" />
+                                </td>
+                                <td>
+                                  <input type="text" class="form-control" id="historial_text-problemas-renales" />
+                                </td>
                               </tr>
                               <tr>
                                 <td>Problemas digestivos</td>
-                                <td><input type="checkbox" readonly></td>
-                                <td><input type="text" class="form-control" readonly></td>
+                                <td class="centrado">
+                                  <input type="checkbox" class="historial_check"
+                                    id="historial_check-problemas-digestivos" />
+                                </td>
+                                <td>
+                                  <input type="text" class="form-control" id="historial_text-problemas-digestivos" />
+                                </td>
                               </tr>
                               <tr>
                                 <td>Problemas de coagulación</td>
-                                <td><input type="checkbox" readonly></td>
-                                <td><input type="text" class="form-control" readonly></td>
+                                <td class="centrado">
+                                  <input type="checkbox" class="historial_check"
+                                    id="historial_check-problemas-coagulacion" />
+                                </td>
+                                <td>
+                                  <input type="text" class="form-control" id="historial_text-problemas-coagulacion" />
+                                </td>
                               </tr>
                               <tr>
                                 <td>Intervenciones quirúrgicas</td>
-                                <td><input type="checkbox" readonly></td>
-                                <td><input type="text" class="form-control" readonly></td>
+                                <td class="centrado">
+                                  <input type="checkbox" class="historial_check"
+                                    id="historial_check-intervenciones-quirurgicas" />
+                                </td>
+                                <td>
+                                  <input type="text" class="form-control"
+                                    id="historial_text-intervenciones-quirurgicas" />
+                                </td>
                               </tr>
                               <tr>
                                 <td>Alergias</td>
-                                <td><input type="checkbox" readonly></td>
-                                <td><input type="text" class="form-control" readonly></td>
+                                <td class="centrado">
+                                  <input type="checkbox" class="historial_check" id="historial_check-alergias" />
+                                </td>
+                                <td>
+                                  <input type="text" class="form-control" id="historial_text-alergias" />
+                                </td>
                               </tr>
                               <tr>
                                 <td>Convulsiones</td>
-                                <td><input type="checkbox" readonly></td>
-                                <td><input type="text" class="form-control" readonly></td>
+                                <td class="centrado">
+                                  <input type="checkbox" class="historial_check" id="historial_check-convulsiones" />
+                                </td>
+                                <td>
+                                  <input type="text" class="form-control" id="historial_text-convulsiones" />
+                                </td>
                               </tr>
                               <tr>
                                 <td>Toma anticonceptivos</td>
-                                <td><input type="checkbox" readonly></td>
-                                <td><input type="text" class="form-control" readonly></td>
+                                <td class="centrado">
+                                  <input type="checkbox" class="historial_check"
+                                    id="historial_check-toma-anticonceptivos" />
+                                </td>
+                                <td>
+                                  <input type="text" class="form-control" id="historial_text-toma-anticonceptivos" />
+                                </td>
                               </tr>
                               <tr>
                                 <td>Embarazo actual</td>
-                                <td><input type="checkbox" readonly></td>
-                                <td><input type="text" class="form-control" readonly></td>
+                                <td class="centrado">
+                                  <input type="checkbox" class="historial_check" id="historial_check-embarazo-actual" />
+                                </td>
+                                <td>
+                                  <input type="text" class="form-control" id="historial_text-embarazo-actual" />
+                                </td>
                               </tr>
                             </tbody>
                           </table>
@@ -1041,47 +1109,148 @@
                             <tbody>
                               <tr>
                                 <td>Higiene bucal</td>
-                                <td><input type="checkbox" readonly></td>
-                                <td><input type="text" class="form-control" readonly></td>
+                                <td class="centrado">
+                                  <input type="checkbox" class="historial_check-no-patologicos"
+                                    id="historial_check-higiene-bucal" />
+                                </td>
+                                <td>
+                                  <input type="text" class="form-control" id="historial_text-higiene-bucal" />
+                                </td>
                               </tr>
                               <tr>
                                 <td>Frecuencia de cepillado</td>
-                                <td><input type="checkbox" readonly></td>
-                                <td><input type="text" class="form-control" readonly></td>
+                                <td class="centrado">
+                                  <input type="checkbox" class="historial_check-no-patologicos"
+                                    id="historial_check-frecuencia-cepillado" />
+                                </td>
+                                <td>
+                                  <input type="text" class="form-control" id="historial_text-frecuencia-cepillado" />
+                                </td>
                               </tr>
                               <tr>
                                 <td>Fuma (cuántos cigarros al día)</td>
-                                <td><input type="checkbox" readonly></td>
-                                <td><input type="text" class="form-control" readonly></td>
+                                <td class="centrado">
+                                  <input type="checkbox" class="historial_check-no-patologicos"
+                                    id="historial_check-fuma" />
+                                </td>
+                                <td>
+                                  <input type="text" class="form-control" id="historial_text-fuma" />
+                                </td>
                               </tr>
                               <tr>
                                 <td>Consume alcohol</td>
-                                <td><input type="checkbox" readonly></td>
-                                <td><input type="text" class="form-control" readonly></td>
+                                <td class="centrado">
+                                  <input type="checkbox" class="historial_check-no-patologicos"
+                                    id="historial_check-consume-alcohol" />
+                                </td>
+                                <td>
+                                  <input type="text" class="form-control" id="historial_text-consume-alcohol" />
+                                </td>
                               </tr>
                               <tr>
                                 <td>Aprieta o rechina los dientes</td>
-                                <td><input type="checkbox" readonly></td>
-                                <td><input type="text" class="form-control" readonly></td>
+                                <td class="centrado">
+                                  <input type="checkbox" class="historial_check-no-patologicos"
+                                    id="historial_check-rechina-dientes" />
+                                </td>
+                                <td>
+                                  <input type="text" class="form-control" id="historial_text-rechina-dientes" />
+                                </td>
                               </tr>
                             </tbody>
                           </table>
                         </div>
-
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
-          </div> <!--Fin Antecedentes Patologicos-->
+          </div>
+          <!--Fin Antecedentes-->
+
+          <br />
+          <!-- Card para Listado de Citas -->
+          <div class="row">
+            <div class="col-12">
+              <div class="card bg-white">
+                <div class="card-body m-0 p-0">
+                  <h5 class="card-header card-title bg-dark text-white">Historial de citas</h5>
+                  <div class="card-content">
+                    <table class="table table-bordered table-sm">
+                      <thead class="thead-light">
+                        <tr>
+                          <th>Fecha</th>
+                          <th>Hora</th>
+                          <th>Motivo</th>
+                          <th>Método de Agenda</th>
+                          <th>Estado</th>
+                        </tr>
+                      </thead>
+                      <tbody id="citas_list">
+                        <!-- Las citas se cargarán aquí -->
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Fin Listado de Citas -->
         </div>
 
-        <!--Seccion dashboard-->
-        <div id="antecedentes" class="section">
-          <h2>Gestión de Antecedentes</h2>
-          <p>Contenido relacionado con los historiales aquí.</p>
+        <!--Secciones de usuario------------------------------------------------------------------------------->
+        <!--Registrar usuario-->
+        <div id="registrarUsuario" class="section">
+          <div class="d-flex justify-content-between align-items-center">
+            <h2 class="mb-0">Registrar Usuario</h2>
+          </div>
+
+          <br />
+
+          <div class="row">
+            <div class="col-12">
+              <div class="card bg-white">
+                <div class="card-body m-0 p-0">
+                  <form id="formRegistrarUsuario">
+                    <h5 class="card-header card-title bg-dark text-white">Información del Usuario</h5>
+                    <div class="card-content p-3">
+                      <div class="row mb-3">
+                        <div class="form-group col">
+                          <label for="correo">Correo Electrónico</label>
+                          <input type="email" class="form-control" id="registro_correo" placeholder="Ingrese el correo"
+                            required />
+                        </div>
+                        <div class="form-group col">
+                          <label for="contrasenia">Contraseña</label>
+                          <input type="password" class="form-control" id="registro_contrasenia"
+                            placeholder="Ingrese la contraseña" required />
+                        </div>
+                      </div>
+                      <div class="row mb-3">
+                        <div class="form-group col">
+                          <label for="rol">Rol</label>
+                          <select class="form-select" id="registro_rol" required>
+                            <option value="" disabled selected>Seleccione un rol</option>
+                            <option value="100">Administrador</option>
+                            <option value="10">Operador</option>
+                          </select>
+                        </div>
+                      </div>
+                      <div class="d-flex justify-content-end">
+                        <button type="button" class="btn btn-primary" onclick="registrarUsuario()">Registrar</button>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
+
+
+
       </div>
     </div>
   </div>
@@ -1138,6 +1307,7 @@
     new Chart(ctx, config);
   </script>
 
+  <!-------------------------------Script para PACIENTES ------------------------->
   <!--Listar datos (por nombre y general)-->
   <script>
     document
@@ -1190,7 +1360,7 @@
   <td class="col-3">
     <button class="btn btn-warning" onclick="showSection('actualizarPaciente'); modificarDatos(${paciente.idPaciente})">Actualizar</button>
     <button class="btn btn-danger" onclick="eliminarPaciente(${paciente.idPaciente})">Eliminar</button>
-    <button class="btn btn-success" onclick="verHistorial(${paciente.idPaciente})">Ver historial</button>
+    <button class="btn btn-success" onclick="showSection('historialPaciente'); verHistorial(${paciente.idPaciente})">Ver historial</button>
   </td>
   `;
 
@@ -1230,7 +1400,7 @@
           <td class="col-3">
             <button class="btn btn-warning" onclick="showSection('actualizarPaciente'); modificarDatos(${paciente.idPaciente})">Actualizar</button>
             <button class="btn btn-danger" onclick="eliminarPaciente(${paciente.idPaciente})">Eliminar</button>
-            <button class="btn btn-success" onclick="verHistorial(${paciente.idPaciente})">Ver historial</button>
+            <button class="btn btn-success" onclick="showSection('historialPaciente'); verHistorial(${paciente.idPaciente})">Ver historial</button>
           </td>
         `;
             tbody.appendChild(row);
@@ -1408,9 +1578,90 @@
     // Función para manejar el botón "Ver Historial"
     function verHistorial(idPaciente) {
       console.log("Ver historial del paciente con ID:", idPaciente);
-      // Aquí puedes redirigir o hacer alguna acción con la id del paciente
-      // Por ejemplo:
-      // window.location.href = `historial_paciente.php?id=${idPaciente}`;
+
+      fetch(`./Conexion/obtener_historial.php?id=${idPaciente}`)
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error(`Error al obtener datos: ${response.statusText}`);
+          }
+          return response.json();
+        })
+        .then((data) => {
+          if (data.error) {
+            alert(`Error: ${data.error}`);
+            return;
+          }
+
+          const paciente = data.paciente;
+
+          // Llenar los campos del formulario con los datos obtenidos
+          document.getElementById("historial_nombre").value = paciente.nombre || "";
+          document.getElementById("historial_ap").value = paciente.ap || "";
+          document.getElementById("historial_am").value = paciente.am || "";
+          document.getElementById("historial_fn").value = paciente.fechaN || "";
+          document.getElementById("historial_telefono").value = paciente.telefono || "";
+          document.getElementById("historial_mail").value = paciente.correo || "";
+          document.getElementById("historial_calle").value = paciente.calle || "";
+          document.getElementById("historial_col").value = paciente.colonia || "";
+          document.getElementById("historial_municipio").value = paciente.municipio || "";
+          document.getElementById("historial_estado").value = paciente.estado || "";
+
+          // Llenar antecedentes patológicos
+          data.patologicos.forEach((patologico) => {
+            const check = document.getElementById(
+              `historial_check-${patologico.nombre.toLowerCase().replace(/ /g, "-")}`
+            );
+            const text = document.getElementById(
+              `historial_text-${patologico.nombre.toLowerCase().replace(/ /g, "-")}`
+            );
+            if (check) {
+              check.checked = patologico.estado === "1";
+            }
+            if (text) {
+              text.value = patologico.descripcion || "";
+            }
+          });
+
+          // Llenar antecedentes no patológicos
+          data.noPatologicos.forEach((noPatologico) => {
+            const check = document.getElementById(
+              `historial_check-${noPatologico.nombre.toLowerCase().replace(/ /g, "-")}`
+            );
+            const text = document.getElementById(
+              `historial_text-${noPatologico.nombre.toLowerCase().replace(/ /g, "-")}`
+            );
+            if (check) {
+              check.checked = noPatologico.estado === "1";
+            }
+            if (text) {
+              text.value = noPatologico.descripcion || "";
+            }
+          });
+
+          // Llenar la card de citas
+          const citasContainer = document.getElementById("citas_list");
+          citasContainer.innerHTML = ""; // Limpiar contenido anterior
+          if (data.citas.length === 0) {
+            citasContainer.innerHTML = "<p>No hay citas registradas para este paciente.</p>";
+          } else {
+            data.citas.forEach((cita) => {
+              const citaItem = `
+            <tr>
+              <td>${cita.fecha}</td>
+              <td>${cita.hora}</td>
+              <td>${cita.motivo}</td>
+              <td>${cita.metodoAgenda}</td>
+              <td>${cita.estado}</td>
+            </tr>
+          `;
+              citasContainer.insertAdjacentHTML("beforeend", citaItem);
+            });
+          }
+
+          // Asociar el ID del paciente al botón de actualizar
+          document.getElementById("botonActualizar").dataset.id = idPaciente;
+        })
+        .catch((error) => console.error("Error:", error));
     }
 
     // Función para manejar el botón "Eliminar el paciente"
@@ -1440,7 +1691,7 @@
 
   </script>
 
-  <!--Guardar datos-->
+  <!--Registrar paciente-->
   <script>
     function guardarDatos() {
       const pacienteData = {
@@ -1515,6 +1766,55 @@
 
   </script>
 
+  <!-------------------------------Script para Usuarios ------------------------->
+  <!--Registrar Usuario-->
+  <script>
+    function registrarUsuario() {
+      // Obtener los datos del formulario
+      const correo = document.getElementById("registro_correo").value.trim();
+      const contrasenia = document.getElementById("registro_contrasenia").value.trim();
+      const rol = document.getElementById("registro_rol").value;
+
+      // Validar que todos los campos estén llenos
+      if (!correo || !contrasenia || !rol) {
+        alert("Por favor, complete todos los campos.");
+        return;
+      }
+
+      // Crear el objeto para enviar al servidor
+      const usuarioData = {
+        correo,
+        contrasenia,
+        rol: parseInt(rol, 10),
+      };
+
+      // Enviar los datos al servidor
+      fetch("./Conexion/registrar_usuario.php", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(usuarioData),
+      })
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error(`Error en la respuesta del servidor: ${response.statusText}`);
+          }
+          return response.json();
+        })
+        .then((data) => {
+          if (data.error) {
+            alert(`Error al registrar usuario: ${data.error}`);
+          } else {
+            alert("Usuario registrado con éxito.");
+            document.getElementById("formRegistrarUsuario").reset();
+          }
+        })
+        .catch((error) => {
+          console.error("Error en la solicitud de registro:", error);
+          alert("Ocurrió un error al registrar el usuario.");
+        });
+    }
+
+  </script>
 </body>
 
 </html>
