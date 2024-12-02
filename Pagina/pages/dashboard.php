@@ -99,7 +99,7 @@
       <ul class="menu-items">
 
         <li class="item">
-          <a onclick="showSection('pacientes')">Pacientes</a>
+          <a onclick="showSection('pacientes'); listarTodo(); ">Pacientes</a>
         </li>
         <li class="item">
           <a onclick="showSection('historiales')">Historiales</a>
@@ -901,6 +901,53 @@
 
       tbody.appendChild(row);
     }
+
+    function listarTodo() {
+      fetch('./Conexion/listar_pacientes.php') // Asegúrate de usar la ruta correcta
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error("Error al obtener los pacientes");
+          }
+          return response.json();
+        })
+        .then((data) => {
+          if (data.error) {
+            alert(data.error);
+            return;
+          }
+          const tbody = document.querySelector("#pacientesTable tbody");
+          tbody.innerHTML = ""; // Limpiar la tabla
+
+          if (data.length === 0) {
+            tbody.innerHTML =
+              '<tr><td colspan="5" class="text-center">No se encontraron pacientes.</td></tr>';
+            return;
+          }
+
+          // Iterar sobre los pacientes y crear una fila por cada uno
+          data.forEach((paciente) => {
+            const row = document.createElement("tr");
+            row.innerHTML = `
+          <td class="col-1">${paciente.idPaciente}</td>
+          <td class="col-3">${paciente.NombreCompleto}</td>
+          <td class="col-2">${paciente.Telefono}</td>
+          <td class="col-3">${paciente.Correo ? paciente.Correo : "N/A"}</td>
+          <td class="col-3">
+            <button class="btn btn-warning" onclick="modificarDatos(${paciente.idPaciente})">Actualizar</button>
+            <button class="btn btn-danger" onclick="eliminarPaciente(${paciente.idPaciente})">Eliminar</button>
+            <button class="btn btn-success" onclick="verHistorial(${paciente.idPaciente})">Ver historial</button>
+          </td>
+        `;
+            tbody.appendChild(row);
+          });
+        })
+        .catch((error) => {
+          console.error("Error:", error);
+          alert("Ocurrió un error al cargar los pacientes.");
+        });
+    }
+
+
     // Función para manejar el botón "Modificar Datos"
     function modificarDatos(idPaciente) {
       console.log("Modificar datos del paciente con ID:", idPaciente);
@@ -1014,6 +1061,8 @@
         })
         .catch((error) => console.error("Error:", error));
     }
+
+
   </script>
 
 </body>
