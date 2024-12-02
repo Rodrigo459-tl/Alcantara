@@ -1358,6 +1358,84 @@
           </div>
         </div>
 
+        <!--Actualizar usuario-->
+        <div id="actualizarUsuario" class="section">
+          <div class="container">
+            <!-- Encabezado -->
+            <div class="d-flex justify-content-between align-items-center mb-4">
+              <h2 class="text-dark">
+                <i class="fas fa-user-plus me-2"></i>Actualizar Usuario
+              </h2>
+            </div>
+
+            <!-- Tarjeta principal -->
+            <div class="card bg-white border-0 shadow">
+              <div class="card-header bg-dark text-white text-center">
+                <h5 class="mb-0">Información del Usuario</h5>
+              </div>
+              <div class="card-body p-4">
+                <form id="formRegistrarUsuario" class="needs-validation" novalidate>
+                  <!-- Correo y Contraseña -->
+                  <div class="row mb-4">
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label for="registro_correo" class="form-label">
+                          <i class="fas fa-envelope me-2"></i>Correo Electrónico
+                        </label>
+                        <input type="email" class="form-control" id="actualizar_registro_correo"
+                          placeholder="Ingrese el correo" required />
+                        <div class="invalid-feedback">Por favor, ingrese un correo válido.</div>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label for="registro_contrasenia" class="form-label">
+                          <i class="fas fa-key me-2"></i>Contraseña
+                        </label>
+                        <input type="password" class="form-control" id="actualizar_registro_contrasenia"
+                          placeholder="Ingrese la contraseña" required />
+                        <div class="invalid-feedback">Por favor, ingrese una contraseña.</div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Selección de Rol -->
+                  <div class="row mb-4">
+                    <div class="col-md-12">
+                      <div class="form-group">
+                        <label for="registro_rol" class="form-label">
+                          <i class="fas fa-user-tag me-2"></i>Rol
+                        </label>
+                        <select class="form-select" id="actualizar_registro_rol" required>
+                          <option value="" disabled selected>Seleccione un rol</option>
+                          <option value="100">Administrador</option>
+                          <option value="10">Operador</option>
+                        </select>
+                        <div class="invalid-feedback">Por favor, seleccione un rol.</div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Botón de registro -->
+                  <div class="text-center">
+                    <button type="button" class="btn btn-dark btn-lg px-5" onclick="enviarActualizacionUsuario()">
+                      <i class="fas fa-save me-2"></i>Actualizar
+                    </button>
+                  </div>
+                </form>
+              </div>
+            </div>
+
+            <!-- Pie de página -->
+            <div class="text-center mt-4">
+              <p class="text-muted">
+                <i class="fas fa-info-circle me-2"></i>Asegúrese de que los datos sean correctos antes de actualizar al
+                usuario.
+              </p>
+            </div>
+          </div>
+        </div>
+
       </div>
     </div>
   </div>
@@ -1938,7 +2016,7 @@
       <td class="col-4 text-center align-middle">${usuario.Correo}</td>
       <td class="col-3 text-center align-middle">${usuario.Rol}</td>
       <td class="col-3 text-center align-middle">
-        <button class="btn btn-warning" onclick="actualizarUsuario(${usuario.idUsuario})">Actualizar</button>
+        <button class="btn btn-warning" onclick="showSection('actualizarUsuario'); actualizarUsuario(${usuario.idUsuario})">Actualizar</button>
         <button class="btn btn-danger" onclick="eliminarUsuario(${usuario.idUsuario})">Eliminar</button>
       </td>
     `;
@@ -1971,7 +2049,7 @@
             <td class="col-4 text-center align-middle">${usuario.Correo}</td>
             <td class="col-3 text-center align-middle">${usuario.Rol}</td>
             <td class="col-3 text-center align-middle">
-              <button class="btn btn-warning" onclick="actualizarUsuario(${usuario.idUsuario})">Actualizar</button>
+              <button class="btn btn-warning" onclick="showSection('actualizarUsuario'); actualizarUsuario(${usuario.idUsuario})">Actualizar</button>
               <button class="btn btn-danger" onclick="eliminarUsuario(${usuario.idUsuario})">Eliminar</button>
             </td>
           `;
@@ -2010,11 +2088,83 @@
       }
     }
 
+    // Función para obtener los datos del usuario por ID y rellenar el formulario
+    function obtenerUsuario(idUsuario) {
+      console.log("Obteniendo datos del usuario con ID:", idUsuario);
+
+      fetch(`./Conexion/obtener_usuario.php?id=${idUsuario}`)
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error("Error al obtener los datos del usuario.");
+          }
+          return response.json();
+        })
+        .then((data) => {
+          if (data.error) {
+            alert(`Error: ${data.error}`);
+            return;
+          }
+
+          // Rellenar el formulario con los datos del usuario
+          document.getElementById("actualizar_registro_correo").value = data.Correo_Electronico || "";
+          document.getElementById("actualizar_registro_contrasenia").value = data.Contrasenia || "";
+          document.getElementById("actualizar_registro_rol").value = data.idRol || "";
+
+          // Asociar el ID del usuario al botón de actualizar
+          document.getElementById("formRegistrarUsuario").dataset.id = idUsuario;
+        })
+        .catch((error) => {
+          console.error("Error al obtener el usuario:", error);
+          alert("Ocurrió un error al cargar los datos del usuario.");
+        });
+    }
+
+    // Función para manejar la actualización del usuario
     function actualizarUsuario(idUsuario) {
       console.log("Actualizar usuario con ID:", idUsuario);
-      // Aquí puedes agregar la lógica para actualizar al usuario
-      // Por ejemplo, abrir un modal o redirigir a otra página con más detalles.
+
+      // Llamar a la función para obtener los datos del usuario y rellenar el formulario
+      obtenerUsuario(idUsuario);
+
+      // Mostrar la sección del formulario
+      document.getElementById("actualizarUsuario").scrollIntoView({ behavior: "smooth" });
     }
+
+    // Función para enviar los datos actualizados al servidor
+    function enviarActualizacionUsuario() {
+      const idUsuario = document.getElementById("formRegistrarUsuario").dataset.id;
+
+      if (!idUsuario) {
+        alert("ID del usuario no está definido.");
+        return;
+      }
+
+      const usuarioData = {
+        idUsuario: idUsuario,
+        Correo_Electronico: document.getElementById("actualizar_registro_correo").value,
+        Contrasenia: document.getElementById("actualizar_registro_contrasenia").value,
+        idRol: document.getElementById("actualizar_registro_rol").value,
+      };
+
+      fetch("./Conexion/actualizar_usuario.php", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(usuarioData),
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          if (data.error) {
+            alert(`Error al actualizar el usuario: ${data.error}`);
+          } else {
+            alert("Usuario actualizado con éxito.");
+          }
+        })
+        .catch((error) => {
+          console.error("Error al actualizar el usuario:", error);
+          alert("Ocurrió un error al actualizar el usuario.");
+        });
+    }
+
   </script>
 
 </body>
