@@ -81,6 +81,12 @@
       height: 20px;
       cursor: pointer;
     }
+
+    .check-no-patologicos {
+      width: 20px;
+      height: 20px;
+      cursor: pointer;
+    }
   </style>
 </head>
 
@@ -260,11 +266,10 @@
         <div id="registrarPaciente" class="section active">
           <div class="d-flex justify-content-between align-items-center">
             <h2 class="mb-0">Registrar Nuevo Paciente</h2>
-            <button class="btn btn-success me-4" id="botonRegistrar">Registrar</button>
+            <button class="btn btn-success me-4" id="botonRegistrar" onclick="guardarDatos();">Registrar</button>
           </div>
 
-
-          <br> <!--datos personales del paciente -->
+          <br> <!-- Datos personales del paciente -->
           <div class="row">
             <div class="col-12">
               <div class="card bg-white">
@@ -275,49 +280,49 @@
                       <div class="row mb-3">
                         <div class="form-group col">
                           <label for="nombre">Nombre</label>
-                          <input type="text" class="form-control" id="nombre">
+                          <input type="text" class="form-control" id="nombre" value="Ernesto">
                         </div>
                         <div class="form-group col">
                           <label for="ap">Apellido paterno</label>
-                          <input type="text" class="form-control" id="ap">
+                          <input type="text" class="form-control" id="ap" value="Sanchez">
                         </div>
                         <div class="form-group col">
                           <label for="am">Apellido materno</label>
-                          <input type="text" class="form-control" id="am">
+                          <input type="text" class="form-control" id="am" value="Piedras">
                         </div>
                       </div>
 
                       <div class="row mb-3">
                         <div class="form-group col-3">
                           <label for="fn">Fecha de Nacimiento</label>
-                          <input type="date" class="form-control" id="fn">
+                          <input type="date" class="form-control" id="fn" value="1985-05-05">
                         </div>
                         <div class="form-group col-3">
-                          <label for="fn">Teléfono</label>
-                          <input type="tel" class="form-control" id="fn">
+                          <label for="telefono">Teléfono</label>
+                          <input type="tel" class="form-control" id="telefono" value="2947595684">
                         </div>
                         <div class="form-group col">
                           <label for="mail">Correo electrónico</label>
-                          <input type="email" class="form-control" id="mail">
+                          <input type="email" class="form-control" id="mail" value="ErnestoSP@gmail.com">
                         </div>
                       </div>
 
                       <div class="row mb-3">
                         <div class="form-group col">
                           <label for="calle">Calle y número</label>
-                          <input type="text" class="form-control" id="calle">
+                          <input type="text" class="form-control" id="calle" value="Avenida Juarez #123">
                         </div>
                         <div class="form-group col">
                           <label for="col">Colonia</label>
-                          <input type="text" class="form-control" id="col">
+                          <input type="text" class="form-control" id="col" value="Centro">
                         </div>
                         <div class="form-group col">
                           <label for="municipio">Municipio</label>
-                          <input type="text" class="form-control" id="municipio">
+                          <input type="text" class="form-control" id="municipio" value="Tlaxcala">
                         </div>
                         <div class="form-group col">
                           <label for="estado">Estado</label>
-                          <input type="text" class="form-control" id="estado">
+                          <input type="text" class="form-control" id="estado" value="Tlaxcala">
                         </div>
                       </div>
                     </div>
@@ -325,7 +330,8 @@
                 </div>
               </div>
             </div>
-          </div> <!--Fin datos del paciente-->
+          </div>
+          <!-- Fin datos del paciente -->
 
 
           <br> <!-- antecedentes Patologicos y no Patologicos -->
@@ -474,14 +480,14 @@
                               <tr>
                                 <td>Higiene bucal</td>
                                 <td class="centrado">
-                                  <input type="checkbox" class="check" id="check-higiene-bucal">
+                                  <input type="checkbox" class="check-no-patologicos" id="check-higiene-bucal">
                                 </td>
                                 <td><input type="text" class="form-control" id="text-higiene-bucal"></td>
                               </tr>
                               <tr>
                                 <td>Frecuencia de cepillado</td>
                                 <td class="centrado">
-                                  <input type="checkbox" class="check" id="check-frecuencia-cepillado">
+                                  <input type="checkbox" class="check-no-patologicos" id="check-frecuencia-cepillado">
                                 </td>
                                 <td><input type="text" class="form-control" id="text-frecuencia-cepillado">
                                 </td>
@@ -489,21 +495,21 @@
                               <tr>
                                 <td>Fuma (cuántos cigarros al día)</td>
                                 <td class="centrado">
-                                  <input type="checkbox" class="check" id="check-fuma">
+                                  <input type="checkbox" class="check-no-patologicos" id="check-fuma">
                                 </td>
                                 <td><input type="text" class="form-control" id="text-fuma"></td>
                               </tr>
                               <tr>
                                 <td>Consume alcohol</td>
                                 <td class="centrado">
-                                  <input type="checkbox" class="check" id="check-consume-alcohol">
+                                  <input type="checkbox" class="check-no-patologicos" id="check-consume-alcohol">
                                 </td>
                                 <td><input type="text" class="form-control" id="text-consume-alcohol"></td>
                               </tr>
                               <tr>
                                 <td>Aprieta o rechina los dientes</td>
                                 <td class="centrado">
-                                  <input type="checkbox" class="check" id="check-rechina-dientes">
+                                  <input type="checkbox" class="check-no-patologicos" id="check-rechina-dientes">
                                 </td>
                                 <td><input type="text" class="form-control" id="text-rechina-dientes"></td>
                               </tr>
@@ -518,7 +524,7 @@
                 </div>
               </div>
             </div>
-          </div> <!--Fin Antecedentes Patologicos-->
+          </div> <!--Fin Antecedentes-->
         </div>
 
         <div id="pacientes" class="section">
@@ -911,24 +917,105 @@
       // window.location.href = `historial_paciente.php?id=${idPaciente}`;
     }
 
-    // Función para manejar el botón "Ver Historial"
+    // Función para manejar el botón "Eliminar el paciente"
     function eliminarPaciente(idPaciente) {
-      console.log("elimina al paciente con la ID:", idPaciente);
-      // Aquí puedes redirigir o hacer alguna acción con la id del paciente
-      // Por ejemplo:
-      // window.location.href = `historial_paciente.php?id=${idPaciente}`;
+      if (confirm("¿Estás seguro de que deseas eliminar este paciente y toda su información asociada?")) {
+        fetch("./Conexion/eliminar_paciente.php", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ idPaciente })
+        })
+          .then((response) => response.json())
+          .then((data) => {
+            console.log("Respuesta del servidor:", data);
+            if (data.error) {
+              alert(`Error al eliminar el paciente: ${data.error}`);
+            } else {
+              alert("Paciente eliminado con éxito.");
+              location.reload(); // Opcional: Recargar la página tras éxito
+            }
+          })
+          .catch((error) => {
+            console.error("Error en la solicitud:", error);
+            alert("Ocurrió un error inesperado. Inténtalo de nuevo.");
+          });
+      }
     }
 
-
-
-
-    //PARTE FINALLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL
-    const diabetesChecked = document.getElementById('check-diabetes').checked;
-    const diabetesText = document.getElementById('text-diabetes').value;
-
-    console.log(`Diabetes: ${diabetesChecked}, Descripción: ${diabetesText}`);
-
   </script>
+
+  <script>
+    function guardarDatos() {
+      const pacienteData = {
+        nombre: document.getElementById("nombre").value,
+        ap: document.getElementById("ap").value,
+        am: document.getElementById("am").value,
+        telefono: document.getElementById("telefono").value,
+        fechaN: document.getElementById("fn").value,
+        municipio: document.getElementById("municipio").value,
+        colonia: document.getElementById("col").value,
+        calle: document.getElementById("calle").value,
+        estado: document.getElementById("estado").value,
+        correo: document.getElementById("mail").value
+      };
+
+      // Antecedentes Patológicos
+      const patologicos = [];
+      const patologicosCheckboxes = document.querySelectorAll("input.check");
+      patologicosCheckboxes.forEach((check) => {
+        const nombre = check.closest("tr").cells[0].innerText;
+        const estado = check.checked ? 1 : 0;
+        const descripcion = check.checked
+          ? document.getElementById(`text-${check.id.split('-')[1]}`).value || null
+          : null;
+
+        patologicos.push({
+          nombre,
+          estado,
+          descripcion
+        });
+      });
+
+      // Antecedentes No Patológicos
+      const noPatologicos = [];
+      const noPatologicosCheckboxes = document.querySelectorAll("input.check-no-patologicos");
+      noPatologicosCheckboxes.forEach((check) => {
+        const nombre = check.closest("tr").cells[0].innerText;
+        const estado = check.checked ? 1 : 0;
+        const descripcion = check.checked
+          ? document.getElementById(`text-no-${check.id.split('-')[1]}`).value || null
+          : null;
+
+        noPatologicos.push({
+          nombre,
+          estado,
+          descripcion
+        });
+      });
+
+      // Enviar datos mediante fetch al servidor PHP
+      fetch("./Conexion/guardar_paciente.php", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ pacienteData, patologicos, noPatologicos })
+      })
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error(`Error en la respuesta del servidor: ${response.statusText}`);
+          }
+          return response.json();
+        })
+        .then((data) => {
+          if (data.error) {
+            alert(`Error al registrar paciente: ${data.error}`);
+          } else {
+            alert("Paciente registrado con éxito.");
+          }
+        })
+        .catch((error) => console.error("Error:", error));
+    }
+  </script>
+
 </body>
 
 </html>
