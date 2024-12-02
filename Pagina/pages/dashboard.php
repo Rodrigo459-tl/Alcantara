@@ -177,7 +177,7 @@
               Volver
             </div>
             <li class="item">
-              <a href="#">Programar cita</a>
+              <a onclick="showSection('verPacientesCita'); listarPacientes();">Programar cita</a>
             </li>
             <li class="item">
               <a href="#">Ver citas</a>
@@ -197,7 +197,7 @@
     <div class="row w-100">
       <div class="col-lg-12"> <!--Columna principal-->
         <!--Seccion dashboard-->
-        <div id="dashboard" class="section active">
+        <div id="dashboard" class="section">
           <h2>Dashboard</h2>
           <!-- Inicio row tarjetas -->
           <div class="row mt-4">
@@ -894,7 +894,7 @@
             <h2 class="text-dark">
               <i class="fas fa-history me-2"></i>Historial del Paciente
             </h2>
-            <button id="botonCerrarHistorial" class="btn btn-success btn-lg" onclick="showSection('verPacientes');">
+            <button id="botonCerrarHistorial" class="btn btn-success btn-lg" onclick="showSection('dashboard');">
               <i class="fas fa-times me-2"></i>Cerrar historial
             </button>
           </div>
@@ -1255,7 +1255,7 @@
         </div>
 
 
-        <!--------------------------------------Secciones de Usuario------------------------------------------------------------------------------->
+
         <!--Registrar usuario-->
         <div id="registrarUsuario" class="section">
           <div class="container">
@@ -1465,6 +1465,174 @@
             </div>
           </div>
         </div>
+
+        <!--------------------------------------Secciones de Citas------------------------------------------------------------------------------->
+        <!-- Sección Ver Pacientes para Agendar Cita -->
+        <div id="verPacientesCita" class="section active">
+          <div class="d-flex justify-content-between align-items-center mb-4">
+            <h2 class="mb-0">
+              <i class="fas fa-calendar-plus"></i> Agendar Citas
+            </h2>
+            <button class="btn btn-dark" onclick="listarPacientes();">
+              <i class="fas fa-list"></i> Ver Pacientes
+            </button>
+          </div>
+
+          <div class="search-container d-flex mb-3">
+            <input type="text" id="searchInputCita" class="form-control rounded-start"
+              placeholder="Buscar por nombre..." />
+            <button id="searchButtonCita" class="btn btn-dark rounded-end">
+              <i class="fas fa-search"></i> Buscar
+            </button>
+          </div>
+
+          <div class="card shadow-sm">
+            <div class="card-header bg-black text-white">
+              <h5 class="mb-0 text-center">
+                <i class="fas fa-address-book"></i> Listado de Pacientes
+              </h5>
+            </div>
+            <div class="card-body p-0">
+              <table id="tablaPacientesCita" class="table table-striped table-hover table-bordered mb-0">
+                <thead class="table-dark">
+                  <tr>
+                    <th class="col-1 text-center">
+                      <i class="fas fa-id-card"></i> ID
+                    </th>
+                    <th class="col-3">
+                      <i class="fas fa-user"></i> Nombre Completo
+                    </th>
+                    <th class="col-2">
+                      <i class="fas fa-phone"></i> Teléfono
+                    </th>
+                    <th class="col-3">
+                      <i class="fas fa-envelope"></i> Correo Electrónico
+                    </th>
+                    <th class="col-3 text-center">
+                      <i class="fas fa-calendar-plus"></i> Acciones
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <!-- Datos serán llenados dinámicamente desde la base de datos -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- Sección Agendar Cita -->
+        <div id="agendarCita" class="section">
+          <div class="d-flex justify-content-between align-items-center mb-4">
+            <h2 class="text-dark">
+              <i class="fas fa-calendar-plus me-2"></i>Agendar Cita
+            </h2>
+            <button class="btn btn-danger btn-lg" onclick="showSection('verPacientesCita');">
+              <i class="fas fa-arrow-left me-2"></i>Regresar
+            </button>
+          </div>
+
+          <!-- Datos del Paciente -->
+          <div class="row mb-4">
+            <div class="col-12">
+              <div class="card bg-white shadow border-0">
+                <h5 class="card-header bg-dark text-white">
+                  <i class="fas fa-user me-2"></i>Información del Paciente
+                </h5>
+                <div class="card-body">
+                  <div class="row">
+                    <div class="form-group col-md-4">
+                      <label for="cita_nombre">
+                        <i class="fas fa-user-tag me-2"></i>Nombre
+                      </label>
+                      <input type="text" class="form-control" id="cita_nombre" disabled />
+                    </div>
+                    <div class="form-group col-md-4">
+                      <label for="cita_telefono">
+                        <i class="fas fa-phone me-2"></i>Teléfono
+                      </label>
+                      <input type="text" class="form-control" id="cita_telefono" disabled />
+                    </div>
+                    <div class="form-group col-md-4">
+                      <label for="cita_correo">
+                        <i class="fas fa-envelope me-2"></i>Correo Electrónico
+                      </label>
+                      <input type="email" class="form-control" id="cita_correo" disabled />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Datos de la Cita -->
+          <div class="row mb-4">
+            <div class="col-12">
+              <div class="card bg-white shadow border-0">
+                <h5 class="card-header bg-dark text-white">
+                  <i class="fas fa-calendar-alt me-2"></i>Detalles de la Cita
+                </h5>
+                <div class="card-body">
+                  <form id="formAgendarCita">
+                    <input type="hidden" id="cita_idPaciente" />
+                    <input type="hidden" id="cita_idHistorial" />
+                    <div class="row">
+                      <div class="form-group col-md-6">
+                        <label for="cita_motivo">
+                          <i class="fas fa-comment-dots me-2"></i>Motivo de la Cita
+                        </label>
+                        <textarea class="form-control" id="cita_motivo" rows="3" placeholder="Describe el motivo..."
+                          required></textarea>
+                      </div>
+                      <div class="form-group col-md-3">
+                        <label for="cita_fecha">
+                          <i class="fas fa-calendar-day me-2"></i>Fecha
+                        </label>
+                        <input type="date" class="form-control" id="cita_fecha" required />
+                      </div>
+                      <div class="form-group col-md-3">
+                        <label for="cita_hora">
+                          <i class="fas fa-clock me-2"></i>Hora
+                        </label>
+                        <input type="time" class="form-control" id="cita_hora" required />
+                      </div>
+                    </div>
+                    <div class="row mt-3">
+                      <div class="form-group col-md-6">
+                        <label for="cita_metodo">
+                          <i class="fas fa-list-alt me-2"></i>Método de Agenda
+                        </label>
+                        <select class="form-select" id="cita_metodo" required>
+                          <option value="" disabled selected>Seleccione un método</option>
+                          <option value="Teléfono">Teléfono</option>
+                          <option value="Online">Online</option>
+                          <option value="Presencial">Presencial</option>
+                        </select>
+                      </div>
+                      <div class="form-group col-md-6">
+                        <label for="cita_estado">
+                          <i class="fas fa-check-circle me-2"></i>Estado
+                        </label>
+                        <select class="form-select" id="cita_estado" required>
+                          <option value="" disabled selected>Seleccione el estado</option>
+                          <option value="Pendiente">Pendiente</option>
+                          <option value="Confirmada">Confirmada</option>
+                          <option value="Cancelada">Cancelada</option>
+                        </select>
+                      </div>
+                    </div>
+                    <div class="text-center mt-4">
+                      <button type="button" class="btn btn-success btn-lg" onclick="guardarCita();">
+                        <i class="fas fa-save me-2"></i>Guardar Cita
+                      </button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
 
       </div>
     </div>
@@ -2204,6 +2372,169 @@
 
   </script>
 
+  <!-------------------------------Script para Citas ------------------------->
+  <!--Ver pacientes-->
+  <script>
+    document.getElementById("searchButtonCita").addEventListener("click", buscarPacientesCita);
+
+    function buscarPacientesCita() {
+      const searchValue = document.getElementById("searchInputCita").value.trim();
+
+      if (!searchValue) {
+        alert("Por favor, ingresa un nombre.");
+        return;
+      }
+
+      // Crear objeto FormData para enviar datos al servidor
+      const formData = new FormData();
+      formData.append("name", searchValue);
+
+      // Realizar la solicitud AJAX
+      fetch("./Conexion/buscar_paciente.php", {
+        method: "POST",
+        body: formData,
+      })
+        .then((response) => response.json()) // Convertir la respuesta en JSON
+        .then((data) => {
+          mostrarPacientesCita(data); // Llamar a la función para mostrar los resultados
+        })
+        .catch((error) => {
+          console.error("Error al obtener los datos:", error);
+        });
+    }
+
+    function mostrarPacientesCita(paciente) {
+      const tbody = document.querySelector("#tablaPacientesCita tbody");
+      tbody.innerHTML = ""; // Limpiar la tabla
+
+      if (!paciente.idPaciente) {
+        tbody.innerHTML =
+          '<tr><td colspan="5" class="text-center">No se encontraron resultados.</td></tr>';
+        return;
+      }
+
+      // Crear una fila con los datos recibidos
+      const row = document.createElement("tr");
+      row.innerHTML = `
+    <td class="col-1 text-center">${paciente.idPaciente}</td>
+    <td class="col-3">${paciente.NombreCompleto}</td>
+    <td class="col-2">${paciente.Telefono}</td>
+    <td class="col-3">${paciente.Correo ? paciente.Correo : "N/A"}</td>
+    <td class="col-3 text-center">
+      <button class="btn btn-primary" onclick="agendarCita(${paciente.idPaciente})">Agendar Cita</button>
+      <button class="btn btn-success" onclick="showSection('historialPaciente'); verHistorial(${paciente.idPaciente})">Ver historial</button>
+    </td>
+  `;
+
+      tbody.appendChild(row);
+    }
+
+    function listarPacientes() {
+      fetch("./Conexion/listar_pacientes.php")
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error("Error al obtener los pacientes");
+          }
+          return response.json();
+        })
+        .then((data) => {
+          const tbody = document.querySelector("#tablaPacientesCita tbody");
+          tbody.innerHTML = ""; // Limpiar la tabla
+
+          if (data.length === 0) {
+            tbody.innerHTML =
+              '<tr><td colspan="5" class="text-center">No se encontraron pacientes.</td></tr>';
+            return;
+          }
+
+          // Iterar sobre los pacientes y crear una fila por cada uno
+          data.forEach((paciente) => {
+            const row = document.createElement("tr");
+            row.innerHTML = `
+          <td class="col-1 text-center">${paciente.idPaciente}</td>
+          <td class="col-3">${paciente.NombreCompleto}</td>
+          <td class="col-2">${paciente.Telefono}</td>
+          <td class="col-3">${paciente.Correo}</td>
+          <td class="col-3 text-center">
+            <button class="btn btn-primary" onclick="agendarCita(${paciente.idPaciente})">Agendar Cita</button>
+            <button class="btn btn-success" onclick="showSection('historialPaciente'); verHistorial(${paciente.idPaciente})">Ver historial</button>
+          </td>
+        `;
+            tbody.appendChild(row);
+          });
+        })
+        .catch((error) => {
+          console.error("Error:", error);
+          alert("Ocurrió un error al cargar los pacientes.");
+        });
+    }
+  </script>
+
+  <!--Agendar citas-->
+  <script>
+    function agendarCita(idPaciente) {
+      // Obtener información del paciente desde el servidor
+      fetch(`./Conexion/obtener_paciente_cita.php?id=${idPaciente}`)
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error("Error al obtener los datos del paciente.");
+          }
+          return response.json();
+        })
+        .then((data) => {
+          if (data.error) {
+            alert(`Error: ${data.error}`);
+            return;
+          }
+
+          // Rellenar los datos del formulario
+          document.getElementById("cita_nombre").value = data.NombreCompleto || "";
+          document.getElementById("cita_telefono").value = data.Telefono || "";
+          document.getElementById("cita_correo").value = data.Correo || "N/A";
+          document.getElementById("cita_idPaciente").value = idPaciente;
+          document.getElementById("cita_idHistorial").value = data.idHistorial || "";
+
+          // Mostrar la sección Agendar Cita
+          showSection("agendarCita");
+        })
+        .catch((error) => {
+          console.error("Error al cargar los datos del paciente:", error);
+          alert("Ocurrió un error al cargar los datos del paciente.");
+        });
+    }
+
+    function guardarCita() {
+      const citaData = {
+        idPaciente: document.getElementById("cita_idPaciente").value,
+        idHistorial: document.getElementById("cita_idHistorial").value,
+        Motivo: document.getElementById("cita_motivo").value,
+        Fecha: document.getElementById("cita_fecha").value,
+        Hora: document.getElementById("cita_hora").value,
+        Metodo_Agenda: document.getElementById("cita_metodo").value,
+        Estado: document.getElementById("cita_estado").value,
+      };
+
+      fetch("./Conexion/guardar_cita.php", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(citaData),
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          if (data.error) {
+            alert(`Error al guardar la cita: ${data.error}`);
+          } else {
+            alert("Cita guardada con éxito.");
+            showSection("verPacientesCita"); // Regresar a la lista de pacientes
+          }
+        })
+        .catch((error) => {
+          console.error("Error al guardar la cita:", error);
+          alert("Ocurrió un error al guardar la cita.");
+        });
+    }
+
+  </script>
 </body>
 
 </html>
