@@ -285,270 +285,284 @@
           </div>
         </div>
 
-        <!--Secciones de Paciente------------------------------------------------------------------------------->
+        <!-------------------------------------Secciones de Paciente------------------------------------------------------------------------------->
 
-        <!--Seccion Registrar paciente-->
+        <!-- Sección Registrar Paciente -->
         <div id="registrarPaciente" class="section">
-          <div class="d-flex justify-content-between align-items-center">
-            <h2 class="mb-0">Registrar Nuevo Paciente</h2>
-            <button class="btn btn-primary me-4" id="botonRegistrar" onclick="guardarDatos();">Registrar</button>
+          <div class="d-flex justify-content-between align-items-center mb-4">
+            <h2 class="mb-0 text-dark">
+              <i class="fas fa-user-plus me-2"></i>Registrar Nuevo Paciente
+            </h2>
+            <button class="btn btn-primary btn-lg" id="botonRegistrar" onclick="guardarDatos();">
+              <i class="fas fa-save me-2"></i>Registrar
+            </button>
           </div>
 
-          <br> <!-- Datos personales del paciente -->
+          <!-- Datos personales del paciente -->
           <div class="row">
             <div class="col-12">
-              <div class="card bg-white">
-                <div class="card-body m-0 p-0">
+              <div class="card bg-white shadow border-0">
+                <div class="card-body">
                   <form>
-                    <h5 class="card-header card-title bg-dark text-white">Datos personales</h5>
-                    <div class="card-content">
-                      <div class="row mb-3">
-                        <div class="form-group col">
-                          <label for="nombre">Nombre</label>
-                          <input type="text" class="form-control" id="nombre" value="Ernesto">
-                        </div>
-                        <div class="form-group col">
-                          <label for="ap">Apellido paterno</label>
-                          <input type="text" class="form-control" id="ap" value="Sanchez">
-                        </div>
-                        <div class="form-group col">
-                          <label for="am">Apellido materno</label>
-                          <input type="text" class="form-control" id="am" value="Piedras">
-                        </div>
+                    <h5 class="card-header bg-dark text-white">
+                      <i class="fas fa-id-card me-2"></i>Datos personales
+                    </h5>
+                    <div class="row mt-3">
+                      <div class="form-group col-md-4">
+                        <label for="nombre">
+                          <i class="fas fa-user me-2"></i>Nombre
+                        </label>
+                        <input type="text" class="form-control" id="nombre" value="Ernesto" />
                       </div>
-
-                      <div class="row mb-3">
-                        <div class="form-group col-3">
-                          <label for="fn">Fecha de Nacimiento</label>
-                          <input type="date" class="form-control" id="fn" value="1985-05-05">
-                        </div>
-                        <div class="form-group col-3">
-                          <label for="telefono">Teléfono</label>
-                          <input type="tel" class="form-control" id="telefono" value="2947595684">
-                        </div>
-                        <div class="form-group col">
-                          <label for="mail">Correo electrónico</label>
-                          <input type="email" class="form-control" id="mail" value="ErnestoSP@gmail.com">
-                        </div>
+                      <div class="form-group col-md-4">
+                        <label for="ap">
+                          <i class="fas fa-user-tag me-2"></i>Apellido paterno
+                        </label>
+                        <input type="text" class="form-control" id="ap" value="Sanchez" />
                       </div>
-
-                      <div class="row mb-3">
-                        <div class="form-group col">
-                          <label for="calle">Calle y número</label>
-                          <input type="text" class="form-control" id="calle" value="Avenida Juarez #123">
-                        </div>
-                        <div class="form-group col">
-                          <label for="col">Colonia</label>
-                          <input type="text" class="form-control" id="col" value="Centro">
-                        </div>
-                        <div class="form-group col">
-                          <label for="municipio">Municipio</label>
-                          <input type="text" class="form-control" id="municipio" value="Tlaxcala">
-                        </div>
-                        <div class="form-group col">
-                          <label for="estado">Estado</label>
-                          <input type="text" class="form-control" id="estado" value="Tlaxcala">
-                        </div>
+                      <div class="form-group col-md-4">
+                        <label for="am">
+                          <i class="fas fa-user-tag me-2"></i>Apellido materno
+                        </label>
+                        <input type="text" class="form-control" id="am" value="Piedras" />
+                      </div>
+                    </div>
+                    <div class="row mt-3">
+                      <div class="form-group col-md-4">
+                        <label for="fn">
+                          <i class="fas fa-calendar-alt me-2"></i>Fecha de Nacimiento
+                        </label>
+                        <input type="date" class="form-control" id="fn" value="1985-05-05" />
+                      </div>
+                      <div class="form-group col-md-4">
+                        <label for="telefono">
+                          <i class="fas fa-phone me-2"></i>Teléfono
+                        </label>
+                        <input type="tel" class="form-control" id="telefono" value="2947595684" />
+                      </div>
+                      <div class="form-group col-md-4">
+                        <label for="mail">
+                          <i class="fas fa-envelope me-2"></i>Correo electrónico
+                        </label>
+                        <input type="email" class="form-control" id="mail" value="ErnestoSP@gmail.com" />
+                      </div>
+                    </div>
+                    <div class="row mt-3">
+                      <div class="form-group col-md-6">
+                        <label for="calle">
+                          <i class="fas fa-road me-2"></i>Calle y número
+                        </label>
+                        <input type="text" class="form-control" id="calle" value="Avenida Juarez #123" />
+                      </div>
+                      <div class="form-group col-md-3">
+                        <label for="col">
+                          <i class="fas fa-map-marker-alt me-2"></i>Colonia
+                        </label>
+                        <input type="text" class="form-control" id="col" value="Centro" />
+                      </div>
+                      <div class="form-group col-md-3">
+                        <label for="municipio">
+                          <i class="fas fa-city me-2"></i>Municipio
+                        </label>
+                        <input type="text" class="form-control" id="municipio" value="Tlaxcala" />
+                      </div>
+                    </div>
+                    <div class="row mt-3">
+                      <div class="form-group col-md-6">
+                        <label for="estado">
+                          <i class="fas fa-map me-2"></i>Estado
+                        </label>
+                        <input type="text" class="form-control" id="estado" value="Tlaxcala" />
                       </div>
                     </div>
                   </form>
                 </div>
               </div>
             </div>
-          </div><!-- Fin datos del paciente -->
+          </div>
 
+          <!-- Antecedentes -->
+          <div class="row mt-5">
+            <div class="col-12">
+              <div class="card bg-white shadow border-0">
+                <button class="card-header bg-dark text-white d-flex justify-content-between align-items-center"
+                  type="button" data-bs-toggle="collapse" data-bs-target="#antecedentesPanel" aria-expanded="false"
+                  aria-controls="antecedentesPanel">
+                  <h5 class="mb-0">
+                    <i class="fas fa-notes-medical me-2"></i>Antecedentes
+                  </h5>
+                  <i class="fas fa-chevron-down"></i>
+                </button>
+                <div class="collapse" id="antecedentesPanel">
+                  <div class="row p-3">
+                    <div class="col-xl-6">
+                      <h5 class="text-center text-dark"><i class="fas fa-stethoscope me-2"></i>Patológicos</h5>
+                      <table class="table table-striped">
+                        <thead>
+                          <tr>
+                            <th>Nombre</th>
+                            <th>Estado</th>
+                            <th>Descripción</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td>Diabetes</td>
+                            <td class="centrado">
+                              <input type="checkbox" class="check" id="check-diabetes">
+                            </td>
+                            <td><input type="text" class="form-control" id="text-diabetes"></td>
+                          </tr>
+                          <tr>
+                            <td>Hipertensión</td>
+                            <td class="centrado">
+                              <input type="checkbox" class="check" id="check-hipertension">
+                            </td>
+                            <td><input type="text" class="form-control" id="text-hipertension"></td>
+                          </tr>
+                          <tr>
+                            <td>Enfermedades crónicas</td>
+                            <td class="centrado">
+                              <input type="checkbox" class="check" id="check-enfermedades-cronicas">
+                            </td>
+                            <td><input type="text" class="form-control" id="text-enfermedades-cronicas"></td>
+                          </tr>
+                          <tr>
+                            <td>Problemas del corazón</td>
+                            <td class="centrado">
+                              <input type="checkbox" class="check" id="check-problemas-corazon">
+                            </td>
+                            <td><input type="text" class="form-control" id="text-problemas-corazon"></td>
+                          </tr>
+                          <tr>
+                            <td>Problemas respiratorios</td>
+                            <td class="centrado">
+                              <input type="checkbox" class="check" id="check-problemas-respiratorios">
+                            </td>
+                            <td><input type="text" class="form-control" id="text-problemas-respiratorios"></td>
+                          </tr>
+                          <tr>
+                            <td>Problemas del hígado</td>
+                            <td class="centrado">
+                              <input type="checkbox" class="check" id="check-problemas-higado">
+                            </td>
+                            <td><input type="text" class="form-control" id="text-problemas-higado"></td>
+                          </tr>
+                          <tr>
+                            <td>Problemas renales</td>
+                            <td class="centrado">
+                              <input type="checkbox" class="check" id="check-problemas-renales">
+                            </td>
+                            <td><input type="text" class="form-control" id="text-problemas-renales"></td>
+                          </tr>
+                          <tr>
+                            <td>Problemas digestivos</td>
+                            <td class="centrado">
+                              <input type="checkbox" class="check" id="check-problemas-digestivos">
+                            </td>
+                            <td><input type="text" class="form-control" id="text-problemas-digestivos"></td>
+                          </tr>
+                          <tr>
+                            <td>Problemas de coagulación</td>
+                            <td class="centrado">
+                              <input type="checkbox" class="check" id="check-problemas-coagulacion">
+                            </td>
+                            <td><input type="text" class="form-control" id="text-problemas-coagulacion"></td>
+                          </tr>
+                          <tr>
+                            <td>Intervenciones quirúrgicas</td>
+                            <td class="centrado">
+                              <input type="checkbox" class="check" id="check-intervenciones-quirurgicas">
+                            </td>
+                            <td><input type="text" class="form-control" id="text-intervenciones-quirurgicas"></td>
+                          </tr>
+                          <tr>
+                            <td>Alergias</td>
+                            <td class="centrado">
+                              <input type="checkbox" class="check" id="check-alergias">
+                            </td>
+                            <td><input type="text" class="form-control" id="text-alergias"></td>
+                          </tr>
+                          <tr>
+                            <td>Convulsiones</td>
+                            <td class="centrado">
+                              <input type="checkbox" class="check" id="check-convulsiones">
+                            </td>
+                            <td><input type="text" class="form-control" id="text-convulsiones"></td>
+                          </tr>
+                          <tr>
+                            <td>Toma anticonceptivos</td>
+                            <td class="centrado">
+                              <input type="checkbox" class="check" id="check-toma-anticonceptivos">
+                            </td>
+                            <td><input type="text" class="form-control" id="text-toma-anticonceptivos"></td>
+                          </tr>
+                          <tr>
+                            <td>Embarazo actual</td>
+                            <td class="centrado">
+                              <input type="checkbox" class="check" id="check-embarazo-actual">
+                            </td>
+                            <td><input type="text" class="form-control" id="text-embarazo-actual"></td>
+                          </tr>
+                        </tbody>
 
-          <br> <!-- antecedentes Patologicos y no Patologicos -->
-          <div class="row">
-            <div class="col-12 mb-5">
-              <div class="card p-0 m-0 bg-white">
-                <div class="card-body p-0 m-0">
-                  <!-- Botón que activa el panel -->
-                  <button class="card-header bg-dark text-white legend-button" type="button" data-bs-toggle="collapse"
-                    data-bs-target="#antecedentesPanel" aria-expanded="false" aria-controls="antecedentesPanel">
-                    <h5 class="mb-0 text-start"> <i class="fas fa-angle-down icon-rotate" id="iconoColapso"
-                        style="font-size: 1.2rem;"></i> Antecedentes</h5>
-                  </button>
-
-                  <!-- Panel colapsable -->
-                  <div class="row">
-                    <div class="collapse p-0 m-0" id="antecedentesPanel">
-                      <div class="row card-content p-0 mb-2">
-                        <!-- Antecedentes Patológicos -->
-                        <div class="col-xl-6">
-                          <h4 class="text-center">Antecedentes Patológicos</h4>
-                          <table class="table table-bordered table-sm">
-                            <thead class="thead-light">
-                              <tr>
-                                <th>Nombre</th>
-                                <th>Estado</th>
-                                <th>Descripción</th>
-                              </tr>
-                            </thead>
-                            <tbody>
-                              <tr>
-                                <td>Diabetes</td>
-                                <td class="centrado">
-                                  <input type="checkbox" class="check" id="check-diabetes">
-                                </td>
-                                <td><input type="text" class="form-control" id="text-diabetes"></td>
-                              </tr>
-                              <tr>
-                                <td>Hipertensión</td>
-                                <td class="centrado">
-                                  <input type="checkbox" class="check" id="check-hipertension">
-                                </td>
-                                <td><input type="text" class="form-control" id="text-hipertension"></td>
-                              </tr>
-                              <tr>
-                                <td>Enfermedades crónicas</td>
-                                <td class="centrado">
-                                  <input type="checkbox" class="check" id="check-enfermedades-cronicas">
-                                </td>
-                                <td><input type="text" class="form-control" id="text-enfermedades-cronicas"></td>
-                              </tr>
-                              <tr>
-                                <td>Problemas del corazón</td>
-                                <td class="centrado">
-                                  <input type="checkbox" class="check" id="check-problemas-corazon">
-                                </td>
-                                <td><input type="text" class="form-control" id="text-problemas-corazon"></td>
-                              </tr>
-                              <tr>
-                                <td>Problemas respiratorios</td>
-                                <td class="centrado">
-                                  <input type="checkbox" class="check" id="check-problemas-respiratorios">
-                                </td>
-                                <td><input type="text" class="form-control" id="text-problemas-respiratorios"></td>
-                              </tr>
-                              <tr>
-                                <td>Problemas del hígado</td>
-                                <td class="centrado">
-                                  <input type="checkbox" class="check" id="check-problemas-higado">
-                                </td>
-                                <td><input type="text" class="form-control" id="text-problemas-higado"></td>
-                              </tr>
-                              <tr>
-                                <td>Problemas renales</td>
-                                <td class="centrado">
-                                  <input type="checkbox" class="check" id="check-problemas-renales">
-                                </td>
-                                <td><input type="text" class="form-control" id="text-problemas-renales"></td>
-                              </tr>
-                              <tr>
-                                <td>Problemas digestivos</td>
-                                <td class="centrado">
-                                  <input type="checkbox" class="check" id="check-problemas-digestivos">
-                                </td>
-                                <td><input type="text" class="form-control" id="text-problemas-digestivos"></td>
-                              </tr>
-                              <tr>
-                                <td>Problemas de coagulación</td>
-                                <td class="centrado">
-                                  <input type="checkbox" class="check" id="check-problemas-coagulacion">
-                                </td>
-                                <td><input type="text" class="form-control" id="text-problemas-coagulacion"></td>
-                              </tr>
-                              <tr>
-                                <td>Intervenciones quirúrgicas</td>
-                                <td class="centrado">
-                                  <input type="checkbox" class="check" id="check-intervenciones-quirurgicas">
-                                </td>
-                                <td><input type="text" class="form-control" id="text-intervenciones-quirurgicas"></td>
-                              </tr>
-                              <tr>
-                                <td>Alergias</td>
-                                <td class="centrado">
-                                  <input type="checkbox" class="check" id="check-alergias">
-                                </td>
-                                <td><input type="text" class="form-control" id="text-alergias"></td>
-                              </tr>
-                              <tr>
-                                <td>Convulsiones</td>
-                                <td class="centrado">
-                                  <input type="checkbox" class="check" id="check-convulsiones">
-                                </td>
-                                <td><input type="text" class="form-control" id="text-convulsiones"></td>
-                              </tr>
-                              <tr>
-                                <td>Toma anticonceptivos</td>
-                                <td class="centrado">
-                                  <input type="checkbox" class="check" id="check-toma-anticonceptivos">
-                                </td>
-                                <td><input type="text" class="form-control" id="text-toma-anticonceptivos"></td>
-                              </tr>
-                              <tr>
-                                <td>Embarazo actual</td>
-                                <td class="centrado">
-                                  <input type="checkbox" class="check" id="check-embarazo-actual">
-                                </td>
-                                <td><input type="text" class="form-control" id="text-embarazo-actual"></td>
-                              </tr>
-                            </tbody>
-
-                          </table>
-                        </div>
-
-                        <!-- Antecedentes No Patológicos -->
-                        <div class="col-xl-6">
-                          <h4 class="text-center">Antecedentes No Patológicos</h4>
-                          <table class="table table-bordered table-sm b-0 p-0">
-                            <thead class="thead-light">
-                              <tr>
-                                <th>Nombre</th>
-                                <th>Estado</th>
-                                <th>Descripción</th>
-                              </tr>
-                            </thead>
-                            <tbody>
-                              <tr>
-                                <td>Higiene bucal</td>
-                                <td class="centrado">
-                                  <input type="checkbox" class="check-no-patologicos" id="check-higiene-bucal">
-                                </td>
-                                <td><input type="text" class="form-control" id="text-higiene-bucal"></td>
-                              </tr>
-                              <tr>
-                                <td>Frecuencia de cepillado</td>
-                                <td class="centrado">
-                                  <input type="checkbox" class="check-no-patologicos" id="check-frecuencia-cepillado">
-                                </td>
-                                <td><input type="text" class="form-control" id="text-frecuencia-cepillado">
-                                </td>
-                              </tr>
-                              <tr>
-                                <td>Fuma (cuántos cigarros al día)</td>
-                                <td class="centrado">
-                                  <input type="checkbox" class="check-no-patologicos" id="check-fuma">
-                                </td>
-                                <td><input type="text" class="form-control" id="text-fuma"></td>
-                              </tr>
-                              <tr>
-                                <td>Consume alcohol</td>
-                                <td class="centrado">
-                                  <input type="checkbox" class="check-no-patologicos" id="check-consume-alcohol">
-                                </td>
-                                <td><input type="text" class="form-control" id="text-consume-alcohol"></td>
-                              </tr>
-                              <tr>
-                                <td>Aprieta o rechina los dientes</td>
-                                <td class="centrado">
-                                  <input type="checkbox" class="check-no-patologicos" id="check-rechina-dientes">
-                                </td>
-                                <td><input type="text" class="form-control" id="text-rechina-dientes"></td>
-                              </tr>
-                            </tbody>
-
-                          </table>
-                        </div>
-
-                      </div>
+                      </table>
+                    </div>
+                    <div class="col-xl-6">
+                      <h5 class="text-center text-dark"><i class="fas fa-heartbeat me-2"></i>No Patológicos</h5>
+                      <table class="table table-striped">
+                        <thead>
+                          <tr>
+                            <th>Nombre</th>
+                            <th>Estado</th>
+                            <th>Descripción</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td>Higiene bucal</td>
+                            <td class="centrado">
+                              <input type="checkbox" class="check-no-patologicos" id="check-higiene-bucal">
+                            </td>
+                            <td><input type="text" class="form-control" id="text-higiene-bucal"></td>
+                          </tr>
+                          <tr>
+                            <td>Frecuencia de cepillado</td>
+                            <td class="centrado">
+                              <input type="checkbox" class="check-no-patologicos" id="check-frecuencia-cepillado">
+                            </td>
+                            <td><input type="text" class="form-control" id="text-frecuencia-cepillado">
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>Fuma (cuántos cigarros al día)</td>
+                            <td class="centrado">
+                              <input type="checkbox" class="check-no-patologicos" id="check-fuma">
+                            </td>
+                            <td><input type="text" class="form-control" id="text-fuma"></td>
+                          </tr>
+                          <tr>
+                            <td>Consume alcohol</td>
+                            <td class="centrado">
+                              <input type="checkbox" class="check-no-patologicos" id="check-consume-alcohol">
+                            </td>
+                            <td><input type="text" class="form-control" id="text-consume-alcohol"></td>
+                          </tr>
+                          <tr>
+                            <td>Aprieta o rechina los dientes</td>
+                            <td class="centrado">
+                              <input type="checkbox" class="check-no-patologicos" id="check-rechina-dientes">
+                            </td>
+                            <td><input type="text" class="form-control" id="text-rechina-dientes"></td>
+                          </tr>
+                        </tbody>
+                      </table>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
-          </div> <!--Fin Antecedentes-->
+          </div>
         </div>
 
         <!--Seccion ver pacientes (Actualizar, eliminar y ver historial completo-->
@@ -1226,7 +1240,7 @@
           <!-- Fin Listado de Citas -->
         </div>
 
-        <!--Secciones de usuario------------------------------------------------------------------------------->
+        <!--------------------------------------Secciones de Usuario------------------------------------------------------------------------------->
         <!--Registrar usuario-->
         <div id="registrarUsuario" class="section">
           <div class="container">
