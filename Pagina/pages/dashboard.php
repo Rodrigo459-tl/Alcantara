@@ -2429,6 +2429,7 @@
       tbody.appendChild(row);
     }
 
+
     function listarPacientes() {
       fetch("./Conexion/listar_pacientes.php")
         .then((response) => {
