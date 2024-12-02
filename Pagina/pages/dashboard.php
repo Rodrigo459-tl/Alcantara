@@ -159,7 +159,7 @@
               <a onclick="showSection('registrarUsuario')">Registrar usuario</a>
             </li>
             <li class="item">
-              <a href="#">Ver usuarios</a>
+              <a onclick="showSection('verUsuarios'); listarTodosUsuarios();">Ver usuarios</a>
             </li>
           </ul>
         </li>
@@ -553,28 +553,54 @@
 
         <!--Seccion ver pacientes (Actualizar, eliminar y ver historial completo-->
         <div id="verPacientes" class="section">
-          <h2>Pacientes registrados</h2>
-          <div class="search-container mt-3 mb-3 d-flex">
-            <input type="text" id="searchInput" class="form-control" placeholder="Buscar por nombre...">
-            <button id="searchButton" class="btn btn-primary ms-2">
-              <i class="fa fa-search"></i> <!-- Ícono de lupa de Font Awesome -->
+          <div class="d-flex justify-content-between align-items-center mb-4">
+            <h2 class="mb-0">
+              <i class="fas fa-user-friends"></i> Pacientes Registrados
+            </h2>
+            <button class="btn btn-dark" onclick="listarTodo();">
+              <i class="fas fa-list"></i> Ver Todos
             </button>
           </div>
-          <div class="card-content">
-            <table id="pacientesTable" class="table table-bordered">
-              <thead>
-                <tr>
-                  <th class="col-1">ID</th>
-                  <th class="col-3">Nombre Completo</th>
-                  <th class="col-2">Teléfono</th>
-                  <th class="col-3">Correo Electrónico</th>
-                  <th class="col-3">Acciones</th>
-                </tr>
-              </thead>
-              <tbody>
-                <!-- Datos serán llenados dinámicamente desde la base de datos -->
-              </tbody>
-            </table>
+
+          <div class="search-container d-flex mb-3">
+            <input type="text" id="searchInput" class="form-control rounded-start" placeholder="Buscar por nombre..." />
+            <button id="searchButton" class="btn btn-dark rounded-end">
+              <i class="fas fa-search"></i> Buscar
+            </button>
+          </div>
+
+          <div class="card shadow-sm">
+            <div class="card-header bg-black text-white">
+              <h5 class="mb-0 text-center">
+                <i class="fas fa-address-book"></i> Listado de Pacientes
+              </h5>
+            </div>
+            <div class="card-body p-0">
+              <table id="pacientesTable" class="table table-striped table-hover table-bordered mb-0">
+                <thead class="table-dark">
+                  <tr>
+                    <th class="col-1 text-center">
+                      <i class="fas fa-id-card"></i> ID
+                    </th>
+                    <th class="col-3">
+                      <i class="fas fa-user"></i> Nombre Completo
+                    </th>
+                    <th class="col-2">
+                      <i class="fas fa-phone"></i> Teléfono
+                    </th>
+                    <th class="col-3">
+                      <i class="fas fa-envelope"></i> Correo Electrónico
+                    </th>
+                    <th class="col-3 text-center">
+                      <i class="fas fa-cogs"></i> Acciones
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <!-- Datos serán llenados dinámicamente desde la base de datos -->
+                </tbody>
+              </table>
+            </div>
           </div>
         </div>
 
@@ -1203,53 +1229,134 @@
         <!--Secciones de usuario------------------------------------------------------------------------------->
         <!--Registrar usuario-->
         <div id="registrarUsuario" class="section">
-          <div class="d-flex justify-content-between align-items-center">
-            <h2 class="mb-0">Registrar Usuario</h2>
-          </div>
+          <div class="container">
+            <!-- Encabezado -->
+            <div class="d-flex justify-content-between align-items-center mb-4">
+              <h2 class="text-dark">
+                <i class="fas fa-user-plus me-2"></i>Registrar Usuario
+              </h2>
+            </div>
 
-          <br />
-
-          <div class="row">
-            <div class="col-12">
-              <div class="card bg-white">
-                <div class="card-body m-0 p-0">
-                  <form id="formRegistrarUsuario">
-                    <h5 class="card-header card-title bg-dark text-white">Información del Usuario</h5>
-                    <div class="card-content p-3">
-                      <div class="row mb-3">
-                        <div class="form-group col">
-                          <label for="correo">Correo Electrónico</label>
-                          <input type="email" class="form-control" id="registro_correo" placeholder="Ingrese el correo"
-                            required />
-                        </div>
-                        <div class="form-group col">
-                          <label for="contrasenia">Contraseña</label>
-                          <input type="password" class="form-control" id="registro_contrasenia"
-                            placeholder="Ingrese la contraseña" required />
-                        </div>
-                      </div>
-                      <div class="row mb-3">
-                        <div class="form-group col">
-                          <label for="rol">Rol</label>
-                          <select class="form-select" id="registro_rol" required>
-                            <option value="" disabled selected>Seleccione un rol</option>
-                            <option value="100">Administrador</option>
-                            <option value="10">Operador</option>
-                          </select>
-                        </div>
-                      </div>
-                      <div class="d-flex justify-content-end">
-                        <button type="button" class="btn btn-primary" onclick="registrarUsuario()">Registrar</button>
+            <!-- Tarjeta principal -->
+            <div class="card bg-white border-0 shadow">
+              <div class="card-header bg-dark text-white text-center">
+                <h5 class="mb-0">Información del Usuario</h5>
+              </div>
+              <div class="card-body p-4">
+                <form id="formRegistrarUsuario" class="needs-validation" novalidate>
+                  <!-- Correo y Contraseña -->
+                  <div class="row mb-4">
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label for="registro_correo" class="form-label">
+                          <i class="fas fa-envelope me-2"></i>Correo Electrónico
+                        </label>
+                        <input type="email" class="form-control" id="registro_correo" placeholder="Ingrese el correo"
+                          required />
+                        <div class="invalid-feedback">Por favor, ingrese un correo válido.</div>
                       </div>
                     </div>
-                  </form>
-                </div>
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label for="registro_contrasenia" class="form-label">
+                          <i class="fas fa-key me-2"></i>Contraseña
+                        </label>
+                        <input type="password" class="form-control" id="registro_contrasenia"
+                          placeholder="Ingrese la contraseña" required />
+                        <div class="invalid-feedback">Por favor, ingrese una contraseña.</div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Selección de Rol -->
+                  <div class="row mb-4">
+                    <div class="col-md-12">
+                      <div class="form-group">
+                        <label for="registro_rol" class="form-label">
+                          <i class="fas fa-user-tag me-2"></i>Rol
+                        </label>
+                        <select class="form-select" id="registro_rol" required>
+                          <option value="" disabled selected>Seleccione un rol</option>
+                          <option value="100">Administrador</option>
+                          <option value="10">Operador</option>
+                        </select>
+                        <div class="invalid-feedback">Por favor, seleccione un rol.</div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Botón de registro -->
+                  <div class="text-center">
+                    <button type="button" class="btn btn-dark btn-lg px-5" onclick="registrarUsuario()">
+                      <i class="fas fa-save me-2"></i>Registrar
+                    </button>
+                  </div>
+                </form>
               </div>
+            </div>
+
+            <!-- Pie de página -->
+            <div class="text-center mt-4">
+              <p class="text-muted">
+                <i class="fas fa-info-circle me-2"></i>Asegúrese de que los datos sean correctos antes de registrar al
+                usuario.
+              </p>
             </div>
           </div>
         </div>
 
+        <!-- Sección Ver Usuarios -->
+        <div id="verUsuarios" class="section">
+          <div class="d-flex justify-content-between align-items-center mb-4">
+            <h2 class="text-dark">
+              <i class="fas fa-users me-2"></i> Usuarios Registrados
+            </h2>
+            <button class="btn btn-dark" onclick="listarTodosUsuarios();">
+              <i class="fas fa-list"></i> Ver Todos
+            </button>
+          </div>
 
+          <!-- Barra de búsqueda -->
+          <div class="search-container mt-3 mb-4 d-flex">
+            <input type="text" id="searchInputUsuarios" class="form-control rounded-start"
+              placeholder="Buscar por correo electrónico..." />
+            <button id="searchButtonUsuarios" class="btn btn-dark rounded-end">
+              <i class="fas fa-search"></i> Buscar
+            </button>
+          </div>
+
+          <!-- Tabla de usuarios -->
+          <div class="card shadow-sm">
+            <div class="card-header bg-black text-white">
+              <h5 class="mb-0 text-center">
+                <i class="fas fa-table me-2"></i> Listado de Usuarios
+              </h5>
+            </div>
+            <div class="card-body p-0">
+              <table id="usuariosTable" class="table table-striped table-hover table-bordered mb-0">
+                <thead class="bg-black text-white">
+                  <tr>
+                    <th class="col-2 text-center">
+                      <i class="fas fa-id-card me-1"></i> ID
+                    </th>
+                    <th class="col-4">
+                      <i class="fas fa-envelope me-1"></i> Correo Electrónico
+                    </th>
+                    <th class="col-3">
+                      <i class="fas fa-user-tag me-1"></i> Rol
+                    </th>
+                    <th class="col-3 text-center">
+                      <i class="fas fa-cogs me-1"></i> Acciones
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <!-- Datos serán llenados dinámicamente desde la base de datos -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
 
       </div>
     </div>
@@ -1308,7 +1415,7 @@
   </script>
 
   <!-------------------------------Script para PACIENTES ------------------------->
-  <!--Listar datos (por nombre y general)-->
+  <!--Listar pacientes (por nombre y general)-->
   <script>
     document
       .getElementById("searchButton")
@@ -1811,6 +1918,101 @@
         .catch((error) => {
           console.error("Error en la solicitud de registro:", error);
           alert("Ocurrió un error al registrar el usuario.");
+        });
+    }
+
+  </script>
+
+  <!--Listar usuarios (por nombre y general)-->
+  <script>
+    document.getElementById("searchButtonUsuarios").addEventListener("click", fetchUsuarios);
+
+    function fetchUsuarios() {
+      const searchValue = document.getElementById("searchInputUsuarios").value.trim();
+
+      if (!searchValue) {
+        alert("Por favor, ingresa un correo electrónico para buscar.");
+        return;
+      }
+
+      // Crear objeto FormData para enviar datos al servidor
+      const formData = new FormData();
+      formData.append("correo", searchValue);
+
+      // Realizar la solicitud AJAX
+      fetch("./Conexion/buscar_usuario.php", {
+        method: "POST",
+        body: formData,
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          mostrarUsuarios(data); // Llamar a la función para mostrar los resultados
+        })
+        .catch((error) => {
+          console.error("Error al obtener los datos:", error);
+        });
+    }
+
+    function mostrarUsuarios(usuario) {
+      const tbody = document.querySelector("#usuariosTable tbody");
+      tbody.innerHTML = ""; // Limpiar la tabla
+
+      if (!usuario.idUsuario) {
+        tbody.innerHTML =
+          '<tr><td colspan="4" class="text-center">No se encontraron resultados.</td></tr>';
+        return;
+      }
+
+      // Crear una fila con los datos recibidos
+      const row = document.createElement("tr");
+      row.innerHTML = `
+    <td class="col-2 text-center align-middle">${usuario.idUsuario}</td>
+    <td class="col-4 text-center align-middle">${usuario.Correo}</td>
+    <td class="col-3 text-center align-middle">${usuario.Rol}</td>
+    <td class="col-3 text-center align-middle">
+      <button class="btn btn-warning">Actualizar</button>
+      <button class="btn btn-danger">Eliminar</button>
+    </td>
+  `;
+
+      tbody.appendChild(row);
+    }
+
+    function listarTodosUsuarios() {
+      fetch("./Conexion/listar_usuarios.php")
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error("Error al obtener los usuarios.");
+          }
+          return response.json();
+        })
+        .then((data) => {
+          const tbody = document.querySelector("#usuariosTable tbody");
+          tbody.innerHTML = ""; // Limpiar la tabla
+
+          if (data.length === 0) {
+            tbody.innerHTML =
+              '<tr><td colspan="4" class="text-center">No se encontraron usuarios.</td></tr>';
+            return;
+          }
+
+          data.forEach((usuario) => {
+            const row = document.createElement("tr");
+            row.innerHTML = `
+          <td class="col-2 text-center align-middle">${usuario.idUsuario}</td>
+          <td class="col-4 text-center align-middle">${usuario.Correo}</td>
+          <td class="col-3 text-center align-middle">${usuario.Rol}</td>
+          <td class="col-3 text-center align-middle">
+            <button class="btn btn-warning">Actualizar</button>
+            <button class="btn btn-danger">Eliminar</button>
+          </td>
+        `;
+            tbody.appendChild(row);
+          });
+        })
+        .catch((error) => {
+          console.error("Error:", error);
+          alert("Ocurrió un error al cargar los usuarios.");
         });
     }
 

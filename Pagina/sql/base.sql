@@ -7,7 +7,7 @@ GRANT ALL PRIVILEGES ON ExpedienteMedico.* TO 'admin' @'localhost';
 -- ROLES
 CREATE TABLE Roles (
     idRol INT(5) NOT NULL PRIMARY KEY AUTO_INCREMENT,
-    rol VARCHAR(10) NOT NULL
+    rol VARCHAR(20) NOT NULL
 );
 -- USUARIOS
 CREATE TABLE Usuarios (
@@ -29,7 +29,7 @@ CREATE TABLE Paciente (
     Colonia VARCHAR(50) NOT NULL,
     Calle VARCHAR(50) NOT NULL,
     Estado VARCHAR(50) NOT NULL,
-    idUsuario INT(5) NOT NULL,
+    idUsuario INT(5) NULL,
     FOREIGN KEY (idUsuario) REFERENCES Usuarios (idUsuario) ON DELETE CASCADE ON UPDATE CASCADE
 );
 -- Historial
