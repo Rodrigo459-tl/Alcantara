@@ -87,6 +87,18 @@
       height: 20px;
       cursor: pointer;
     }
+
+    .update_check {
+      width: 20px;
+      height: 20px;
+      cursor: pointer;
+    }
+
+    .update_check-no-patologicos {
+      width: 20px;
+      height: 20px;
+      cursor: pointer;
+    }
   </style>
 </head>
 
@@ -99,7 +111,7 @@
       <ul class="menu-items">
 
         <li class="item">
-          <a onclick="showSection('pacientes'); listarTodo(); ">Pacientes</a>
+          <a onclick="showSection('verPacientes'); listarTodo();">Pacientes</a>
         </li>
         <li class="item">
           <a onclick="showSection('historiales')">Historiales</a>
@@ -125,7 +137,7 @@
               <a onclick="showSection('registrarPaciente')">Registrar paciente</a>
             </li>
             <li class=" item">
-              <a href="#">Ver pacientes</a>
+              <a onclick="showSection('verPacientes'); listarTodo();">Ver pacientes</a>
             </li>
           </ul>
         </li>
@@ -183,40 +195,49 @@
   <div class="main content scrollable-div">
     <div class="row w-100">
       <div class="col-lg-12"> <!--Columna principal-->
+        <!--Seccion dashboard-->
         <div id="dashboard" class="section">
           <h2>Dashboard</h2>
-          <!--Inicio row tarjetas-->
+          <!-- Inicio row tarjetas -->
           <div class="row mt-4">
             <!-- Tarjeta 1: Total Pacientes -->
-            <div class="col-md-4">
-              <div class="card bg-white mb-3 card-info shadow-sm">
+            <div class="col-4">
+              <div class="card shadow-sm mb-4">
+                <div class="card-header bg-dark text-white">
+                  <h5 class="mb-0">Total Pacientes</h5>
+                </div>
                 <div class="card-body">
-                  <h5>Total Pacientes</h5>
-                  <p class="card-text">120</p>
+                  <p class="card-text text-primary"><strong>Total:</strong> 120</p>
                 </div>
               </div>
             </div>
 
             <!-- Tarjeta 2: Citas Pendientes -->
-            <div class="col-md-4">
-              <div class="card bg-white mb-3 card-warning shadow-sm">
+            <div class="col-4">
+              <div class="card shadow-sm mb-4">
+                <div class="card-header bg-dark text-white">
+                  <h5 class="mb-0">Citas Pendientes</h5>
+                </div>
                 <div class="card-body">
-                  <h5>Citas Pendientes</h5>
-                  <p class="card-text">15</p>
+                  <p class="card-text text-warning"><strong>Total:</strong> 15</p>
                 </div>
               </div>
             </div>
 
             <!-- Tarjeta 3: Nuevas Consultas -->
-            <div class="col-md-4">
-              <div class="card bg-white mb-3 card-success shadow-sm">
+            <div class="col-4">
+              <div class="card shadow-sm mb-4">
+                <div class="card-header bg-dark text-white">
+                  <h5 class="mb-0">Nuevas Consultas</h5>
+                </div>
                 <div class="card-body">
-                  <h5>Nuevas Consultas</h5>
-                  <p class="card-text">30</p>
+                  <p class="card-text text-success"><strong>Total:</strong> 30</p>
                 </div>
               </div>
             </div>
-          </div> <!--Fin row tarjetas-->
+          </div>
+          <!-- Fin row tarjetas -->
+
 
 
 
@@ -263,7 +284,8 @@
           </div>
         </div>
 
-        <div id="registrarPaciente" class="section active">
+        <!--Seccion Registrar paciente-->
+        <div id="registrarPaciente" class="section">
           <div class="d-flex justify-content-between align-items-center">
             <h2 class="mb-0">Registrar Nuevo Paciente</h2>
             <button class="btn btn-success me-4" id="botonRegistrar" onclick="guardarDatos();">Registrar</button>
@@ -330,8 +352,7 @@
                 </div>
               </div>
             </div>
-          </div>
-          <!-- Fin datos del paciente -->
+          </div><!-- Fin datos del paciente -->
 
 
           <br> <!-- antecedentes Patologicos y no Patologicos -->
@@ -527,8 +548,9 @@
           </div> <!--Fin Antecedentes-->
         </div>
 
-        <div id="pacientes" class="section">
-          <h2>Gestión de Pacientes</h2>
+        <!--Seccion ver pacientes (Actualizar, eliminar y ver historial completo-->
+        <div id="verPacientes" class="section">
+          <h2>Pacientes registrados</h2>
           <div class="search-container mt-3 mb-3 d-flex">
             <input type="text" id="searchInput" class="form-control" placeholder="Buscar por nombre...">
             <button id="searchButton" class="btn btn-primary ms-2">
@@ -553,6 +575,277 @@
           </div>
         </div>
 
+        <!-- Sección Actualizar Paciente -->
+        <div id="actualizarPaciente" class="section">
+          <div class="d-flex justify-content-between align-items-center">
+            <h2 class="mb-0">Actualizar Paciente</h2>
+            <button id="botonActualizar" class="btn btn-primary" onclick="actualizarDatos();">Actualizar</button>
+          </div>
+
+          <br> <!-- Datos personales del paciente -->
+          <div class="row">
+            <div class="col-12">
+              <div class="card bg-white">
+                <div class="card-body m-0 p-0">
+                  <form>
+                    <h5 class="card-header card-title bg-dark text-white">Datos personales</h5>
+                    <div class="card-content">
+                      <div class="row mb-3">
+                        <div class="form-group col">
+                          <label for="nombre">Nombre</label>
+                          <input type="text" class="form-control" id="update_nombre" value="Ernesto">
+                        </div>
+                        <div class="form-group col">
+                          <label for="ap">Apellido paterno</label>
+                          <input type="text" class="form-control" id="update_ap" value="Sanchez">
+                        </div>
+                        <div class="form-group col">
+                          <label for="am">Apellido materno</label>
+                          <input type="text" class="form-control" id="update_am" value="Piedras">
+                        </div>
+                      </div>
+
+                      <div class="row mb-3">
+                        <div class="form-group col-3">
+                          <label for="fn">Fecha de Nacimiento</label>
+                          <input type="date" class="form-control" id="update_fn" value="1985-05-05">
+                        </div>
+                        <div class="form-group col-3">
+                          <label for="telefono">Teléfono</label>
+                          <input type="tel" class="form-control" id="update_telefono" value="2947595684">
+                        </div>
+                        <div class="form-group col">
+                          <label for="mail">Correo electrónico</label>
+                          <input type="email" class="form-control" id="update_mail" value="ErnestoSP@gmail.com">
+                        </div>
+                      </div>
+
+                      <div class="row mb-3">
+                        <div class="form-group col">
+                          <label for="calle">Calle y número</label>
+                          <input type="text" class="form-control" id="update_calle" value="Avenida Juarez #123">
+                        </div>
+                        <div class="form-group col">
+                          <label for="col">Colonia</label>
+                          <input type="text" class="form-control" id="update_col" value="Centro">
+                        </div>
+                        <div class="form-group col">
+                          <label for="municipio">Municipio</label>
+                          <input type="text" class="form-control" id="update_municipio" value="Tlaxcala">
+                        </div>
+                        <div class="form-group col">
+                          <label for="estado">Estado</label>
+                          <input type="text" class="form-control" id="update_estado" value="Tlaxcala">
+                        </div>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div><!-- Fin datos del paciente -->
+
+          <br> <!-- antecedentes Patologicos y no Patologicos -->
+          <div class="row">
+            <div class="col-12 mb-5">
+              <div class="card p-0 m-0 bg-white">
+                <div class="card-body p-0 m-0">
+                  <!-- Botón que activa el panel -->
+                  <button class="card-header bg-dark text-white legend-button" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#antecedentesPanel" aria-expanded="false" aria-controls="antecedentesPanel">
+                    <h5 class="mb-0 text-start"> <i class="fas fa-angle-down icon-rotate" id="iconoColapso"
+                        style="font-size: 1.2rem;"></i> Antecedentes</h5>
+                  </button>
+
+                  <!-- Panel colapsable -->
+                  <div class="row">
+                    <div class="collapse p-0 m-0" id="antecedentesPanel">
+                      <div class="row card-content p-0 mb-2">
+                        <!-- Antecedentes Patológicos -->
+                        <div class="col-xl-6">
+                          <h4 class="text-center">Antecedentes Patológicos</h4>
+                          <table class="table table-bordered table-sm">
+                            <thead class="thead-light">
+                              <tr>
+                                <th>Nombre</th>
+                                <th>Estado</th>
+                                <th>Descripción</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr>
+                                <td>Diabetes</td>
+                                <td class="centrado">
+                                  <input type="checkbox" class="update_check" id="update_check-diabetes">
+                                </td>
+                                <td><input type="text" class="form-control" id="update_text-diabetes"></td>
+                              </tr>
+                              <tr>
+                                <td>Hipertensión</td>
+                                <td class="centrado">
+                                  <input type="checkbox" class="update_check" id="update_check-hipertension">
+                                </td>
+                                <td><input type="text" class="form-control" id="update_text-hipertension"></td>
+                              </tr>
+                              <tr>
+                                <td>Enfermedades crónicas</td>
+                                <td class="centrado">
+                                  <input type="checkbox" class="update_check" id="update_check-enfermedades-cronicas">
+                                </td>
+                                <td><input type="text" class="form-control" id="update_text-enfermedades-cronicas"></td>
+                              </tr>
+                              <tr>
+                                <td>Problemas del corazón</td>
+                                <td class="centrado">
+                                  <input type="checkbox" class="update_check" id="update_check-problemas-corazon">
+                                </td>
+                                <td><input type="text" class="form-control" id="update_text-problemas-corazon"></td>
+                              </tr>
+                              <tr>
+                                <td>Problemas respiratorios</td>
+                                <td class="centrado">
+                                  <input type="checkbox" class="update_check" id="update_check-problemas-respiratorios">
+                                </td>
+                                <td><input type="text" class="form-control" id="update_text-problemas-respiratorios">
+                                </td>
+                              </tr>
+                              <tr>
+                                <td>Problemas del hígado</td>
+                                <td class="centrado">
+                                  <input type="checkbox" class="update_check" id="update_check-problemas-higado">
+                                </td>
+                                <td><input type="text" class="form-control" id="update_text-problemas-higado"></td>
+                              </tr>
+                              <tr>
+                                <td>Problemas renales</td>
+                                <td class="centrado">
+                                  <input type="checkbox" class="update_check" id="update_check-problemas-renales">
+                                </td>
+                                <td><input type="text" class="form-control" id="update_text-problemas-renales"></td>
+                              </tr>
+                              <tr>
+                                <td>Problemas digestivos</td>
+                                <td class="centrado">
+                                  <input type="checkbox" class="update_check" id="update_check-problemas-digestivos">
+                                </td>
+                                <td><input type="text" class="form-control" id="update_text-problemas-digestivos"></td>
+                              </tr>
+                              <tr>
+                                <td>Problemas de coagulación</td>
+                                <td class="centrado">
+                                  <input type="checkbox" class="update_check" id="update_check-problemas-coagulacion">
+                                </td>
+                                <td><input type="text" class="form-control" id="update_text-problemas-coagulacion"></td>
+                              </tr>
+                              <tr>
+                                <td>Intervenciones quirúrgicas</td>
+                                <td class="centrado">
+                                  <input type="checkbox" class="update_check"
+                                    id="update_check-intervenciones-quirurgicas">
+                                </td>
+                                <td><input type="text" class="form-control" id="update_text-intervenciones-quirurgicas">
+                                </td>
+                              </tr>
+                              <tr>
+                                <td>Alergias</td>
+                                <td class="centrado">
+                                  <input type="checkbox" class="update_check" id="update_check-alergias">
+                                </td>
+                                <td><input type="text" class="form-control" id="update_text-alergias"></td>
+                              </tr>
+                              <tr>
+                                <td>Convulsiones</td>
+                                <td class="centrado">
+                                  <input type="checkbox" class="update_check" id="update_check-convulsiones">
+                                </td>
+                                <td><input type="text" class="form-control" id="update_text-convulsiones"></td>
+                              </tr>
+                              <tr>
+                                <td>Toma anticonceptivos</td>
+                                <td class="centrado">
+                                  <input type="checkbox" class="update_check" id="update_check-toma-anticonceptivos">
+                                </td>
+                                <td><input type="text" class="form-control" id="update_text-toma-anticonceptivos"></td>
+                              </tr>
+                              <tr>
+                                <td>Embarazo actual</td>
+                                <td class="centrado">
+                                  <input type="checkbox" class="update_check" id="update_check-embarazo-actual">
+                                </td>
+                                <td><input type="text" class="form-control" id="update_text-embarazo-actual"></td>
+                              </tr>
+                            </tbody>
+
+                          </table>
+                        </div>
+
+                        <!-- Antecedentes No Patológicos -->
+                        <div class="col-xl-6">
+                          <h4 class="text-center">Antecedentes No Patológicos</h4>
+                          <table class="table table-bordered table-sm b-0 p-0">
+                            <thead class="thead-light">
+                              <tr>
+                                <th>Nombre</th>
+                                <th>Estado</th>
+                                <th>Descripción</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr>
+                                <td>Higiene bucal</td>
+                                <td class="centrado">
+                                  <input type="checkbox" class="update_check-no-patologicos"
+                                    id="update_check-higiene-bucal">
+                                </td>
+                                <td><input type="text" class="form-control" id="update_text-higiene-bucal"></td>
+                              </tr>
+                              <tr>
+                                <td>Frecuencia de cepillado</td>
+                                <td class="centrado">
+                                  <input type="checkbox" class="update_check-no-patologicos"
+                                    id="update_check-frecuencia-cepillado">
+                                </td>
+                                <td><input type="text" class="form-control" id="update_text-frecuencia-cepillado">
+                                </td>
+                              </tr>
+                              <tr>
+                                <td>Fuma (cuántos cigarros al día)</td>
+                                <td class="centrado">
+                                  <input type="checkbox" class="update_check-no-patologicos" id="update_check-fuma">
+                                </td>
+                                <td><input type="text" class="form-control" id="update_text-fuma"></td>
+                              </tr>
+                              <tr>
+                                <td>Consume alcohol</td>
+                                <td class="centrado">
+                                  <input type="checkbox" class="update_check-no-patologicos"
+                                    id="update_check-consume-alcohol">
+                                </td>
+                                <td><input type="text" class="form-control" id="update_text-consume-alcohol"></td>
+                              </tr>
+                              <tr>
+                                <td>Aprieta o rechina los dientes</td>
+                                <td class="centrado">
+                                  <input type="checkbox" class="update_check-no-patologicos"
+                                    id="update_check-rechina-dientes">
+                                </td>
+                                <td><input type="text" class="form-control" id="update_text-rechina-dientes"></td>
+                              </tr>
+                            </tbody>
+
+                          </table>
+                        </div>
+
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div> <!--Fin Antecedentes-->
+        </div>
+
+        <!--Seccion dashboard-->
         <div id="historiales" class="section">
           <h2>Gestión de Historiales</h2>
 
@@ -784,6 +1077,7 @@
           </div> <!--Fin Antecedentes Patologicos-->
         </div>
 
+        <!--Seccion dashboard-->
         <div id="antecedentes" class="section">
           <h2>Gestión de Antecedentes</h2>
           <p>Contenido relacionado con los historiales aquí.</p>
@@ -794,6 +1088,8 @@
 
   <script src="script.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+  <!--Animacion de grafica dashboard-->
   <script>
     // Datos de ejemplo (número de pacientes por día)
     const datosPacientes = {
@@ -841,6 +1137,8 @@
     const ctx = document.getElementById("graficaPacientes").getContext("2d");
     new Chart(ctx, config);
   </script>
+
+  <!--Listar datos (por nombre y general)-->
   <script>
     document
       .getElementById("searchButton")
@@ -890,12 +1188,9 @@
   <td class="col-2">${paciente.Telefono}</td>
   <td class="col-3">${paciente.Correo ? paciente.Correo : "N/A"}</td>
   <td class="col-3">
-    <button class="btn btn-warning" onclick="modificarDatos(${paciente.idPaciente
-        })">Actualizar</button>
-        <button class="btn btn-danger" onclick="eliminarPaciente(${paciente.idPaciente
-        })">Eliminar</button>
-    <button class="btn btn-success" onclick="verHistorial(${paciente.idPaciente
-        })">Ver historial</button>
+    <button class="btn btn-warning" onclick="showSection('actualizarPaciente'); modificarDatos(${paciente.idPaciente})">Actualizar</button>
+    <button class="btn btn-danger" onclick="eliminarPaciente(${paciente.idPaciente})">Eliminar</button>
+    <button class="btn btn-success" onclick="verHistorial(${paciente.idPaciente})">Ver historial</button>
   </td>
   `;
 
@@ -933,7 +1228,7 @@
           <td class="col-2">${paciente.Telefono}</td>
           <td class="col-3">${paciente.Correo ? paciente.Correo : "N/A"}</td>
           <td class="col-3">
-            <button class="btn btn-warning" onclick="modificarDatos(${paciente.idPaciente})">Actualizar</button>
+            <button class="btn btn-warning" onclick="showSection('actualizarPaciente'); modificarDatos(${paciente.idPaciente})">Actualizar</button>
             <button class="btn btn-danger" onclick="eliminarPaciente(${paciente.idPaciente})">Eliminar</button>
             <button class="btn btn-success" onclick="verHistorial(${paciente.idPaciente})">Ver historial</button>
           </td>
@@ -946,14 +1241,168 @@
           alert("Ocurrió un error al cargar los pacientes.");
         });
     }
+  </script>
 
-
+  <!--Funciones de usuarios (Actualizar, eliminar, ver historial)-->
+  <script>
     // Función para manejar el botón "Modificar Datos"
     function modificarDatos(idPaciente) {
       console.log("Modificar datos del paciente con ID:", idPaciente);
-      // Aquí puedes redirigir o hacer alguna acción con la id del paciente
-      // Por ejemplo:
-      // window.location.href = `modificar_paciente.php?id=${idPaciente}`;
+
+      fetch(`./Conexion/obtener_paciente.php?id=${idPaciente}`)
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error(`Error al obtener datos: ${response.statusText}`);
+          }
+          return response.json();
+        })
+        .then((data) => {
+          if (data.error) {
+            alert(`Error: ${data.error}`);
+            return;
+          }
+
+          const paciente = data.paciente;
+
+          // Llenar los campos del formulario con los datos obtenidos
+          document.getElementById("update_nombre").value = paciente.nombre || "";
+          document.getElementById("update_ap").value = paciente.ap || "";
+          document.getElementById("update_am").value = paciente.am || "";
+          document.getElementById("update_fn").value = paciente.fechaN || "";
+          document.getElementById("update_telefono").value = paciente.telefono || "";
+          document.getElementById("update_mail").value = paciente.correo || "";
+          document.getElementById("update_calle").value = paciente.calle || "";
+          document.getElementById("update_col").value = paciente.colonia || "";
+          document.getElementById("update_municipio").value = paciente.municipio || "";
+          document.getElementById("update_estado").value = paciente.estado || "";
+
+          // Llenar antecedentes patológicos
+          data.patologicos.forEach((patologico) => {
+            const check = document.getElementById(`update_check-${patologico.nombre.toLowerCase().replace(/ /g, '-')}`);
+            const text = document.getElementById(`update_text-${patologico.nombre.toLowerCase().replace(/ /g, '-')}`);
+            if (check) {
+              check.checked = patologico.estado === "1";
+            }
+            if (text) {
+              text.value = patologico.descripcion || "";
+            }
+          });
+
+          // Llenar antecedentes no patológicos
+          data.noPatologicos.forEach((noPatologico) => {
+            const check = document.getElementById(`update_check-${noPatologico.nombre.toLowerCase().replace(/ /g, '-')}`);
+            const text = document.getElementById(`update_text-${noPatologico.nombre.toLowerCase().replace(/ /g, '-')}`);
+            if (check) {
+              check.checked = noPatologico.estado === "1";
+            }
+            if (text) {
+              text.value = noPatologico.descripcion || "";
+            }
+          });
+
+          // Asociar el ID del paciente al botón de actualizar
+          document.getElementById("botonActualizar").dataset.id = idPaciente;
+        })
+        .catch((error) => console.error("Error:", error));
+    }
+
+    function actualizarDatos() {
+      // Obtener el ID del paciente
+      const idPaciente = document.getElementById("botonActualizar").dataset.id;
+
+      if (!idPaciente) {
+        console.error("ID del paciente no está definido.");
+        alert("No se pudo identificar el paciente a actualizar.");
+        return;
+      }
+
+      // Declarar las variables que almacenarán los datos
+      const patologicos = [];
+      const noPatologicos = [];
+
+      // Recolectar los datos del formulario
+      const pacienteData = {
+        idPaciente,
+        nombre: document.getElementById("update_nombre").value,
+        ap: document.getElementById("update_ap").value,
+        am: document.getElementById("update_am").value,
+        telefono: document.getElementById("update_telefono").value,
+        fechaN: document.getElementById("update_fn").value,
+        municipio: document.getElementById("update_municipio").value,
+        colonia: document.getElementById("update_col").value,
+        calle: document.getElementById("update_calle").value,
+        estado: document.getElementById("update_estado").value,
+        correo: document.getElementById("update_mail").value,
+      };
+
+      // Recolectar antecedentes patológicos
+      const patologicosCheckboxes = document.querySelectorAll("input.update_check");
+      patologicosCheckboxes.forEach((check) => {
+        const nombreCell = check.closest("tr")?.cells[0];
+        const nombre = nombreCell ? nombreCell.innerText : null;
+
+        if (!nombre) {
+          console.warn("No se pudo obtener el nombre del patológico.");
+          return;
+        }
+
+        const estado = check.checked ? 1 : 0;
+
+        const descripcionElement = document.getElementById(`update_text-${check.id.split('-')[1]}`);
+        const descripcion = check.checked && descripcionElement ? descripcionElement.value || null : null;
+
+        patologicos.push({ nombre, estado, descripcion });
+      });
+
+      // Recolectar antecedentes no patológicos
+      const noPatologicosCheckboxes = document.querySelectorAll("input.update_check-no-patologicos");
+      noPatologicosCheckboxes.forEach((check) => {
+        const nombreCell = check.closest("tr")?.cells[0];
+        const nombre = nombreCell ? nombreCell.innerText : null;
+
+        if (!nombre) {
+          console.warn("No se pudo obtener el nombre del no patológico.");
+          return;
+        }
+
+        const estado = check.checked ? 1 : 0;
+
+        const descripcionElement = document.getElementById(`update_text-${check.id.split('-')[1]}`);
+        const descripcion = check.checked && descripcionElement ? descripcionElement.value || null : null;
+
+        noPatologicos.push({ nombre, estado, descripcion });
+      });
+
+      // Enviar los datos al servidor
+      console.log("ID del paciente:", idPaciente);
+      console.log("Datos del paciente enviados al servidor:", pacienteData);
+      console.log("Patológicos:", patologicos);
+      console.log("No Patológicos:", noPatologicos);
+
+      fetch("./Conexion/actualizar_paciente.php", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ pacienteData, patologicos, noPatologicos }),
+      })
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error(`Error en la respuesta del servidor: ${response.statusText}`);
+          }
+          return response.json();
+        })
+        .then((data) => {
+          if (data.error) {
+            console.error("Error al actualizar paciente:", data.error);
+            alert(`Error al actualizar paciente: ${data.error}`);
+          } else {
+            alert("Paciente actualizado con éxito.");
+            console.log("Respuesta del servidor:", data);
+          }
+        })
+        .catch((error) => {
+          console.error("Error en la solicitud de actualización:", error);
+          alert("Ocurrió un error al actualizar el paciente.");
+        });
     }
 
     // Función para manejar el botón "Ver Historial"
@@ -991,6 +1440,7 @@
 
   </script>
 
+  <!--Guardar datos-->
   <script>
     function guardarDatos() {
       const pacienteData = {
