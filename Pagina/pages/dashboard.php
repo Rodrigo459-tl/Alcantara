@@ -1475,7 +1475,7 @@
     }
 
     function listarTodo() {
-      fetch('./Conexion/listar_pacientes.php') // Asegúrate de usar la ruta correcta
+      fetch('./Conexion/listar_pacientes.php')
         .then((response) => {
           if (!response.ok) {
             throw new Error("Error al obtener los pacientes");
@@ -1503,7 +1503,7 @@
           <td class="col-1">${paciente.idPaciente}</td>
           <td class="col-3">${paciente.NombreCompleto}</td>
           <td class="col-2">${paciente.Telefono}</td>
-          <td class="col-3">${paciente.Correo ? paciente.Correo : "N/A"}</td>
+          <td class="col-3">${paciente.Correo}</td>
           <td class="col-3">
             <button class="btn btn-warning" onclick="showSection('actualizarPaciente'); modificarDatos(${paciente.idPaciente})">Actualizar</button>
             <button class="btn btn-danger" onclick="eliminarPaciente(${paciente.idPaciente})">Eliminar</button>
@@ -1518,6 +1518,7 @@
           alert("Ocurrió un error al cargar los pacientes.");
         });
     }
+
   </script>
 
   <!--Funciones de usuarios (Actualizar, eliminar, ver historial)-->
@@ -1584,7 +1585,6 @@
     }
 
     function actualizarDatos() {
-      // Obtener el ID del paciente
       const idPaciente = document.getElementById("botonActualizar").dataset.id;
 
       if (!idPaciente) {
@@ -1593,11 +1593,6 @@
         return;
       }
 
-      // Declarar las variables que almacenarán los datos
-      const patologicos = [];
-      const noPatologicos = [];
-
-      // Recolectar los datos del formulario
       const pacienteData = {
         idPaciente,
         nombre: document.getElementById("update_nombre").value,
@@ -1612,68 +1607,44 @@
         correo: document.getElementById("update_mail").value,
       };
 
-      // Recolectar antecedentes patológicos
-      const patologicosCheckboxes = document.querySelectorAll("input.update_check");
-      patologicosCheckboxes.forEach((check) => {
+      const patologicos = [];
+      const noPatologicos = [];
+
+      document.querySelectorAll("input.update_check").forEach((check) => {
         const nombreCell = check.closest("tr")?.cells[0];
         const nombre = nombreCell ? nombreCell.innerText : null;
-
-        if (!nombre) {
-          console.warn("No se pudo obtener el nombre del patológico.");
-          return;
-        }
-
         const estado = check.checked ? 1 : 0;
-
         const descripcionElement = document.getElementById(`update_text-${check.id.split('-')[1]}`);
         const descripcion = check.checked && descripcionElement ? descripcionElement.value || null : null;
 
-        patologicos.push({ nombre, estado, descripcion });
+        if (nombre) {
+          patologicos.push({ nombre, estado, descripcion });
+        }
       });
 
-      // Recolectar antecedentes no patológicos
-      const noPatologicosCheckboxes = document.querySelectorAll("input.update_check-no-patologicos");
-      noPatologicosCheckboxes.forEach((check) => {
+      document.querySelectorAll("input.update_check-no-patologicos").forEach((check) => {
         const nombreCell = check.closest("tr")?.cells[0];
         const nombre = nombreCell ? nombreCell.innerText : null;
-
-        if (!nombre) {
-          console.warn("No se pudo obtener el nombre del no patológico.");
-          return;
-        }
-
         const estado = check.checked ? 1 : 0;
-
         const descripcionElement = document.getElementById(`update_text-${check.id.split('-')[1]}`);
         const descripcion = check.checked && descripcionElement ? descripcionElement.value || null : null;
 
-        noPatologicos.push({ nombre, estado, descripcion });
+        if (nombre) {
+          noPatologicos.push({ nombre, estado, descripcion });
+        }
       });
-
-      // Enviar los datos al servidor
-      console.log("ID del paciente:", idPaciente);
-      console.log("Datos del paciente enviados al servidor:", pacienteData);
-      console.log("Patológicos:", patologicos);
-      console.log("No Patológicos:", noPatologicos);
 
       fetch("./Conexion/actualizar_paciente.php", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ pacienteData, patologicos, noPatologicos }),
       })
-        .then((response) => {
-          if (!response.ok) {
-            throw new Error(`Error en la respuesta del servidor: ${response.statusText}`);
-          }
-          return response.json();
-        })
+        .then((response) => response.json())
         .then((data) => {
           if (data.error) {
-            console.error("Error al actualizar paciente:", data.error);
             alert(`Error al actualizar paciente: ${data.error}`);
           } else {
             alert("Paciente actualizado con éxito.");
-            console.log("Respuesta del servidor:", data);
           }
         })
         .catch((error) => {
@@ -1786,7 +1757,7 @@
               alert(`Error al eliminar el paciente: ${data.error}`);
             } else {
               alert("Paciente eliminado con éxito.");
-              location.reload(); // Opcional: Recargar la página tras éxito
+              listarTodo(); // Opcional: Recargar la página tras éxito
             }
           })
           .catch((error) => {
@@ -1935,18 +1906,16 @@
         return;
       }
 
-      // Crear objeto FormData para enviar datos al servidor
       const formData = new FormData();
       formData.append("correo", searchValue);
 
-      // Realizar la solicitud AJAX
       fetch("./Conexion/buscar_usuario.php", {
         method: "POST",
         body: formData,
       })
         .then((response) => response.json())
         .then((data) => {
-          mostrarUsuarios(data); // Llamar a la función para mostrar los resultados
+          mostrarUsuarios(data);
         })
         .catch((error) => {
           console.error("Error al obtener los datos:", error);
@@ -1955,7 +1924,7 @@
 
     function mostrarUsuarios(usuario) {
       const tbody = document.querySelector("#usuariosTable tbody");
-      tbody.innerHTML = ""; // Limpiar la tabla
+      tbody.innerHTML = "";
 
       if (!usuario.idUsuario) {
         tbody.innerHTML =
@@ -1963,17 +1932,16 @@
         return;
       }
 
-      // Crear una fila con los datos recibidos
       const row = document.createElement("tr");
       row.innerHTML = `
-    <td class="col-2 text-center align-middle">${usuario.idUsuario}</td>
-    <td class="col-4 text-center align-middle">${usuario.Correo}</td>
-    <td class="col-3 text-center align-middle">${usuario.Rol}</td>
-    <td class="col-3 text-center align-middle">
-      <button class="btn btn-warning">Actualizar</button>
-      <button class="btn btn-danger">Eliminar</button>
-    </td>
-  `;
+      <td class="col-2 text-center align-middle">${usuario.idUsuario}</td>
+      <td class="col-4 text-center align-middle">${usuario.Correo}</td>
+      <td class="col-3 text-center align-middle">${usuario.Rol}</td>
+      <td class="col-3 text-center align-middle">
+        <button class="btn btn-warning" onclick="actualizarUsuario(${usuario.idUsuario})">Actualizar</button>
+        <button class="btn btn-danger" onclick="eliminarUsuario(${usuario.idUsuario})">Eliminar</button>
+      </td>
+    `;
 
       tbody.appendChild(row);
     }
@@ -1988,7 +1956,7 @@
         })
         .then((data) => {
           const tbody = document.querySelector("#usuariosTable tbody");
-          tbody.innerHTML = ""; // Limpiar la tabla
+          tbody.innerHTML = "";
 
           if (data.length === 0) {
             tbody.innerHTML =
@@ -1999,14 +1967,14 @@
           data.forEach((usuario) => {
             const row = document.createElement("tr");
             row.innerHTML = `
-          <td class="col-2 text-center align-middle">${usuario.idUsuario}</td>
-          <td class="col-4 text-center align-middle">${usuario.Correo}</td>
-          <td class="col-3 text-center align-middle">${usuario.Rol}</td>
-          <td class="col-3 text-center align-middle">
-            <button class="btn btn-warning">Actualizar</button>
-            <button class="btn btn-danger">Eliminar</button>
-          </td>
-        `;
+            <td class="col-2 text-center align-middle">${usuario.idUsuario}</td>
+            <td class="col-4 text-center align-middle">${usuario.Correo}</td>
+            <td class="col-3 text-center align-middle">${usuario.Rol}</td>
+            <td class="col-3 text-center align-middle">
+              <button class="btn btn-warning" onclick="actualizarUsuario(${usuario.idUsuario})">Actualizar</button>
+              <button class="btn btn-danger" onclick="eliminarUsuario(${usuario.idUsuario})">Eliminar</button>
+            </td>
+          `;
             tbody.appendChild(row);
           });
         })
@@ -2015,8 +1983,40 @@
           alert("Ocurrió un error al cargar los usuarios.");
         });
     }
-
   </script>
+
+  <!--Funcion para eliminar y actualizar usuario-->
+  <script>
+    function eliminarUsuario(idUsuario) {
+      if (confirm("¿Estás seguro de que deseas eliminar este usuario?")) {
+        fetch("./Conexion/eliminar_usuario.php", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ idUsuario }),
+        })
+          .then((response) => response.json())
+          .then((data) => {
+            if (data.error) {
+              alert(`Error al eliminar el usuario: ${data.error}`);
+            } else {
+              alert("Usuario eliminado con éxito.");
+              listarTodosUsuarios(); // Recargar la lista
+            }
+          })
+          .catch((error) => {
+            console.error("Error en la solicitud:", error);
+            alert("Ocurrió un error inesperado. Inténtalo de nuevo.");
+          });
+      }
+    }
+
+    function actualizarUsuario(idUsuario) {
+      console.log("Actualizar usuario con ID:", idUsuario);
+      // Aquí puedes agregar la lógica para actualizar al usuario
+      // Por ejemplo, abrir un modal o redirigir a otra página con más detalles.
+    }
+  </script>
+
 </body>
 
 </html>

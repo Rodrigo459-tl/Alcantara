@@ -12,12 +12,12 @@ if ($conn->connect_error) {
 
 // Consulta para obtener todos los pacientes
 $sql = "SELECT 
-            idPaciente, 
+            p.idPaciente, 
             CONCAT(p.Nombre, ' ', p.AP, ' ', p.AM) AS NombreCompleto, 
-            Telefono, 
-            u.Correo_Electronico AS Correo 
+            p.Telefono, 
+            IFNULL(u.Correo_Electronico, 'NA') AS Correo
         FROM paciente p 
-        JOIN usuarios u ON u.idUsuario = p.idUsuario;";
+        LEFT JOIN usuarios u ON u.idUsuario = p.idUsuario";
 
 // Ejecutar la consulta
 $result = $conn->query($sql);
@@ -35,3 +35,4 @@ if ($result->num_rows > 0) {
 
 // Cerrar la conexión
 $conn->close();
+?>

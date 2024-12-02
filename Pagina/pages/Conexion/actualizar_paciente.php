@@ -20,6 +20,9 @@ if ($conn->connect_error) {
 }
 
 try {
+    // Iniciar una transacción
+    $conn->begin_transaction();
+
     // Verificar que el paciente existe y obtener idUsuario e idHistorial
     $result = $conn->query("SELECT idUsuario, h.idHistorial 
                             FROM paciente p
@@ -32,15 +35,31 @@ try {
     $idUsuario = $row['idUsuario'];
     $idHistorial = $row['idHistorial'];
 
-    // Actualizar datos del usuario
-    $correo = $conn->real_escape_string($data['pacienteData']['correo']);
-    $sqlUsuario = "UPDATE usuarios SET Correo_Electronico = '$correo' WHERE idUsuario = $idUsuario";
-    if (!$conn->query($sqlUsuario)) {
-        throw new Exception("Error al actualizar usuario: " . $conn->error);
+    $paciente = $data['pacienteData'];
+    $correo = $conn->real_escape_string($paciente['correo']);
+
+    // Si idUsuario es NULL y se proporciona un correo, crear un nuevo usuario
+    if (!$idUsuario && !empty($correo)) {
+        $sqlInsertUsuario = "INSERT INTO usuarios (Correo_Electronico, idRol) VALUES ('$correo', 1)";
+        if (!$conn->query($sqlInsertUsuario)) {
+            throw new Exception("Error al crear el usuario: " . $conn->error);
+        }
+        $idUsuario = $conn->insert_id;
+
+        // Vincular el nuevo usuario al paciente
+        $sqlUpdatePacienteUsuario = "UPDATE paciente SET idUsuario = $idUsuario WHERE idPaciente = $idPaciente";
+        if (!$conn->query($sqlUpdatePacienteUsuario)) {
+            throw new Exception("Error al vincular usuario con paciente: " . $conn->error);
+        }
+    } elseif ($idUsuario && !empty($correo)) {
+        // Si el usuario ya existe, actualizar su correo
+        $sqlUpdateUsuario = "UPDATE usuarios SET Correo_Electronico = '$correo' WHERE idUsuario = $idUsuario";
+        if (!$conn->query($sqlUpdateUsuario)) {
+            throw new Exception("Error al actualizar usuario: " . $conn->error);
+        }
     }
 
     // Actualizar datos del paciente
-    $paciente = $data['pacienteData'];
     $sqlPaciente = "UPDATE paciente 
                     SET Nombre = '{$conn->real_escape_string($paciente['nombre'])}',
                         AP = '{$conn->real_escape_string($paciente['ap'])}',
@@ -92,8 +111,12 @@ try {
         }
     }
 
+    // Confirmar la transacción
+    $conn->commit();
     echo json_encode(["success" => true]);
 } catch (Exception $e) {
+    // Revertir la transacción en caso de error
+    $conn->rollback();
     echo json_encode(["error" => $e->getMessage()]);
 } finally {
     $conn->close();
