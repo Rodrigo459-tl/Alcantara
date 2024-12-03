@@ -2628,6 +2628,31 @@
         });
     }
 
+    function verPacienteCita(idPaciente) {
+      // Obtener información del paciente desde el servidor
+      fetch(`./Conexion/obtener_paciente_cita.php?id=${idPaciente}`)
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error("Error al obtener los datos del paciente.");
+          }
+          return response.json();
+        })
+        .then((data) => {
+          if (data.error) {
+            alert(`Error: ${data.error}`);
+            return;
+          }
+
+          // Rellenar los datos del formulario
+          document.getElementById("Ucita_nombre").value = data.NombreCompleto || "";
+          document.getElementById("Ucita_telefono").value = data.Telefono || "";
+          document.getElementById("Ucita_correo").value = data.Correo || "N/A";
+          document.getElementById("Ucita_idPaciente").value = idPaciente;
+          document.getElementById("Ucita_idHistorial").value = data.idHistorial || "";
+
+        })
+    }
+
     function guardarCita() {
       const citaData = {
         idPaciente: document.getElementById("cita_idPaciente").value,
@@ -2665,28 +2690,7 @@
   <!--Ver citas-->
   <Script>
     function mostrarCitas(idPaciente) {
-      // Obtener información del paciente desde el servidor
-      fetch(`./Conexion/obtener_paciente_cita.php?id=${idPaciente}`)
-        .then((response) => {
-          if (!response.ok) {
-            throw new Error("Error al obtener los datos del paciente.");
-          }
-          return response.json();
-        })
-        .then((data) => {
-          if (data.error) {
-            alert(`Error: ${data.error}`);
-            return;
-          }
-
-          // Rellenar los datos del formulario
-          document.getElementById("Ucita_nombre").value = data.NombreCompleto || "";
-          document.getElementById("Ucita_telefono").value = data.Telefono || "";
-          document.getElementById("Ucita_correo").value = data.Correo || "N/A";
-          document.getElementById("Ucita_idPaciente").value = idPaciente;
-          document.getElementById("Ucita_idHistorial").value = data.idHistorial || "";
-
-        })
+      verPacienteCita(idPaciente);
 
       fetch(`./Conexion/obtener_citas.php?idPaciente=${idPaciente}`)
         .then((response) => response.json())
@@ -2705,29 +2709,25 @@
           }
 
           data.citas.forEach((cita) => {
-            // Construir tratamientos asociados a la cita
             const tratamientosHTML = cita.tratamientos.length
               ? cita.tratamientos
-                .map((tratamiento) => {
-                  return `
+                .map(
+                  (tratamiento) => `
                   <div class="card bg-light mb-2">
-                    <div class="card-body d-flex justify-content-between align-items-center">
-                      <div>
-                        <p><strong>Tipo:</strong> ${tratamiento.Tipo}</p>
-                        <p><strong>Descripción:</strong> ${tratamiento.Descripcion}</p>
-                        <p><strong>Estado:</strong> ${tratamiento.Estado}</p>
-                        <p><strong>Fechas:</strong> ${tratamiento.Fecha_Inicio} - ${tratamiento.Fecha_Finalizacion}</p>
-                      </div>
-                      <div class="btn-group">
-                        <button class="btn btn-danger btn-sm" onclick="eliminarTratamiento(${tratamiento.idTratamiento}, ${idPaciente})">Eliminar</button>
+                    <div class="card-body">
+                      <p><strong>Tipo:</strong> ${tratamiento.Tipo}</p>
+                      <p><strong>Descripción:</strong> ${tratamiento.Descripcion}</p>
+                      <p><strong>Estado:</strong> ${tratamiento.Estado}</p>
+                      <p><strong>Fechas:</strong> ${tratamiento.Fecha_Inicio} - ${tratamiento.Fecha_Finalizacion}</p>
+                      <div class="text-end">
+                        <button class="btn btn-danger btn-sm" onclick="eliminarTratamiento(${tratamiento.idTratamiento})">Eliminar</button>
                       </div>
                     </div>
-                  </div>`;
-                })
+                  </div>`
+                )
                 .join("")
-              : `<div class="d-flex align-items-center"><p>No hay tratamientos asignados a esta cita.</p></div>`;
+              : `<p>No hay tratamientos asignados a esta cita.</p>`;
 
-            // Construir HTML para la cita
             const citaHTML = `
           <div class="row mb-4">
             <div class="col-6">
@@ -2742,6 +2742,7 @@
                   <p><strong>Método de Agenda:</strong> ${cita.Metodo_Agenda}</p>
                   <div class="text-center mt-3">
                     <button class="btn btn-success btn-sm" onclick="agregarTratamiento(${cita.idCita})">Agregar Tratamiento</button>
+                    <button class="btn btn-danger btn-sm" onclick="eliminarCita(${cita.idCita})">Eliminar Cita</button>
                   </div>
                 </div>
               </div>
@@ -2751,7 +2752,6 @@
             </div>
           </div>`;
 
-            // Añadir la cita al contenedor
             citasContainer.innerHTML += citaHTML;
           });
         })
@@ -2760,6 +2760,36 @@
           alert("Ocurrió un error al cargar las citas.");
         });
     }
+
+    function eliminarCita(idCita) {
+      if (!idCita) {
+        console.error("ID de cita no especificado.");
+        return;
+      }
+
+      if (confirm("¿Estás seguro de que deseas eliminar esta cita y todos sus tratamientos relacionados?")) {
+        fetch(`./Conexion/eliminar_cita.php`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ idCita: idCita }),
+        })
+          .then((response) => response.json())
+          .then((data) => {
+            if (data.success) {
+              alert("Cita eliminada correctamente.");
+              showSection('verPacientesCita'); // Actualiza la lista de citas
+            } else {
+              console.error("Error en el servidor:", data.error);
+              alert(`Error al eliminar la cita: ${data.error}`);
+            }
+          })
+          .catch((error) => {
+            console.error("Error al eliminar la cita:", error);
+            alert("Ocurrió un error al eliminar la cita.");
+          });
+      }
+    }
+
 
   </Script>
 
@@ -2791,8 +2821,7 @@
         .then((data) => {
           if (data.success) {
             alert("Tratamiento agregado correctamente.");
-            showSection("verCitas");
-            mostrarCitas(tratamientoData.idCita); // Actualiza la lista de citas
+            showSection("verPacientesCita");
           } else {
             alert(`Error al agregar el tratamiento: ${data.error}`);
           }
@@ -2820,7 +2849,7 @@
           .then((data) => {
             if (data.success) {
               alert("Tratamiento eliminado correctamente.");
-              mostrarCitas(idPaciente); // Recargar la página para actualizar la lista
+              showSection("verPacientesCita"); // Recargar la página para actualizar la lista
             } else {
               console.error("Error en el servidor:", data.error);
               alert(`Error al eliminar el tratamiento: ${data.error}`);
