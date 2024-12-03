@@ -1621,6 +1621,19 @@
                         </select>
                       </div>
                     </div>
+                    <div class="row mt-3">
+                      <div class="form-group col-md-6">
+                        <label for="cita_metodo_envio">
+                          <i class="fas fa-paper-plane me-2"></i>Método de Envío
+                        </label>
+                        <select class="form-select" id="cita_metodo_envio" required>
+                          <option value="" disabled selected>Seleccione un método</option>
+                          <option value="Correo Electrónico">Correo Electrónico</option>
+                          <option value="SMS">SMS</option>
+                          <option value="Llamada Telefónica">Llamada Telefónica</option>
+                        </select>
+                      </div>
+                    </div>
                     <div class="text-center mt-4">
                       <button type="button" class="btn btn-success btn-lg" onclick="guardarCita();">
                         <i class="fas fa-save me-2"></i>Guardar Cita
@@ -1628,6 +1641,20 @@
                     </div>
                   </form>
                 </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Sección para Ver Citas -->
+        <div id="verCitas" class="section container mt-4">
+          <div class="card bg-white shadow border-0">
+            <h5 class="card-header bg-dark text-white">
+              <i class="fas fa-calendar-alt me-2"></i>Historial de Citas
+            </h5>
+            <div class="card-body">
+              <div id="citasContainer">
+                <!-- Aquí se llenarán las citas dinámicamente -->
               </div>
             </div>
           </div>
@@ -2422,13 +2449,12 @@
     <td class="col-3">${paciente.Correo ? paciente.Correo : "N/A"}</td>
     <td class="col-3 text-center">
       <button class="btn btn-primary" onclick="agendarCita(${paciente.idPaciente})">Agendar Cita</button>
-      <button class="btn btn-success" onclick="showSection('historialPaciente'); verHistorial(${paciente.idPaciente})">Ver historial</button>
+      <button class="btn btn-success" onclick="showSection('verCitas'); mostrarCitas(${paciente.idPaciente})">Ver Citas</button>
     </td>
   `;
 
       tbody.appendChild(row);
     }
-
 
     function listarPacientes() {
       fetch("./Conexion/listar_pacientes.php")
@@ -2458,7 +2484,7 @@
           <td class="col-3">${paciente.Correo}</td>
           <td class="col-3 text-center">
             <button class="btn btn-primary" onclick="agendarCita(${paciente.idPaciente})">Agendar Cita</button>
-            <button class="btn btn-success" onclick="showSection('historialPaciente'); verHistorial(${paciente.idPaciente})">Ver historial</button>
+            <button class="btn btn-success" onclick="showSection('verCitas'); mostrarCitas(${paciente.idPaciente})">Ver Citas</button>
           </td>
         `;
             tbody.appendChild(row);
@@ -2513,6 +2539,7 @@
         Hora: document.getElementById("cita_hora").value,
         Metodo_Agenda: document.getElementById("cita_metodo").value,
         Estado: document.getElementById("cita_estado").value,
+        Medio_Envio: document.getElementById("cita_metodo_envio").value,
       };
 
       fetch("./Conexion/guardar_cita.php", {
@@ -2525,14 +2552,137 @@
           if (data.error) {
             alert(`Error al guardar la cita: ${data.error}`);
           } else {
-            alert("Cita guardada con éxito.");
-            showSection("verPacientesCita"); // Regresar a la lista de pacientes
+            alert("Cita y recordatorio guardados con éxito.");
+            showSection("verPacientesCita");
           }
         })
         .catch((error) => {
           console.error("Error al guardar la cita:", error);
           alert("Ocurrió un error al guardar la cita.");
         });
+    }
+
+  </script>
+
+  <!--Ver citas-->
+  <Script>
+    function mostrarCitas(idPaciente) {
+      fetch(`./Conexion/obtener_citas.php?idPaciente=${idPaciente}`)
+        .then((response) => response.json())
+        .then((data) => {
+          const citasContainer = document.getElementById("citasContainer");
+          citasContainer.innerHTML = "";
+
+          if (data.error) {
+            citasContainer.innerHTML = `<p class="text-danger">${data.error}</p>`;
+            return;
+          }
+
+          if (data.citas.length === 0) {
+            citasContainer.innerHTML = `<p class="text-center">No hay citas registradas para este paciente.</p>`;
+            return;
+          }
+
+          data.citas.forEach((cita) => {
+            // Construir tratamientos asociados a la cita
+            const tratamientosHTML = cita.tratamientos.length
+              ? cita.tratamientos
+                .map((tratamiento) => {
+                  return `
+                  <div class="card bg-light mb-2">
+                    <div class="card-body d-flex justify-content-between align-items-center">
+                      <div>
+                        <p><strong>Tipo:</strong> ${tratamiento.Tipo}</p>
+                        <p><strong>Descripción:</strong> ${tratamiento.Descripcion}</p>
+                        <p><strong>Estado:</strong> ${tratamiento.Estado}</p>
+                        <p><strong>Fechas:</strong> ${tratamiento.Fecha_Inicio} - ${tratamiento.Fecha_Finalizacion}</p>
+                      </div>
+                      <div class="btn-group">
+                        <button class="btn btn-primary btn-sm" onclick="modificarTratamiento(${cita.idCita})">Modificar</button>
+                        <button class="btn btn-danger btn-sm" onclick="eliminarTratamiento(${tratamiento.idTratamiento})">Eliminar</button>
+                      </div>
+                    </div>
+                  </div>`;
+                })
+                .join("")
+              : `<p>No hay tratamientos asignados a esta cita.</p>`;
+
+            // Construir HTML para la cita
+            const citaHTML = `
+          <div class="row mb-4">
+            <div class="col-6">
+              <div class="card bg-light shadow-sm">
+                <div class="card-body">
+                  <h6 class="card-title">
+                    <i class="fas fa-calendar-day me-2"></i>${cita.Fecha} - 
+                    <i class="fas fa-clock me-2"></i>${cita.Hora}
+                  </h6>
+                  <p><strong>Motivo:</strong> ${cita.Motivo}</p>
+                  <p><strong>Estado:</strong> ${cita.Estado}</p>
+                  <p><strong>Método de Agenda:</strong> ${cita.Metodo_Agenda}</p>
+                  <div class="text-center mt-3">
+                    <button class="btn btn-success btn-sm" onclick="agregarTratamiento(${cita.idCita})">Agregar Tratamiento</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-6 d-flex align-items-center">
+              ${tratamientosHTML}
+            </div>
+          </div>`;
+
+            // Añadir la cita al contenedor
+            citasContainer.innerHTML += citaHTML;
+          });
+        })
+        .catch((error) => {
+          console.error("Error al obtener citas:", error);
+          alert("Ocurrió un error al cargar las citas.");
+        });
+    }
+
+  </Script>
+
+  <!--Funciones Tratamientos-->
+  <script>
+    // Función para imprimir el ID de la cita correspondiente al botón "Modificar"
+    function modificarTratamiento(idCita) {
+      console.log(`Modificar tratamiento para la cita con ID: ${idCita}`);
+    }
+
+    // Función para imprimir el ID de la cita en el botón "Agregar Tratamiento"
+    function agregarTratamiento(idCita) {
+      console.log(`Agregar tratamiento para la cita con ID: ${idCita}`);
+    }
+
+    // Función para eliminar un tratamiento
+    function eliminarTratamiento(idTratamiento) {
+      if (!idTratamiento) {
+        console.error("ID de tratamiento no especificado.");
+        return;
+      }
+
+      if (confirm("¿Estás seguro de que deseas eliminar este tratamiento?")) {
+        fetch(`./Conexion/eliminar_tratamiento.php`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ idTratamiento: idTratamiento }),
+        })
+          .then((response) => response.json())
+          .then((data) => {
+            if (data.success) {
+              alert("Tratamiento eliminado correctamente.");
+              location.reload(); // Recargar la página para actualizar la lista
+            } else {
+              console.error("Error en el servidor:", data.error);
+              alert(`Error al eliminar el tratamiento: ${data.error}`);
+            }
+          })
+          .catch((error) => {
+            console.error("Error al eliminar el tratamiento:", error);
+            alert("Ocurrió un error al eliminar el tratamiento.");
+          });
+      }
     }
 
   </script>
