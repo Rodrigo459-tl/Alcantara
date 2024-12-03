@@ -111,6 +111,12 @@
       height: 20px;
       cursor: pointer;
     }
+
+    footer {
+      text-align: center;
+      margin-top: 2rem;
+      color: #777;
+    }
   </style>
 </head>
 
@@ -166,23 +172,9 @@
 
         <!--Citas-->
         <li class="item">
-          <div class="submenu-item">
-            <span>Citas</span>
-            <i class="fa-solid fa-chevron-right"></i>
+          <div class="item">
+            <a onclick="showSection('verPacientesCita'); listarPacientes();">Citas</a>
           </div>
-
-          <ul class="menu-items submenu">
-            <div class="menu-title">
-              <i class="fa-solid fa-chevron-left"></i>
-              Volver
-            </div>
-            <li class="item">
-              <a onclick="showSection('verPacientesCita'); listarPacientes();">Programar cita</a>
-            </li>
-            <li class="item">
-              <a href="#">Ver citas</a>
-            </li>
-          </ul>
         </li>
 
       </ul>
@@ -191,13 +183,16 @@
 
   <nav class="navbar">
     <i class="fa-solid fa-bars" id="sidebar-close"></i>
+    <a href="../index.php" class="logout-icon"><i class="fa-solid fa-right-from-bracket"></i></a>
   </nav>
+
 
   <div class="main content scrollable-div">
     <div class="row w-100">
       <div class="col-lg-12"> <!--Columna principal-->
+
         <!--Seccion dashboard-->
-        <div id="dashboard" class="section">
+        <div id="dashboard" class="section active">
           <h2>Dashboard</h2>
           <!-- Inicio row tarjetas -->
           <div class="row mt-4">
@@ -268,7 +263,7 @@
                     <h6 class="text-primary"><strong>Motivo:</strong> Chequeo de rutina</h6>
                     <!-- Fecha y Hora -->
                     <p class="card-text">
-                      <strong>Fecha:</strong> 2 de noviembre de 2024<br>
+                      <strong>Fecha:</strong> 4 de noviembre de 2024<br>
                       <strong>Hora:</strong> 10:00 AM
                     </p>
                     <!-- Método de Agenda -->
@@ -1468,7 +1463,7 @@
 
         <!--------------------------------------Secciones de Citas------------------------------------------------------------------------------->
         <!-- Sección Ver Pacientes para Agendar Cita -->
-        <div id="verPacientesCita" class="section active">
+        <div id="verPacientesCita" class="section">
           <div class="d-flex justify-content-between align-items-center mb-4">
             <h2 class="mb-0">
               <i class="fas fa-calendar-plus"></i> Agendar Citas
