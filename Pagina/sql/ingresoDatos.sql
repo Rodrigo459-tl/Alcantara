@@ -108,38 +108,6 @@ VALUES (
         'Tlaxcala',
         3
     );
-INSERT INTO Tratamiento (
-        idPaciente,
-        Tipo,
-        Descripcion,
-        Estado,
-        Fecha_Inicio,
-        Fecha_Finalizacion
-    )
-VALUES (
-        1,
-        'Ortodoncia',
-        'Tratamiento de ortodoncia para corregir alineación dental.',
-        'En progreso',
-        '2024-11-01',
-        '2025-11-01'
-    ),
-    (
-        2,
-        'Blanqueamiento',
-        'Procedimiento para blanqueamiento dental.',
-        'Completado',
-        '2024-11-05',
-        '2024-11-20'
-    ),
-    (
-        3,
-        'Endodoncia',
-        'Tratamiento de conductos en molar derecho.',
-        'En progreso',
-        '2024-11-10',
-        '2024-12-01'
-    );
 INSERT INTO Historial (idPaciente)
 VALUES (1),
     (2),
@@ -321,17 +289,7 @@ VALUES (
         'Bruxismo leve detectado.'
     );
 --------FIN ANTECEDENTES--------------------------------------------------------------------
-INSERT INTO Factura (
-        idPaciente,
-        Fecha_Emision,
-        Monto_Total,
-        Estado_Pago
-    )
-VALUES (1, '2024-11-03', 5000.00, 'Pagada'),
-    (2, '2024-11-07', 1500.00, 'Pendiente'),
-    (3, '2024-11-13', 3500.00, 'Pagada');
 INSERT INTO Cita (
-        idTratamiento,
         idHistorial,
         idPaciente,
         Motivo,
@@ -343,7 +301,6 @@ INSERT INTO Cita (
 VALUES (
         1,
         1,
-        1,
         'Chequeo de rutina',
         '2024-11-02',
         '10:00:00',
@@ -351,7 +308,6 @@ VALUES (
         'Confirmada'
     ),
     (
-        2,
         2,
         2,
         'Valoracion dental pra brackets',
@@ -363,12 +319,43 @@ VALUES (
     (
         3,
         3,
-        3,
         'Limpieza dental',
         '2024-11-12',
         '16:30:00',
         'Presencial',
         'Programada'
+    );
+INSERT INTO Tratamiento (
+        idCita,
+        Tipo,
+        Descripcion,
+        Estado,
+        Fecha_Inicio,
+        Fecha_Finalizacion
+    )
+VALUES (
+        1,
+        'Ortodoncia',
+        'Tratamiento de ortodoncia para corregir alineación dental.',
+        'En progreso',
+        '2024-11-01',
+        '2025-11-01'
+    ),
+    (
+        2,
+        'Blanqueamiento',
+        'Procedimiento para blanqueamiento dental.',
+        'Completado',
+        '2024-11-05',
+        '2024-11-20'
+    ),
+    (
+        3,
+        'Endodoncia',
+        'Tratamiento de conductos en molar derecho.',
+        'En progreso',
+        '2024-11-10',
+        '2024-12-01'
     );
 INSERT INTO Recordatorio (idPaciente, idCita, Medio_Envio, Estado_Envio)
 VALUES (1, 1, 'Correo Electrónico', 'Enviado'),

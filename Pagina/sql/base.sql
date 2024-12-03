@@ -38,17 +38,6 @@ CREATE TABLE Historial (
     idPaciente INT NOT NULL,
     FOREIGN KEY (idPaciente) REFERENCES Paciente (idPaciente) ON DELETE CASCADE ON UPDATE CASCADE
 );
--- Tratamiento
-CREATE TABLE Tratamiento (
-    idTratamiento INT AUTO_INCREMENT PRIMARY KEY,
-    idPaciente INT NOT NULL,
-    Tipo VARCHAR(50) NOT NULL,
-    Descripcion TEXT NOT NULL,
-    Estado VARCHAR(50) NOT NULL,
-    Fecha_Inicio DATE NOT NULL,
-    Fecha_Finalizacion DATE NOT NULL,
-    FOREIGN KEY (idPaciente) REFERENCES Paciente (idPaciente) ON DELETE CASCADE ON UPDATE CASCADE
-);
 -- Antecedentes Patológicos
 CREATE TABLE Antecedentes_Patologicos (
     idAntecedenteP INT AUTO_INCREMENT PRIMARY KEY,
@@ -67,19 +56,9 @@ CREATE TABLE Antecedentes_NO_Patologicos (
     Descripcion TEXT NULL,
     FOREIGN KEY (idHistorial) REFERENCES Historial (idHistorial) ON DELETE CASCADE ON UPDATE CASCADE
 );
--- Factura
-CREATE TABLE Factura (
-    idFactura INT AUTO_INCREMENT PRIMARY KEY,
-    idPaciente INT NOT NULL,
-    Fecha_Emision DATE NOT NULL,
-    Monto_Total DECIMAL(10, 2) NOT NULL,
-    Estado_Pago VARCHAR(50) NOT NULL,
-    FOREIGN KEY (idPaciente) REFERENCES Paciente (idPaciente) ON DELETE CASCADE ON UPDATE CASCADE
-);
 -- Cita
 CREATE TABLE Cita (
     idCita INT AUTO_INCREMENT PRIMARY KEY,
-    idTratamiento INT NULL,
     idHistorial INT NULL,
     idPaciente INT NULL,
     Motivo VARCHAR(200) NOT NULL,
@@ -88,8 +67,18 @@ CREATE TABLE Cita (
     Metodo_Agenda VARCHAR(50) NOT NULL,
     Estado VARCHAR(50) NOT NULL,
     FOREIGN KEY (idHistorial) REFERENCES Historial (idHistorial) ON DELETE CASCADE ON UPDATE CASCADE,
-    FOREIGN KEY (idPaciente) REFERENCES Paciente (idPaciente) ON DELETE CASCADE ON UPDATE CASCADE,
-    FOREIGN KEY (idTratamiento) REFERENCES Tratamiento (idTratamiento) ON DELETE CASCADE ON UPDATE CASCADE
+    FOREIGN KEY (idPaciente) REFERENCES Paciente (idPaciente) ON DELETE CASCADE ON UPDATE CASCADE
+);
+-- Tratamiento
+CREATE TABLE Tratamiento (
+    idTratamiento INT AUTO_INCREMENT PRIMARY KEY,
+    idCita INT NOT NULL,
+    Tipo VARCHAR(50) NOT NULL,
+    Descripcion TEXT NOT NULL,
+    Estado VARCHAR(50) NOT NULL,
+    Fecha_Inicio DATE NOT NULL,
+    Fecha_Finalizacion DATE NOT NULL,
+    FOREIGN KEY (idCita) REFERENCES Cita (idCita) ON DELETE CASCADE ON UPDATE CASCADE
 );
 -- Recordatorio
 CREATE TABLE Recordatorio (
