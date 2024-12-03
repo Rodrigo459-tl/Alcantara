@@ -1648,17 +1648,115 @@
 
         <!-- Sección para Ver Citas -->
         <div id="verCitas" class="section container mt-4">
-          <div class="card bg-white shadow border-0">
-            <h5 class="card-header bg-dark text-white">
-              <i class="fas fa-calendar-alt me-2"></i>Historial de Citas
-            </h5>
-            <div class="card-body">
-              <div id="citasContainer">
-                <!-- Aquí se llenarán las citas dinámicamente -->
+          <!-- Datos del Paciente -->
+          <div class="row mb-4">
+            <div class="col-12">
+              <div class="card bg-white shadow border-0">
+                <h5 class="card-header bg-dark text-white">
+                  <i class="fas fa-user me-2"></i>Información del Paciente
+                </h5>
+                <div class="card-body">
+                  <div class="row">
+                    <div class="form-group col-md-4">
+                      <label for="cita_nombre">
+                        <i class="fas fa-user-tag me-2"></i>Nombre
+                      </label>
+                      <input type="text" class="form-control" id="Ucita_nombre" disabled />
+                    </div>
+                    <div class="form-group col-md-4">
+                      <label for="cita_telefono">
+                        <i class="fas fa-phone me-2"></i>Teléfono
+                      </label>
+                      <input type="text" class="form-control" id="Ucita_telefono" disabled />
+                    </div>
+                    <div class="form-group col-md-4">
+                      <label for="cita_correo">
+                        <i class="fas fa-envelope me-2"></i>Correo Electrónico
+                      </label>
+                      <input type="email" class="form-control" id="Ucita_correo" disabled />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row mb-4">
+            <div class="col-12">
+              <div class="card bg-white shadow border-0">
+                <h5 class="card-header bg-dark text-white">
+                  <i class="fas fa-calendar-alt me-2"></i>Historial de Citas
+                </h5>
+                <div class="card-body">
+                  <div id="citasContainer">
+                    <!-- Aquí se llenarán las citas dinámicamente -->
+                  </div>
+                </div>
               </div>
             </div>
           </div>
         </div>
+
+        <!-- Sección para Agregar Tratamiento -->
+        <div id="agregarTratamiento" class="section container mt-4">
+          <div class="card bg-white shadow border-0">
+            <h5 class="card-header bg-dark text-white">
+              <i class="fas fa-file-medical me-2"></i>Agregar Tratamiento
+            </h5>
+            <div class="card-body">
+              <form id="formAgregarTratamiento">
+                <input type="hidden" id="tratamiento_idCita" />
+                <div class="row mb-3">
+                  <div class="form-group col-md-6">
+                    <label for="tratamiento_tipo">
+                      <i class="fas fa-tag me-2"></i>Tipo
+                    </label>
+                    <input type="text" class="form-control" id="tratamiento_tipo" value="Ortodoncia" required />
+                  </div>
+                  <div class="form-group col-md-6">
+                    <label for="tratamiento_estado">
+                      <i class="fas fa-tasks me-2"></i>Estado
+                    </label>
+                    <select class="form-select" id="tratamiento_estado" required>
+                      <option value="En progreso">En progreso</option>
+                      <option value="Completado">Completado</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="row mb-3">
+                  <div class="form-group col-12">
+                    <label for="tratamiento_descripcion">
+                      <i class="fas fa-comment me-2"></i>Descripción
+                    </label>
+                    <textarea class="form-control" id="tratamiento_descripcion" rows="3"
+                      required>Tratamiento de ortodoncia para corregir alineación dental.</textarea>
+                  </div>
+                </div>
+                <div class="row mb-3">
+                  <div class="form-group col-md-6">
+                    <label for="tratamiento_fechaInicio">
+                      <i class="fas fa-calendar-day me-2"></i>Fecha de Inicio
+                    </label>
+                    <input type="date" class="form-control" id="tratamiento_fechaInicio" value="2024-11-01" required />
+                  </div>
+                  <div class="form-group col-md-6">
+                    <label for="tratamiento_fechaFin">
+                      <i class="fas fa-calendar-day me-2"></i>Fecha de Finalización
+                    </label>
+                    <input type="date" class="form-control" id="tratamiento_fechaFin" value="2025-11-01" required />
+                  </div>
+                </div>
+                <div class="text-center">
+                  <button type="button" class="btn btn-success btn-lg" onclick="guardarTratamiento();">
+                    <i class="fas fa-save me-2"></i>Guardar Tratamiento
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+
+
 
 
       </div>
@@ -1763,16 +1861,16 @@
       // Crear una fila con los datos recibidos
       const row = document.createElement("tr");
       row.innerHTML = `
-  <td class="col-1">${paciente.idPaciente}</td>
-  <td class="col-3">${paciente.NombreCompleto}</td>
-  <td class="col-2">${paciente.Telefono}</td>
-  <td class="col-3">${paciente.Correo ? paciente.Correo : "N/A"}</td>
-  <td class="col-3">
-    <button class="btn btn-warning" onclick="showSection('actualizarPaciente'); modificarDatos(${paciente.idPaciente})">Actualizar</button>
-    <button class="btn btn-danger" onclick="eliminarPaciente(${paciente.idPaciente})">Eliminar</button>
-    <button class="btn btn-success" onclick="showSection('historialPaciente'); verHistorial(${paciente.idPaciente})">Ver historial</button>
-  </td>
-  `;
+      <td class="col-1">${paciente.idPaciente}</td>
+      <td class="col-3">${paciente.NombreCompleto}</td>
+      <td class="col-2">${paciente.Telefono}</td>
+      <td class="col-3">${paciente.Correo ? paciente.Correo : "N/A"}</td>
+      <td class="col-3">
+        <button class="btn btn-warning" onclick="showSection('actualizarPaciente'); modificarDatos(${paciente.idPaciente})">Actualizar</button>
+        <button class="btn btn-danger" onclick="eliminarPaciente(${paciente.idPaciente})">Eliminar</button>
+        <button class="btn btn-success" onclick="showSection('historialPaciente'); verHistorial(${paciente.idPaciente})">Ver historial</button>
+      </td>
+      `;
 
       tbody.appendChild(row);
     }
@@ -2567,6 +2665,29 @@
   <!--Ver citas-->
   <Script>
     function mostrarCitas(idPaciente) {
+      // Obtener información del paciente desde el servidor
+      fetch(`./Conexion/obtener_paciente_cita.php?id=${idPaciente}`)
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error("Error al obtener los datos del paciente.");
+          }
+          return response.json();
+        })
+        .then((data) => {
+          if (data.error) {
+            alert(`Error: ${data.error}`);
+            return;
+          }
+
+          // Rellenar los datos del formulario
+          document.getElementById("Ucita_nombre").value = data.NombreCompleto || "";
+          document.getElementById("Ucita_telefono").value = data.Telefono || "";
+          document.getElementById("Ucita_correo").value = data.Correo || "N/A";
+          document.getElementById("Ucita_idPaciente").value = idPaciente;
+          document.getElementById("Ucita_idHistorial").value = data.idHistorial || "";
+
+        })
+
       fetch(`./Conexion/obtener_citas.php?idPaciente=${idPaciente}`)
         .then((response) => response.json())
         .then((data) => {
@@ -2598,14 +2719,13 @@
                         <p><strong>Fechas:</strong> ${tratamiento.Fecha_Inicio} - ${tratamiento.Fecha_Finalizacion}</p>
                       </div>
                       <div class="btn-group">
-                        <button class="btn btn-primary btn-sm" onclick="modificarTratamiento(${cita.idCita})">Modificar</button>
-                        <button class="btn btn-danger btn-sm" onclick="eliminarTratamiento(${tratamiento.idTratamiento})">Eliminar</button>
+                        <button class="btn btn-danger btn-sm" onclick="eliminarTratamiento(${tratamiento.idTratamiento}, ${idPaciente})">Eliminar</button>
                       </div>
                     </div>
                   </div>`;
                 })
                 .join("")
-              : `<p>No hay tratamientos asignados a esta cita.</p>`;
+              : `<div class="d-flex align-items-center"><p>No hay tratamientos asignados a esta cita.</p></div>`;
 
             // Construir HTML para la cita
             const citaHTML = `
@@ -2626,7 +2746,7 @@
                 </div>
               </div>
             </div>
-            <div class="col-6 d-flex align-items-center">
+            <div class="col-6">
               ${tratamientosHTML}
             </div>
           </div>`;
@@ -2645,18 +2765,46 @@
 
   <!--Funciones Tratamientos-->
   <script>
-    // Función para imprimir el ID de la cita correspondiente al botón "Modificar"
-    function modificarTratamiento(idCita) {
-      console.log(`Modificar tratamiento para la cita con ID: ${idCita}`);
-    }
 
     // Función para imprimir el ID de la cita en el botón "Agregar Tratamiento"
     function agregarTratamiento(idCita) {
-      console.log(`Agregar tratamiento para la cita con ID: ${idCita}`);
+      document.getElementById("tratamiento_idCita").value = idCita;
+      showSection("agregarTratamiento");
+    }
+
+    function guardarTratamiento() {
+      const tratamientoData = {
+        idCita: document.getElementById("tratamiento_idCita").value,
+        Tipo: document.getElementById("tratamiento_tipo").value,
+        Descripcion: document.getElementById("tratamiento_descripcion").value,
+        Estado: document.getElementById("tratamiento_estado").value,
+        Fecha_Inicio: document.getElementById("tratamiento_fechaInicio").value,
+        Fecha_Finalizacion: document.getElementById("tratamiento_fechaFin").value,
+      };
+
+      fetch("./Conexion/agregar_tratamiento.php", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(tratamientoData),
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          if (data.success) {
+            alert("Tratamiento agregado correctamente.");
+            showSection("verCitas");
+            mostrarCitas(tratamientoData.idCita); // Actualiza la lista de citas
+          } else {
+            alert(`Error al agregar el tratamiento: ${data.error}`);
+          }
+        })
+        .catch((error) => {
+          console.error("Error al guardar el tratamiento:", error);
+          alert("Ocurrió un error al guardar el tratamiento.");
+        });
     }
 
     // Función para eliminar un tratamiento
-    function eliminarTratamiento(idTratamiento) {
+    function eliminarTratamiento(idTratamiento, idPaciente) {
       if (!idTratamiento) {
         console.error("ID de tratamiento no especificado.");
         return;
@@ -2672,7 +2820,7 @@
           .then((data) => {
             if (data.success) {
               alert("Tratamiento eliminado correctamente.");
-              location.reload(); // Recargar la página para actualizar la lista
+              mostrarCitas(idPaciente); // Recargar la página para actualizar la lista
             } else {
               console.error("Error en el servidor:", data.error);
               alert(`Error al eliminar el tratamiento: ${data.error}`);
