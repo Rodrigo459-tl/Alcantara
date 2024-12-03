@@ -357,7 +357,7 @@ VALUES (
         '2024-11-10',
         '2024-12-01'
     );
-INSERT INTO Recordatorio (idPaciente, idCita, Medio_Envio, Estado_Envio)
-VALUES (1, 1, 'Correo Electrónico', 'Enviado'),
-    (2, 2, 'SMS', 'Pendiente'),
-    (3, 3, 'Llamada telefónica', 'Enviado');
+INSERT INTO Recordatorio (idCita, Medio_Envio, Estado_Envio)
+VALUES (1, 'Correo Electrónico', 'Enviado'),
+    (2, 'SMS', 'Pendiente'),
+    (3, 'Llamada telefónica', 'Enviado');

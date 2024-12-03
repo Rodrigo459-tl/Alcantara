@@ -83,10 +83,8 @@ CREATE TABLE Tratamiento (
 -- Recordatorio
 CREATE TABLE Recordatorio (
     idRecordatorio INT AUTO_INCREMENT PRIMARY KEY,
-    idPaciente INT NOT NULL,
     idCita INT NOT NULL,
     Medio_Envio VARCHAR(50) NOT NULL,
     Estado_Envio VARCHAR(50) NOT NULL,
-    FOREIGN KEY (idPaciente) REFERENCES Paciente (idPaciente) ON DELETE CASCADE ON UPDATE CASCADE,
     FOREIGN KEY (idCita) REFERENCES Cita (idCita) ON DELETE CASCADE ON UPDATE CASCADE
 );
